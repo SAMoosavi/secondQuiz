@@ -1,13 +1,18 @@
 <template>
-    <input type="checkbox" :value="value" v-model="proxyChecked"
-           class="rounded border-gray-300 text-indigo-600 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50">
+    <input
+        type="checkbox"
+        :value="value"
+        v-model="proxyChecked"
+        class="bg-transparent border-2 border-primary  shadow-sm shadow-indigo-700 dark:shadow-indigo-300 dark:border-indigo-400 accent-indigo-700 dark:accent-indigo-300 focus:ring-2 focus:ring-indigo-600/50 dark:focus:ring-indigo-100/50"
+    />
+    >
 </template>
 
 <script>
-import { defineComponent } from 'vue'
+import { defineComponent } from "vue";
 
 export default defineComponent({
-    emits: ['update:checked'],
+    emits: ["update:checked"],
 
     props: {
         checked: {
@@ -30,5 +35,5 @@ export default defineComponent({
             },
         },
     },
-})
+});
 </script>

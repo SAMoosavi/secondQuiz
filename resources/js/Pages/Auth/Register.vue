@@ -1,101 +1,130 @@
 <template>
-    <Head title="Register" />
+    <Head title="ثبت نام" />
 
-    <jet-authentication-card>
+    <my-authentication-card>
         <template #logo>
             <jet-authentication-card-logo />
         </template>
+        <template #title>ثبت نام</template>
 
-        <jet-validation-errors class="mb-4" />
-
-        <form @submit.prevent="submit">
-            <div>
-                <jet-label for="name" value="Name" />
-                <jet-input id="name" type="text" class="mt-1 block w-full" v-model="form.name" required autofocus autocomplete="name" />
+        <form @submit.prevent="submit" novalidate>
+            <div class="form-control">
+                <my-label for="name" value="نام" :required="true" />
+                <my-input
+                    id="name"
+                    type="text"
+                    v-model="form.name"
+                    required
+                    autofocus
+                    autocomplete="name"
+                />
             </div>
 
-            <div class="mt-4">
-                <jet-label for="email" value="Email" />
-                <jet-input id="email" type="email" class="mt-1 block w-full" v-model="form.email" required />
+            <div class="mt-4 form-control">
+                <my-label for="email" value="ایمیل" :required="true" />
+                <my-input
+                    id="email"
+                    type="email"
+                    v-model="form.email"
+                    required
+                />
             </div>
 
-            <div class="mt-4">
-                <jet-label for="password" value="Password" />
-                <jet-input id="password" type="password" class="mt-1 block w-full" v-model="form.password" required autocomplete="new-password" />
+            <div class="mt-4 form-control">
+                <my-label for="password" value="رمز ورود" :required="true" />
+                <my-input
+                    id="password"
+                    type="password"
+                    v-model="form.password"
+                    required
+                    autocomplete="new-password"
+                />
             </div>
 
-            <div class="mt-4">
-                <jet-label for="password_confirmation" value="Confirm Password" />
-                <jet-input id="password_confirmation" type="password" class="mt-1 block w-full" v-model="form.password_confirmation" required autocomplete="new-password" />
+            <div class="mt-4 form-control">
+                <my-label
+                    for="password_confirmation"
+                    value="تایید رمز عبور"
+                    :required="true"
+                />
+                <my-input
+                    id="password_confirmation"
+                    type="password"
+                    v-model="form.password_confirmation"
+                    required
+                    autocomplete="new-password"
+                />
             </div>
+            <div class="flex-col items-start justify-end">
+                <div class="flex items-center justify-end mt-4">
+                    <my-auth-link :href="route('login')">
+                        قبلا ثبت کرده اید؟
+                    </my-auth-link>
 
-            <div class="mt-4" v-if="$page.props.jetstream.hasTermsAndPrivacyPolicyFeature">
-                <jet-label for="terms">
-                    <div class="flex items-center">
-                        <jet-checkbox name="terms" id="terms" v-model:checked="form.terms" />
-
-                        <div class="ml-2">
-                            I agree to the <a target="_blank" :href="route('terms.show')" class="underline text-sm text-gray-600 hover:text-gray-900">Terms of Service</a> and <a target="_blank" :href="route('policy.show')" class="underline text-sm text-gray-600 hover:text-gray-900">Privacy Policy</a>
-                        </div>
-                    </div>
-                </jet-label>
-            </div>
-
-            <div class="flex items-center justify-end mt-4">
-                <Link :href="route('login')" class="underline text-sm text-gray-600 hover:text-gray-900">
-                    Already registered?
-                </Link>
-
-                <jet-button class="ml-4" :class="{ 'opacity-25': form.processing }" :disabled="form.processing">
-                    Register
-                </jet-button>
+                    <my-button
+                        class="mr-4"
+                        :loding="loding"
+                        :disabled="form.processing"
+                    >
+                        ثبت نام
+                    </my-button>
+                </div>
             </div>
         </form>
-    </jet-authentication-card>
+    </my-authentication-card>
 </template>
 
-<script>
-    import { defineComponent } from 'vue'
-    import JetAuthenticationCard from '@/Jetstream/AuthenticationCard.vue'
-    import JetAuthenticationCardLogo from '@/Jetstream/AuthenticationCardLogo.vue'
-    import JetButton from '@/Jetstream/Button.vue'
-    import JetInput from '@/Jetstream/Input.vue'
-    import JetCheckbox from '@/Jetstream/Checkbox.vue'
-    import JetLabel from '@/Jetstream/Label.vue'
-    import JetValidationErrors from '@/Jetstream/ValidationErrors.vue'
-    import { Head, Link } from '@inertiajs/inertia-vue3';
+<script setup>
+import MyAuthenticationCard from "@/component/AuthenticationCard.vue";
+import MyAuthLink from "@/component/AuthLink.vue";
+import MyButton from "@/component/Button.vue";
+import MyInput from "@/component/Input.vue";
+import MyLabel from "@/component/Label.vue";
 
-    export default defineComponent({
-        components: {
-            Head,
-            JetAuthenticationCard,
-            JetAuthenticationCardLogo,
-            JetButton,
-            JetInput,
-            JetCheckbox,
-            JetLabel,
-            JetValidationErrors,
-            Link,
-        },
+import JetAuthenticationCardLogo from "@/Jetstream/AuthenticationCardLogo.vue";
 
-        data() {
-            return {
-                form: this.$inertia.form({
-                    name: '',
-                    email: '',
-                    password: '',
-                    password_confirmation: '',
-                    terms: false,
-                })
-            }
-        },
+import {
+    validEmail,
+    passwordConfirmation,
+    password,
+} from "@/functions/validations";
+import { Head, Link, useForm } from "@inertiajs/inertia-vue3";
+import { ref } from "@vue/reactivity";
 
-        methods: {
-            submit() {
-                this.form.post(this.route('register'), {
-                    onFinish: () => this.form.reset('password', 'password_confirmation'),
-                })
-            }
-        }
-    })
+const form = useForm({
+    name: "",
+    email: "",
+    password: "",
+    password_confirmation: "",
+    terms: false,
+});
+const loding = ref(false);
+
+function submit() {
+    loding.value = true;
+    if (
+        !form.email ||
+        !form.password ||
+        !form.name ||
+        !form.password ||
+        !form.password_confirmation
+    ) {
+        //
+    } else if (form.email && !validEmail(form.email)) {
+        //
+    } else if (
+        !passwordConfirmation(form.password, form.password_confirmation)
+    ) {
+        //
+    } else if (!password(form.password)) {
+        //password(form.password) return errors
+    } else {
+        form.post(route("register"), {
+            onFinish: () => form.reset("password", "password_confirmation"),
+        });
+    }
+    setTimeout(() => {
+        loding.value = false;
+    }, 200);
+}
 </script>

@@ -37,8 +37,10 @@
                     v-model="form.remember"
                 />
             </div>
-            <div class="card-actions flex-col items-start justify-end">
-                <div class="flex items-center justify-end mt-4 mr-auto">
+            <div class="flex-col items-start justify-end card-actions">
+                <div
+                    class="flex-row items-center justify-end mt-4 mr-auto form-control"
+                >
                     <my-auth-link :href="route('register')">
                         ساخت حساب جدید
                     </my-auth-link>
@@ -62,22 +64,18 @@
 
 <script setup>
 import MyAuthenticationCard from "@/component/AuthenticationCard.vue";
-import MyAuthLink from "@/component/AuthLink.vue";
-import MyLabel from "@/component/Label.vue";
 import MyCheckbox from "@/component/Checkbox.vue";
-import MyInput from "@/component/Input.vue";
+import MyAuthLink from "@/component/AuthLink.vue";
 import MyButton from "@/component/Button.vue";
+import MyLabel from "@/component/Label.vue";
+import MyInput from "@/component/Input.vue";
 
 import JetAuthenticationCardLogo from "@/Jetstream/AuthenticationCardLogo.vue";
 import JetValidationErrors from "@/Jetstream/ValidationErrors.vue";
 
-import { ref } from "vue";
+import { validEmail } from "@/functions/validations";
 import { Head, useForm } from "@inertiajs/inertia-vue3";
-
-const props = defineProps({
-    canResetPassword: Boolean,
-    status: String,
-});
+import { ref } from "vue";
 
 const form = useForm({
     email: "",
@@ -87,24 +85,13 @@ const form = useForm({
 
 const loding = ref(false);
 
-function validEmail(email) {
-    return String(email)
-        .toLowerCase()
-        .match(
-            /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
-        );
-}
-
 function submit() {
-    let valid = true;
     loding.value = true;
     if (!form.email || !form.password) {
-        valid = false;
-    }
-    if (form.email && !validEmail(form.email)) {
-        valid = false;
-    }
-    if (valid) {
+        //
+    } else if (form.email && !validEmail(form.email)) {
+        //
+    } else {
         form.transform((data) => ({
             ...data,
             remember: form.remember ? "on" : "",

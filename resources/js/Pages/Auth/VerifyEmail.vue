@@ -1,67 +1,57 @@
 <template>
-    <Head title="Email Verification" />
+    <Head title="تایید ایمیل" />
 
-    <jet-authentication-card>
-        <template #logo>
-            <jet-authentication-card-logo />
-        </template>
+    <my-authentication-card>
+        <template #title>تایید ایمیل</template>
 
-        <div class="mb-4 text-sm text-gray-600">
-            Thanks for signing up! Before getting started, could you verify your email address by clicking on the link we just emailed to you? If you didn't receive the email, we will gladly send you another.
+        <div class="mb-4 text-sm text-justify text-primary-content">
+            از ثبت نام شما سپاسگزاریم! قبل از شروع، آیا می توانید آدرس ایمیل خود
+            را با کلیک بر روی پیوندی که به تازگی برای شما ایمیل کرده ایم تأیید
+            کنید؟ اگر ایمیلی را دریافت نکردید، با کمال میل یک ایمیل دیگر برای
+            شما ارسال خواهیم کرد.
         </div>
 
-        <div class="mb-4 font-medium text-sm text-green-600" v-if="verificationLinkSent" >
-            A new verification link has been sent to the email address you provided during registration.
-        </div>
+        <form @submit.prevent="submit" novalidate>
+            <div class="flex-col items-start justify-end">
+                <div class="flex items-center justify-end mt-4">
+                    <my-button
+                        class="mr-4"
+                        :loding="loding"
+                        :disabled="form.processing"
+                    >
+                        ایمیل تایید را دوباره بفرست
+                    </my-button>
 
-        <form @submit.prevent="submit">
-            <div class="mt-4 flex items-center justify-between">
-                <jet-button :class="{ 'opacity-25': form.processing }" :disabled="form.processing">
-                    Resend Verification Email
-                </jet-button>
-
-                <Link :href="route('logout')" method="post" as="button" class="underline text-sm text-gray-600 hover:text-gray-900">Log Out</Link>
+                    <my-auth-link
+                        :href="route('logout')"
+                        :method="'post'"
+                        as="button"
+                    >
+                        خروج
+                    </my-auth-link>
+                </div>
             </div>
         </form>
-    </jet-authentication-card>
+    </my-authentication-card>
 </template>
 
-<script>
-    import { defineComponent } from 'vue'
-    import JetAuthenticationCard from '@/Jetstream/AuthenticationCard.vue'
-    import JetAuthenticationCardLogo from '@/Jetstream/AuthenticationCardLogo.vue'
-    import JetButton from '@/Jetstream/Button.vue'
-    import { Head, Link } from '@inertiajs/inertia-vue3';
+<script setup>
+import MyAuthenticationCard from "@/component/AuthenticationCard.vue";
+import MyAuthLink from "@/component/AuthLink.vue";
+import MyButton from "@/component/Button.vue";
 
-    export default defineComponent({
-        components: {
-            Head,
-            JetAuthenticationCard,
-            JetAuthenticationCardLogo,
-            JetButton,
-            Link,
-        },
+import { Head, useForm } from "@inertiajs/inertia-vue3";
+import { ref } from "@vue/reactivity";
 
-        props: {
-            status: String
-        },
+const form = useForm();
 
-        data() {
-            return {
-                form: this.$inertia.form()
-            }
-        },
+const loding = ref(false);
 
-        methods: {
-            submit() {
-                this.form.post(this.route('verification.send'))
-            },
-        },
-
-        computed: {
-            verificationLinkSent() {
-                return this.status === 'verification-link-sent';
-            }
-        }
-    })
+function submit() {
+    loding.value = true;
+    form.post(route("verification.send"));
+    setTimeout(() => {
+        loding.value = false;
+    }, 200);
+}
 </script>

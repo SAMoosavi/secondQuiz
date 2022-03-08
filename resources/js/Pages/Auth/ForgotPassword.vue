@@ -1,73 +1,61 @@
 <template>
-    <Head title="Forgot Password" />
+    <Head title="فراموشی رمز عبور" />
 
-    <jet-authentication-card>
-        <template #logo>
-            <jet-authentication-card-logo />
-        </template>
+    <my-authentication-card>
+        <template #title>فراموشی رمز عبور</template>
 
-        <div class="mb-4 text-sm text-gray-600">
-            Forgot your password? No problem. Just let us know your email address and we will email you a password reset link that will allow you to choose a new one.
+        <div class="mb-4 text-sm text-justify text-primary-content">
+            رمز عبور خود را فراموش کرده اید؟ مشکلی نیست فقط آدرس ایمیل خود را به
+            ما بگویید تا ما یک پیوند بازنشانی رمز عبور را برای شما ایمیل می کنیم
+            که به شما امکان می دهد رمز جدیدی را انتخاب کنید.
         </div>
 
-        <div v-if="status" class="mb-4 font-medium text-sm text-green-600">
-            {{ status }}
-        </div>
-
-        <jet-validation-errors class="mb-4" />
-
-        <form @submit.prevent="submit">
-            <div>
-                <jet-label for="email" value="Email" />
-                <jet-input id="email" type="email" class="mt-1 block w-full" v-model="form.email" required autofocus />
+        <form @submit.prevent="submit" novalidate>
+            <div class="form-control">
+                <my-label for="email" value="ایمیل" :required="true" />
+                <my-input
+                    id="email"
+                    type="email"
+                    v-model="form.email"
+                    required
+                    autofocus
+                    autocomplete="email"
+                />
             </div>
-
-            <div class="flex items-center justify-end mt-4">
-                <jet-button :class="{ 'opacity-25': form.processing }" :disabled="form.processing">
-                    Email Password Reset Link
-                </jet-button>
+            <div class="items-end justify-end mt-4 mr-auto form-control">
+                <my-button :loding="loding" :disabled="form.processing">
+                    ارسال ایمیل
+                </my-button>
             </div>
         </form>
-    </jet-authentication-card>
+    </my-authentication-card>
 </template>
 
-<script>
-    import { defineComponent } from 'vue'
-    import { Head } from '@inertiajs/inertia-vue3';
-    import JetAuthenticationCard from '@/Jetstream/AuthenticationCard.vue'
-    import JetAuthenticationCardLogo from '@/Jetstream/AuthenticationCardLogo.vue'
-    import JetButton from '@/Jetstream/Button.vue'
-    import JetInput from '@/Jetstream/Input.vue'
-    import JetLabel from '@/Jetstream/Label.vue'
-    import JetValidationErrors from '@/Jetstream/ValidationErrors.vue'
+<script setup>
+import MyAuthenticationCard from "@/component/AuthenticationCard.vue";
+import MyButton from "@/component/Button.vue";
+import MyLabel from "@/component/Label.vue";
+import MyInput from "@/component/Input.vue";
 
-    export default defineComponent({
-        components: {
-            Head,
-            JetAuthenticationCard,
-            JetAuthenticationCardLogo,
-            JetButton,
-            JetInput,
-            JetLabel,
-            JetValidationErrors
-        },
+import { validEmail } from "@/functions/validations";
+import { Head, useForm } from "@inertiajs/inertia-vue3";
+import { ref } from "@vue/reactivity";
 
-        props: {
-            status: String
-        },
+const form = useForm({
+    email: "",
+});
 
-        data() {
-            return {
-                form: this.$inertia.form({
-                    email: ''
-                })
-            }
-        },
+const loding = ref(false);
 
-        methods: {
-            submit() {
-                this.form.post(this.route('password.email'))
-            }
-        }
-    })
+function submit() {
+    loding.value = true;
+    if (!form.email || !validEmail(form.email)) {
+        //
+    } else {
+        form.post(route("password.email"));
+    }
+    setTimeout(() => {
+        loding.value = false;
+    }, 200);
+}
 </script>

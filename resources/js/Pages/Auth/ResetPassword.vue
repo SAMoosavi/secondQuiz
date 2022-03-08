@@ -1,81 +1,100 @@
 <template>
-    <Head title="Reset Password" />
+    <Head title="بازیابی رمز عبور" />
 
-    <jet-authentication-card>
-        <template #logo>
-            <jet-authentication-card-logo />
-        </template>
+    <my-authentication-card>
+        <template #title>بازیابی رمز عبور</template>
 
-        <jet-validation-errors class="mb-4" />
-
-        <form @submit.prevent="submit">
-            <div>
-                <jet-label for="email" value="Email" />
-                <jet-input id="email" type="email" class="mt-1 block w-full" v-model="form.email" required autofocus />
+        <form @submit.prevent="submit" novalidate>
+            <div class="form-control">
+                <my-label for="email" value="ایمیل" :required="true" />
+                <my-input
+                    id="email"
+                    type="email"
+                    v-model="form.email"
+                    required
+                    autofocus
+                    autocomplete="email"
+                />
             </div>
 
-            <div class="mt-4">
-                <jet-label for="password" value="Password" />
-                <jet-input id="password" type="password" class="mt-1 block w-full" v-model="form.password" required autocomplete="new-password" />
+            <div class="mt-4 form-control">
+                <my-label for="password" value="رمز ورود" :required="true" />
+                <my-input
+                    id="password"
+                    type="password"
+                    v-model="form.password"
+                    required
+                    autocomplete="new-password"
+                />
             </div>
 
-            <div class="mt-4">
-                <jet-label for="password_confirmation" value="Confirm Password" />
-                <jet-input id="password_confirmation" type="password" class="mt-1 block w-full" v-model="form.password_confirmation" required autocomplete="new-password" />
+            <div class="mt-4 form-control">
+                <my-label
+                    for="password_confirmation"
+                    value="تایید رمز عبور"
+                    :required="true"
+                />
+                <my-input
+                    id="password_confirmation"
+                    type="password"
+                    v-model="form.password_confirmation"
+                    required
+                    autocomplete="new-password"
+                />
             </div>
 
-            <div class="flex items-center justify-end mt-4">
-                <jet-button :class="{ 'opacity-25': form.processing }" :disabled="form.processing">
-                    Reset Password
-                </jet-button>
+            <div class="items-end justify-end mt-4 mr-auto form-control">
+                <my-button :loding="loding" :disabled="form.processing">
+                    بازیابی رمز عبور
+                </my-button>
             </div>
         </form>
-    </jet-authentication-card>
+    </my-authentication-card>
 </template>
 
-<script>
-    import { defineComponent } from 'vue';
-    import { Head } from '@inertiajs/inertia-vue3';
-    import JetAuthenticationCard from '@/Jetstream/AuthenticationCard.vue'
-    import JetAuthenticationCardLogo from '@/Jetstream/AuthenticationCardLogo.vue'
-    import JetButton from '@/Jetstream/Button.vue'
-    import JetInput from '@/Jetstream/Input.vue'
-    import JetLabel from '@/Jetstream/Label.vue'
-    import JetValidationErrors from '@/Jetstream/ValidationErrors.vue'
+<script setup>
+import MyAuthenticationCard from "@/component/AuthenticationCard.vue";
+import MyButton from "@/component/Button.vue";
+import MyLabel from "@/component/Label.vue";
+import MyInput from "@/component/Input.vue";
 
-    export default defineComponent({
-        components: {
-            Head,
-            JetAuthenticationCard,
-            JetAuthenticationCardLogo,
-            JetButton,
-            JetInput,
-            JetLabel,
-            JetValidationErrors
-        },
+import { validEmail, passwordConfirmation } from "@/functions/validations";
+import { Head, useForm } from "@inertiajs/inertia-vue3";
+import { ref } from "vue";
 
-        props: {
-            email: String,
-            token: String,
-        },
+const props = defineProps({
+    email: String,
+    token: String,
+});
 
-        data() {
-            return {
-                form: this.$inertia.form({
-                    token: this.token,
-                    email: this.email,
-                    password: '',
-                    password_confirmation: '',
-                })
-            }
-        },
+const form = useForm({
+    token: props.token,
+    email: props.email,
+    password: "",
+    password_confirmation: "",
+});
 
-        methods: {
-            submit() {
-                this.form.post(this.route('password.update'), {
-                    onFinish: () => this.form.reset('password', 'password_confirmation'),
-                })
-            }
-        }
-    })
+const loding = ref(false);
+
+function submit() {
+    loding.value = true;
+    if (!form.email || !form.password || !form.password_confirmation) {
+        //
+    } else if (form.email && !validEmail(form.email)) {
+        //
+    } else if (
+        !passwordConfirmation(form.password, form.password_confirmation)
+    ) {
+        //
+    } else if (!password(form.password)) {
+        //password(form.password) return errors
+    } else {
+        form.post(route("password.update"), {
+            onFinish: () => form.reset("password", "password_confirmation"),
+        });
+    }
+    setTimeout(() => {
+        loding.value = false;
+    }, 200);
+}
 </script>

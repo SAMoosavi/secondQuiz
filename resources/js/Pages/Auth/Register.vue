@@ -2,9 +2,6 @@
     <Head title="ثبت نام" />
 
     <my-authentication-card>
-        <template #logo>
-            <jet-authentication-card-logo />
-        </template>
         <template #title>ثبت نام</template>
 
         <form @submit.prevent="submit" novalidate>
@@ -81,14 +78,12 @@ import MyButton from "@/component/Button.vue";
 import MyInput from "@/component/Input.vue";
 import MyLabel from "@/component/Label.vue";
 
-import JetAuthenticationCardLogo from "@/Jetstream/AuthenticationCardLogo.vue";
-
 import {
     validEmail,
     passwordConfirmation,
     password,
 } from "@/functions/validations";
-import { Head, Link, useForm } from "@inertiajs/inertia-vue3";
+import { Head, useForm } from "@inertiajs/inertia-vue3";
 import { ref } from "@vue/reactivity";
 
 const form = useForm({

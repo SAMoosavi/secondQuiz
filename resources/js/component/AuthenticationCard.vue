@@ -1,16 +1,16 @@
 <template>
     <bg-auth />
     <div
-        class="min-h-screen flex flex-col justify-center items-center bg-transparent"
+        class="flex flex-col items-center justify-center min-h-screen bg-transparent"
     >
         <div>
-            <slot name="logo" />
+            <jet-authentication-card-logo />
         </div>
 
-        <div class="w-full sm:max-w-md card bg-base-300 m-4">
+        <div class="w-full m-4 sm:max-w-md card bg-base-300">
             <div class="card-body">
                 <h2
-                    class="card-title text-center text-primary-focus self-center"
+                    class="self-center text-center card-title text-primary-focus"
                 >
                     <slot name="title" />
                 </h2>
@@ -22,4 +22,5 @@
 </template>
 <script setup>
 import BgAuth from "@/component/BgAuth.vue";
+import JetAuthenticationCardLogo from "@/Jetstream/AuthenticationCardLogo.vue";
 </script>

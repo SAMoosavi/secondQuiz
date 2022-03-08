@@ -2,9 +2,7 @@
     <Head title="ورود" />
 
     <my-authentication-card>
-        <template #logo>
-            <jet-authentication-card-logo />
-        </template>
+
         <template #title>ورود</template>
 
         <form @submit.prevent="submit" novalidate>
@@ -69,9 +67,6 @@ import MyAuthLink from "@/component/AuthLink.vue";
 import MyButton from "@/component/Button.vue";
 import MyLabel from "@/component/Label.vue";
 import MyInput from "@/component/Input.vue";
-
-import JetAuthenticationCardLogo from "@/Jetstream/AuthenticationCardLogo.vue";
-import JetValidationErrors from "@/Jetstream/ValidationErrors.vue";
 
 import { validEmail } from "@/functions/validations";
 import { Head, useForm } from "@inertiajs/inertia-vue3";

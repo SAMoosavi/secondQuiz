@@ -11,7 +11,7 @@
 </template>
 
 <script setup>
-import MyLabel from "@/component/Label.vue";
+import MyLabel from "@/component/Form/Label.vue";
 import { ref, watch } from "@vue/runtime-core";
 
 const emit = defineEmits(["update:modelValue"]);

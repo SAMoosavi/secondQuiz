@@ -1,7 +1,7 @@
 <template>
     <button
         :type="type"
-        class="btn btn-secondary transition-all duration-200 btn-sm"
+        class="btn btn-primary transition-all duration-200 btn-sm"
         :class="{ 'loading flex-row-reverse': loding }"
     >
         <slot></slot>

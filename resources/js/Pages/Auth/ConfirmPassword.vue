@@ -32,9 +32,9 @@
 <script setup>
 import MyAuthCard from "@/component/Auth/Card.vue";
 import MyAuthText from "@/component/Auth/Text.vue";
-import MyButton from "@/component/Button.vue";
-import MyLabel from "@/component/Label.vue";
-import MyInput from "@/component/Input.vue";
+import MyButton from "@/component/Form/Button.vue";
+import MyLabel from "@/component/Form/Label.vue";
+import MyInput from "@/component/Form/Input.vue";
 
 import { Head, useForm } from "@inertiajs/inertia-vue3";
 import { ref } from "@vue/reactivity";

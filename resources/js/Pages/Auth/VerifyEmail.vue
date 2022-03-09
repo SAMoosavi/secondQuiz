@@ -39,7 +39,7 @@
 import MyAuthCard from "@/component/Auth/Card.vue";
 import MyAuthLink from "@/component/Auth/Link.vue";
 import MyAuthText from "@/component/Auth/Text.vue";
-import MyButton from "@/component/Button.vue";
+import MyButton from "@/component/Form/Button.vue";
 
 import { Head, useForm } from "@inertiajs/inertia-vue3";
 import { ref } from "@vue/reactivity";

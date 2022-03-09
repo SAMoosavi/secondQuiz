@@ -74,9 +74,9 @@
 <script setup>
 import MyAuthCard from "@/component/Auth/Card.vue";
 import MyAuthLink from "@/component/Auth/Link.vue";
-import MyButton from "@/component/Button.vue";
-import MyInput from "@/component/Input.vue";
-import MyLabel from "@/component/Label.vue";
+import MyButton from "@/component/Form/Button.vue";
+import MyInput from "@/component/Form/Input.vue";
+import MyLabel from "@/component/Form/Label.vue";
 
 import {
     validEmail,

@@ -54,9 +54,9 @@
 
 <script setup>
 import MyAuthCard from "@/component/Auth/Card.vue";
-import MyButton from "@/component/Button.vue";
-import MyLabel from "@/component/Label.vue";
-import MyInput from "@/component/Input.vue";
+import MyButton from "@/component/Form/Button.vue";
+import MyLabel from "@/component/Form/Label.vue";
+import MyInput from "@/component/Form/Input.vue";
 
 import { validEmail, passwordConfirmation } from "@/functions/validations";
 import { Head, useForm } from "@inertiajs/inertia-vue3";

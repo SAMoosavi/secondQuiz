@@ -1,5 +1,6 @@
 <template>
-    <bg-auth />
+    <my-bg-auth />
+        <togle class="absolute z-10 top-3 right-3 "/>
     <div
         class="flex flex-col items-center justify-center min-h-screen bg-transparent"
     >
@@ -21,6 +22,7 @@
     </div>
 </template>
 <script setup>
-import BgAuth from "@/component/BgAuth.vue";
+import MyBgAuth from "@/component/Auth/Bg.vue";
 import JetAuthenticationCardLogo from "@/Jetstream/AuthenticationCardLogo.vue";
+import Togle from "@/component/TogleThem.vue";
 </script>

@@ -16,5 +16,5 @@
 </template>
 
 <script setup>
-import MyPolygon from "@/component/Polygon.vue";
+import MyPolygon from "@/component/Auth/Polygon.vue";
 </script>

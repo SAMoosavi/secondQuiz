@@ -1,14 +1,14 @@
 <template>
     <Head title="فراموشی رمز عبور" />
 
-    <my-authentication-card>
+    <my-auth-card>
         <template #title>فراموشی رمز عبور</template>
 
-        <div class="mb-4 text-sm text-justify text-primary-content">
+        <my-auth-text>
             رمز عبور خود را فراموش کرده اید؟ مشکلی نیست فقط آدرس ایمیل خود را به
             ما بگویید تا ما یک پیوند بازنشانی رمز عبور را برای شما ایمیل می کنیم
             که به شما امکان می دهد رمز جدیدی را انتخاب کنید.
-        </div>
+        </my-auth-text>
 
         <form @submit.prevent="submit" novalidate>
             <div class="form-control">
@@ -28,11 +28,12 @@
                 </my-button>
             </div>
         </form>
-    </my-authentication-card>
+    </my-auth-card>
 </template>
 
 <script setup>
-import MyAuthenticationCard from "@/component/AuthenticationCard.vue";
+import MyAuthCard from "@/component/Auth/Card.vue";
+import MyAuthText from "@/component/Auth/Text.vue";
 import MyButton from "@/component/Button.vue";
 import MyLabel from "@/component/Label.vue";
 import MyInput from "@/component/Input.vue";

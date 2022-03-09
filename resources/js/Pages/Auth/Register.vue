@@ -1,7 +1,7 @@
 <template>
     <Head title="ثبت نام" />
 
-    <my-authentication-card>
+    <my-auth-card>
         <template #title>ثبت نام</template>
 
         <form @submit.prevent="submit" novalidate>
@@ -68,12 +68,12 @@
                 </div>
             </div>
         </form>
-    </my-authentication-card>
+    </my-auth-card>
 </template>
 
 <script setup>
-import MyAuthenticationCard from "@/component/AuthenticationCard.vue";
-import MyAuthLink from "@/component/AuthLink.vue";
+import MyAuthCard from "@/component/Auth/Card.vue";
+import MyAuthLink from "@/component/Auth/Link.vue";
 import MyButton from "@/component/Button.vue";
 import MyInput from "@/component/Input.vue";
 import MyLabel from "@/component/Label.vue";

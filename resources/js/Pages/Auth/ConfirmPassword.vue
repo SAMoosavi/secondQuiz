@@ -1,11 +1,11 @@
 <template>
     <Head title="منطقه امن" />
-    <my-authentication-card>
+    <my-auth-card>
         <template #title>منطقه امن</template>
-        <div class="mb-4 text-sm text-justify text-primary-content">
+        <my-auth-text>
             این یک منطقه امن برنامه است. لطفاً قبل از ادامه رمز عبور خود را
             تأیید کنید.
-        </div>
+        </my-auth-text>
 
         <form @submit.prevent="submit" novalidate>
             <div class="form-control">
@@ -26,11 +26,12 @@
                 </my-button>
             </div>
         </form>
-    </my-authentication-card>
+    </my-auth-card>
 </template>
 
 <script setup>
-import MyAuthenticationCard from "@/component/AuthenticationCard.vue";
+import MyAuthCard from "@/component/Auth/Card.vue";
+import MyAuthText from "@/component/Auth/Text.vue";
 import MyButton from "@/component/Button.vue";
 import MyLabel from "@/component/Label.vue";
 import MyInput from "@/component/Input.vue";

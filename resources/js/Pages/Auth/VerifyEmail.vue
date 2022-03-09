@@ -1,15 +1,15 @@
 <template>
     <Head title="تایید ایمیل" />
 
-    <my-authentication-card>
+    <my-auth-card>
         <template #title>تایید ایمیل</template>
 
-        <div class="mb-4 text-sm text-justify text-primary-content">
+        <my-auth-text>
             از ثبت نام شما سپاسگزاریم! قبل از شروع، آیا می توانید آدرس ایمیل خود
             را با کلیک بر روی پیوندی که به تازگی برای شما ایمیل کرده ایم تأیید
             کنید؟ اگر ایمیلی را دریافت نکردید، با کمال میل یک ایمیل دیگر برای
             شما ارسال خواهیم کرد.
-        </div>
+        </my-auth-text>
 
         <form @submit.prevent="submit" novalidate>
             <div class="flex-col items-start justify-end">
@@ -32,12 +32,13 @@
                 </div>
             </div>
         </form>
-    </my-authentication-card>
+    </my-auth-card>
 </template>
 
 <script setup>
-import MyAuthenticationCard from "@/component/AuthenticationCard.vue";
-import MyAuthLink from "@/component/AuthLink.vue";
+import MyAuthCard from "@/component/Auth/Card.vue";
+import MyAuthLink from "@/component/Auth/Link.vue";
+import MyAuthText from "@/component/Auth/Text.vue";
 import MyButton from "@/component/Button.vue";
 
 import { Head, useForm } from "@inertiajs/inertia-vue3";

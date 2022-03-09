@@ -1,7 +1,7 @@
 <template>
     <Head title="ورود" />
 
-    <my-authentication-card>
+    <my-auth-card>
 
         <template #title>ورود</template>
 
@@ -57,13 +57,13 @@
                 </div>
             </div>
         </form>
-    </my-authentication-card>
+    </my-auth-card>
 </template>
 
 <script setup>
-import MyAuthenticationCard from "@/component/AuthenticationCard.vue";
+import MyAuthCard from "@/component/Auth/Card.vue";
+import MyAuthLink from "@/component/Auth/Link.vue";
 import MyCheckbox from "@/component/Checkbox.vue";
-import MyAuthLink from "@/component/AuthLink.vue";
 import MyButton from "@/component/Button.vue";
 import MyLabel from "@/component/Label.vue";
 import MyInput from "@/component/Input.vue";

@@ -1,7 +1,7 @@
 <template>
     <Head title="بازیابی رمز عبور" />
 
-    <my-authentication-card>
+    <my-auth-card>
         <template #title>بازیابی رمز عبور</template>
 
         <form @submit.prevent="submit" novalidate>
@@ -49,11 +49,11 @@
                 </my-button>
             </div>
         </form>
-    </my-authentication-card>
+    </my-auth-card>
 </template>
 
 <script setup>
-import MyAuthenticationCard from "@/component/AuthenticationCard.vue";
+import MyAuthCard from "@/component/Auth/Card.vue";
 import MyButton from "@/component/Button.vue";
 import MyLabel from "@/component/Label.vue";
 import MyInput from "@/component/Input.vue";

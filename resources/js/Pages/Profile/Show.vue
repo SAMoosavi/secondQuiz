@@ -1,5 +1,5 @@
 <template>
-    <app-layout title="پزوفایل">
+    <app-layout title="پروفایل">
         <div>
             <div
                 class="py-10 mx-auto overflow-hidden max-w-7xl sm:px-6 lg:px-8"

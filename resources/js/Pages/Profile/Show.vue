@@ -1,64 +1,63 @@
 <template>
-    <app-layout title="Profile">
-        <template #header>
-            <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-                Profile
-            </h2>
-        </template>
-
+    <app-layout title="پزوفایل">
         <div>
-            <div class="max-w-7xl mx-auto py-10 sm:px-6 lg:px-8">
-                <div v-if="$page.props.jetstream.canUpdateProfileInformation">
-                    <update-profile-information-form :user="$page.props.user" />
-
-                    <jet-section-border />
+            <div
+                class="py-10 mx-auto overflow-hidden max-w-7xl sm:px-6 lg:px-8"
+            >
+                <div class="justify-center mb-4 bg-transparent tabs tabs-boxed">
+                    <button
+                        class="tab"
+                        :class="{
+                            'tab-active':
+                                isComponent ==
+                                'update-profile-information-form',
+                        }"
+                        @click="chengTab('update-profile-information-form')"
+                    >
+                        مشخصات
+                    </button>
+                    <button
+                        class="tab"
+                        :class="{
+                            'tab-active': isComponent == 'update-password-form',
+                        }"
+                        @click="chengTab('update-password-form')"
+                    >
+                        تغییر رمز عبور
+                    </button>
                 </div>
-
-                <div v-if="$page.props.jetstream.canUpdatePassword">
-                    <update-password-form class="mt-10 sm:mt-0" />
-
-                    <jet-section-border />
-                </div>
-
-                <div v-if="$page.props.jetstream.canManageTwoFactorAuthentication">
-                    <two-factor-authentication-form class="mt-10 sm:mt-0" />
-
-                    <jet-section-border />
-                </div>
-
-                <logout-other-browser-sessions-form :sessions="sessions" class="mt-10 sm:mt-0" />
-
-                <template v-if="$page.props.jetstream.hasAccountDeletionFeatures">
-                    <jet-section-border />
-
-                    <delete-user-form class="mt-10 sm:mt-0" />
-                </template>
+                <transition
+                    enter-active-class="transition duration-700"
+                    enter-from-class="transform opacity-0 -translate-x-96"
+                    enter-to-class="transform translate-x-0 opacity-100"
+                    leave-active-class="transition duration-700"
+                    leave-from-class="transform translate-x-0 opacity-100"
+                    leave-to-class="transform opacity-0 translate-x-96"
+                    mode="out-in"
+                >
+                    <component
+                        :is="comp[isComponent]"
+                        :user="$page.props.user"
+                        :key="isComponent"
+                    />
+                </transition>
             </div>
         </div>
     </app-layout>
 </template>
 
-<script>
-    import { defineComponent } from 'vue'
-    import AppLayout from '@/Layouts/AppLayout.vue'
-    import DeleteUserForm from '@/Pages/Profile/Partials/DeleteUserForm.vue'
-    import JetSectionBorder from '@/Jetstream/SectionBorder.vue'
-    import LogoutOtherBrowserSessionsForm from '@/Pages/Profile/Partials/LogoutOtherBrowserSessionsForm.vue'
-    import TwoFactorAuthenticationForm from '@/Pages/Profile/Partials/TwoFactorAuthenticationForm.vue'
-    import UpdatePasswordForm from '@/Pages/Profile/Partials/UpdatePasswordForm.vue'
-    import UpdateProfileInformationForm from '@/Pages/Profile/Partials/UpdateProfileInformationForm.vue'
+<script setup>
+import AppLayout from "@/Layouts/AppLayout.vue";
+import UpdatePasswordForm from "@/Pages/Profile/Partials/UpdatePasswordForm.vue";
+import UpdateProfileInformationForm from "@/Pages/Profile/Partials/UpdateProfileInformationForm.vue";
+import { ref } from "@vue/reactivity";
 
-    export default defineComponent({
-        props: ['sessions'],
-
-        components: {
-            AppLayout,
-            DeleteUserForm,
-            JetSectionBorder,
-            LogoutOtherBrowserSessionsForm,
-            TwoFactorAuthenticationForm,
-            UpdatePasswordForm,
-            UpdateProfileInformationForm,
-        },
-    })
+const isComponent = ref("update-password-form");
+const comp = {
+    "update-password-form": UpdatePasswordForm,
+    "update-profile-information-form": UpdateProfileInformationForm,
+};
+function chengTab(tab) {
+    isComponent.value = tab;
+}
 </script>

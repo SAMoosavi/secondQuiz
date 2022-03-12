@@ -1,155 +1,166 @@
 <template>
-    <jet-form-section @submitted="updateProfileInformation">
-        <template #title>
-            Profile Information
-        </template>
-
-        <template #description>
-            Update your account's profile information and email address.
-        </template>
-
-        <template #form>
+    <div class="flex justify-center w-full">
+        <form @submit.prevent="send" class="w-1/2" novalidate>
             <!-- Profile Photo -->
-            <div class="col-span-6 sm:col-span-4" v-if="$page.props.jetstream.managesProfilePhotos">
+            <div class="form-control">
                 <!-- Profile Photo File Input -->
-                <input type="file" class="hidden"
-                            ref="photo"
-                            @change="updatePhotoPreview">
+                <input
+                    type="file"
+                    class="hidden"
+                    ref="photo"
+                    @change="updatePhotoPreview"
+                />
 
-                <jet-label for="photo" value="Photo" />
+                <my-label for="photo" value="تصویر" />
+                <div class="flex items-center justify-between">
+                    <!-- Current Profile Photo -->
+                    <div class="mt-2 avatar" v-if="!photoPreview">
+                        <div class="w-24 overflow-hidden rounded-full">
+                            <img
+                                :src="user.profile_photo_url"
+                                :alt="user.name"
+                            />
+                        </div>
+                    </div>
 
-                <!-- Current Profile Photo -->
-                <div class="mt-2" v-show="! photoPreview">
-                    <img :src="user.profile_photo_url" :alt="user.name" class="rounded-full h-20 w-20 object-cover">
+                    <!-- New Profile Photo Preview -->
+                    <div class="mt-2 avatar" v-if="photoPreview">
+                        <span
+                            class="block h-20 bg-center bg-no-repeat bg-cover rounded-full"
+                            :style="
+                                'background-image: url(\'' +
+                                photoPreview +
+                                '\');'
+                            "
+                        >
+                        </span>
+                    </div>
+                    <div>
+                        <my-button
+                            class="mt-2 ml-2 btn-secondary"
+                            type="button"
+                            @click.prevent="selectNewPhoto"
+                        >
+                            انتخاب تصویر جدید
+                        </my-button>
+
+                        <my-button
+                            type="button"
+                            class="mt-2 btn-secondary"
+                            @click.prevent="deletePhoto"
+                            v-if="user.profile_photo_path"
+                        >
+                            حذف تصویر
+                        </my-button>
+                    </div>
                 </div>
-
-                <!-- New Profile Photo Preview -->
-                <div class="mt-2" v-show="photoPreview">
-                    <span class="block rounded-full w-20 h-20 bg-cover bg-no-repeat bg-center"
-                          :style="'background-image: url(\'' + photoPreview + '\');'">
-                    </span>
-                </div>
-
-                <jet-secondary-button class="mt-2 mr-2" type="button" @click.prevent="selectNewPhoto">
-                    Select A New Photo
-                </jet-secondary-button>
-
-                <jet-secondary-button type="button" class="mt-2" @click.prevent="deletePhoto" v-if="user.profile_photo_path">
-                    Remove Photo
-                </jet-secondary-button>
-
-                <jet-input-error :message="form.errors.photo" class="mt-2" />
             </div>
 
             <!-- Name -->
-            <div class="col-span-6 sm:col-span-4">
-                <jet-label for="name" value="Name" />
-                <jet-input id="name" type="text" class="mt-1 block w-full" v-model="form.name" autocomplete="name" />
-                <jet-input-error :message="form.errors.name" class="mt-2" />
+            <div class="form-control">
+                <my-label for="name" value="نام" :required="true" />
+                <my-input
+                    id="name"
+                    type="text"
+                    v-model="form.name"
+                    autocomplete="name"
+                />
             </div>
 
             <!-- Email -->
-            <div class="col-span-6 sm:col-span-4">
-                <jet-label for="email" value="Email" />
-                <jet-input id="email" type="email" class="mt-1 block w-full" v-model="form.email" />
-                <jet-input-error :message="form.errors.email" class="mt-2" />
+            <div class="form-control">
+                <my-label for="email" value="ایمیل" :required="true" />
+                <my-input
+                    id="email"
+                    type="email"
+                    v-model="form.email"
+                    autocomplete="email"
+                />
             </div>
-        </template>
 
-        <template #actions>
-            <jet-action-message :on="form.recentlySuccessful" class="mr-3">
-                Saved.
-            </jet-action-message>
-
-            <jet-button :class="{ 'opacity-25': form.processing }" :disabled="form.processing">
-                Save
-            </jet-button>
-        </template>
-    </jet-form-section>
+            <div class="mt-2 form-control">
+                <my-button :loding="loding" :disabled="form.processing">
+                    ذخیره
+                </my-button>
+            </div>
+        </form>
+    </div>
 </template>
 
-<script>
-    import { defineComponent } from 'vue'
-    import JetButton from '@/Jetstream/Button.vue'
-    import JetFormSection from '@/Jetstream/FormSection.vue'
-    import JetInput from '@/Jetstream/Input.vue'
-    import JetInputError from '@/Jetstream/InputError.vue'
-    import JetLabel from '@/Jetstream/Label.vue'
-    import JetActionMessage from '@/Jetstream/ActionMessage.vue'
-    import JetSecondaryButton from '@/Jetstream/SecondaryButton.vue'
+<script setup>
+import myButton from "@/component/Form/Button.vue";
+import myInput from "@/component/Form/Input.vue";
+import myLabel from "@/component/Form/Label.vue";
 
-    export default defineComponent({
-        components: {
-            JetActionMessage,
-            JetButton,
-            JetFormSection,
-            JetInput,
-            JetInputError,
-            JetLabel,
-            JetSecondaryButton,
+import { validEmail } from "@/functions/validations";
+
+import { useForm } from "@inertiajs/inertia-vue3";
+import { ref } from "@vue/reactivity";
+
+const props = defineProps(["user"]);
+
+const form = useForm({
+    _method: "PUT",
+    name: props.user.name,
+    email: props.user.email,
+    photo: null,
+});
+
+const photoPreview = ref();
+const loding = ref(false);
+function send() {
+    loding.value = true;
+    if (photo.value) {
+        form.photo = photo.value.files[0];
+    }
+    if (!form.name || !form.email) {
+        //
+    } else if (!validEmail(form.email)) {
+        //
+    } else {
+        form.post(route("user-profile-information.update"), {
+            errorBag: "updateProfileInformation",
+            preserveScroll: true,
+            onSuccess: () => clearPhotoFileInput(),
+        });
+    }
+    setTimeout(() => {
+        loding.value = false;
+    }, 200);
+}
+
+const photo = ref();
+function selectNewPhoto() {
+    photo.value.click();
+}
+
+function updatePhotoPreview() {
+    const Photo = photo.value.files[0];
+
+    if (!Photo) return;
+
+    const reader = new FileReader();
+
+    reader.onload = (e) => {
+        photoPreview.value = e.target.result;
+    };
+
+    reader.readAsDataURL(Photo);
+}
+
+function deletePhoto() {
+    useForm({}).delete(route("current-user-photo.destroy"), {
+        preserveScroll: true,
+        onSuccess: () => {
+            photoPreview.value = null;
+            clearPhotoFileInput();
         },
+    });
+}
 
-        props: ['user'],
-
-        data() {
-            return {
-                form: this.$inertia.form({
-                    _method: 'PUT',
-                    name: this.user.name,
-                    email: this.user.email,
-                    photo: null,
-                }),
-
-                photoPreview: null,
-            }
-        },
-
-        methods: {
-            updateProfileInformation() {
-                if (this.$refs.photo) {
-                    this.form.photo = this.$refs.photo.files[0]
-                }
-
-                this.form.post(route('user-profile-information.update'), {
-                    errorBag: 'updateProfileInformation',
-                    preserveScroll: true,
-                    onSuccess: () => (this.clearPhotoFileInput()),
-                });
-            },
-
-            selectNewPhoto() {
-                this.$refs.photo.click();
-            },
-
-            updatePhotoPreview() {
-                const photo = this.$refs.photo.files[0];
-
-                if (! photo) return;
-
-                const reader = new FileReader();
-
-                reader.onload = (e) => {
-                    this.photoPreview = e.target.result;
-                };
-
-                reader.readAsDataURL(photo);
-            },
-
-            deletePhoto() {
-                this.$inertia.delete(route('current-user-photo.destroy'), {
-                    preserveScroll: true,
-                    onSuccess: () => {
-                        this.photoPreview = null;
-                        this.clearPhotoFileInput();
-                    },
-                });
-            },
-
-            clearPhotoFileInput() {
-                if (this.$refs.photo?.value) {
-                    this.$refs.photo.value = null;
-                }
-            },
-        },
-    })
+function clearPhotoFileInput() {
+    if (photo.value) {
+        photo.value = null;
+    }
+}
 </script>

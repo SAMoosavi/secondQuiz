@@ -1,6 +1,6 @@
 <template>
     <div class="flex justify-center w-full">
-        <form @submit.prevent="send" class="w-1/2" novalidate>
+        <form @submit.prevent="send" class="w-full md:w-1/2" novalidate>
             <div class="form-control">
                 <my-label
                     for="current_password"

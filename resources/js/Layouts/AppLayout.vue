@@ -24,12 +24,13 @@
                         </my-nav-link>
                     </div>
                     <!-- Logo -->
-                    <div class="flex items-center shrink-0">
+                    <div class="flex items-center gap-2 shrink-0">
                         <Link :href="route('dashboard')">
                             <my-application-mark
                                 class="block w-auto h-9 text-neutral-content"
                             />
                         </Link>
+                        <togle-them />
                     </div>
 
                     <!-- User -->
@@ -185,10 +186,12 @@
                             پروفایل
                         </my-nav-link>
                     </div>
+                    <togle-them class="w-full" />
                 </div>
             </nav>
             <!-- Page Content -->
             <main>
+                
                 <slot></slot>
             </main>
         </div>
@@ -199,6 +202,7 @@
 import myApplicationMark from "@/component/Logo/ApplicationMark.vue";
 
 import myNavLink from "@/component/Navbar/Link.vue";
+import togleThem from "@/component/TogleThem.vue";
 
 import { Head, Link, useForm } from "@inertiajs/inertia-vue3";
 

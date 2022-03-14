@@ -1,18 +1,19 @@
 <template>
     <my-select v-model="them">
-        <option
+        <my-option
             v-for="(txt, val) in thems"
             :key="val"
             :value="val"
-            class="bg-base-100"
+            :selected="val == them"
         >
             {{ txt }}
-        </option>
+        </my-option>
     </my-select>
 </template>
 
 <script setup>
 import mySelect from "@/component/Form/Select.vue";
+import myOption from "@/component/Form/Option.vue";
 
 import { ref } from "@vue/reactivity";
 import { watch } from "@vue/runtime-core";

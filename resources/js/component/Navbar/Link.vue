@@ -2,7 +2,7 @@
     <Link
         :href="href"
         class="hidden btn sm:inline-flex"
-        :class="{ 'btn-primary ': active }"
+        :class="{ 'btn-primary btn-disabled': active }"
     >
         <slot />
     </Link>

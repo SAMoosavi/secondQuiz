@@ -3,7 +3,7 @@
         <Head :title="title" />
 
         <div class="min-h-screen bg-gradient-to-br from-base-100 to-base-300">
-            <nav class="flex flex-col items-center justify-center bg-neutral">
+            <nav class="sticky top-0 flex flex-col items-center justify-center bg-neutral">
                 <!-- sm and over -->
                 <div
                     class="hidden h-16 sm:justify-between max-w-screen-2xl sm:navbar"
@@ -98,10 +98,10 @@
                             >
                                 <transition
                                     enter-active-class="transition duration-100 origin-center"
-                                    enter-from-class="transform rotate-90"
+                                    enter-from-class="transform -rotate-90"
                                     enter-to-class="transform rotate-0"
                                     leave-active-class="transition duration-100 origin-center"
-                                    leave-from-class="transform rotate-180"
+                                    leave-from-class="transform rotate-0"
                                     leave-to-class="transform rotate-90"
                                     mode="out-in"
                                 >

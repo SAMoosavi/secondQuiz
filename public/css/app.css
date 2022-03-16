@@ -3168,10 +3168,6 @@ body[dir="rtl"] .checkbox:checked,
   --tw-bg-opacity: 1;
   background-color: hsl(var(--p) / var(--tw-bg-opacity));
 }
-.bg-red-500 {
-  --tw-bg-opacity: 1;
-  background-color: rgb(239 68 68 / var(--tw-bg-opacity));
-}
 .bg-opacity-25 {
   --tw-bg-opacity: 0.25;
 }
@@ -3576,6 +3572,9 @@ body[dir="rtl"] .checkbox:checked,
   transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
   transition-duration: 150ms;
 }
+.delay-100 {
+  transition-delay: 100ms;
+}
 .duration-150 {
   transition-duration: 150ms;
 }
@@ -3596,6 +3595,9 @@ body[dir="rtl"] .checkbox:checked,
 }
 .duration-700 {
   transition-duration: 700ms;
+}
+.duration-500 {
+  transition-duration: 500ms;
 }
 .ease-in-out {
   transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);

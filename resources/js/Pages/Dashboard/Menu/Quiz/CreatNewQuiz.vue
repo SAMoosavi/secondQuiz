@@ -1,7 +1,7 @@
 <template>
-    <div @click="$emit('showThis', -2)">
+    <div @click="$emit('showThis', -1)">
         <p
-            class="flex justify-between items-center px-4 py-2"
+            class="flex items-center justify-between px-4 py-2 transition-all duration-200 delay-100"
             :class="{ 'bg-primary': show }"
         >
             ساخت آزمون جدید

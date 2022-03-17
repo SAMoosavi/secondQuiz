@@ -1,7 +1,7 @@
 <template>
     <div class="sticky top-0 bg-base-100">
         <p
-            class="flex justify-between items-center px-4 py-2"
+            class="flex justify-between items-center px-4 py-2 cursor-pointer"
             @click="$emit('cheng', show)"
         >
             <slot />

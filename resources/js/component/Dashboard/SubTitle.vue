@@ -1,6 +1,6 @@
 <template>
     <p
-        class="flex items-center justify-between px-4 py-2 transition-all duration-500"
+        class="flex items-center justify-between px-4 py-2 transition-all duration-500 cursor-pointer"
         :class="{ 'bg-primary': show }"
     >
         <slot />

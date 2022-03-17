@@ -1,5 +1,13 @@
 <template>
-    <my-title @sendShowAnswer="$emit('chengShow')" :show="show" />
+    <my-title
+        @sendShowAnswer="
+            () => {
+                showIndex = -2;
+                $emit('chengShow');
+            }
+        "
+        :show="show"
+    />
     <transition @before-enter="onBeforEnter" @enter="onEnter" @leave="onLeave">
         <div v-if="show" class="overflow-hidden">
             <div v-for="(answer, index) in answers" :key="answer.name">

@@ -1,25 +1,29 @@
 <template>
-    <my-title @sendShowQuiz="$emit('chengShow')" :show="show" />
-        <transition
-            @before-enter="onBeforEnter"
-            @enter="onEnter"
-            @leave="onLeave"
-        >
-            <div v-if="show" class="overflow-hidden">
-                <creat-new-quiz
-                    :show="-1 == showIndex"
+    <my-title
+        @sendShowQuiz="
+            () => {
+                showIndex = -2;
+                $emit('chengShow');
+            }
+        "
+        :show="show"
+    />
+    <transition @before-enter="onBeforEnter" @enter="onEnter" @leave="onLeave">
+        <div v-if="show" class="overflow-hidden">
+            <creat-new-quiz
+                :show="-1 == showIndex"
+                @showThis="chengShowIndex"
+            />
+            <div v-for="(quiz, index) in quizs" :key="quiz.name">
+                <quiz
+                    :quiz="quiz"
+                    :index="index"
+                    :show="index == showIndex"
                     @showThis="chengShowIndex"
                 />
-                <div v-for="(quiz, index) in quizs" :key="quiz.name">
-                    <quiz
-                        :quiz="quiz"
-                        :index="index"
-                        :show="index == showIndex"
-                        @showThis="chengShowIndex"
-                    />
-                </div>
             </div>
-        </transition>
+        </div>
+    </transition>
 </template>
 
 <script setup>

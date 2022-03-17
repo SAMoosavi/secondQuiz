@@ -25816,8 +25816,10 @@ var _hoisted_1 = {
 };
 function render(_ctx, _cache, $props, $setup, $data, $options) {
   return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)(vue__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)($setup["MyTitle"], {
-    onSendShowAnswer: _cache[0] || (_cache[0] = function ($event) {
-      return _ctx.$emit('chengShow');
+    onSendShowAnswer: _cache[0] || (_cache[0] = function () {
+      $setup.showIndex = -2;
+
+      _ctx.$emit('chengShow');
     }),
     show: $props.show
   }, null, 8
@@ -25950,8 +25952,10 @@ var _hoisted_1 = {
 };
 function render(_ctx, _cache, $props, $setup, $data, $options) {
   return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)(vue__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)($setup["MyTitle"], {
-    onSendShowQuiz: _cache[0] || (_cache[0] = function ($event) {
-      return _ctx.$emit('chengShow');
+    onSendShowQuiz: _cache[0] || (_cache[0] = function () {
+      $setup.showIndex = -2;
+
+      _ctx.$emit('chengShow');
     }),
     show: $props.show
   }, null, 8

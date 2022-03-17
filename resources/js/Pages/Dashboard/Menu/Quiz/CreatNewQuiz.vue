@@ -1,18 +1,17 @@
 <template>
     <div @click="$emit('showThis', -1)">
-        <p
-            class="flex items-center justify-between px-4 py-2 transition-all duration-200 delay-100"
-            :class="{ 'bg-primary': show }"
-        >
+        <sub-title :show="show">
             ساخت آزمون جدید
-            <span>
+            <template #icon>
                 <plus />
-            </span>
-        </p>
+            </template>
+        </sub-title>
     </div>
 </template>
 
 <script setup>
+import SubTitle from "@/component/Dashboard/SubTitle.vue";
+
 import Plus from "@/component/Icons/Plus.vue";
 
 defineProps(["show"]);

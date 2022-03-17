@@ -30,10 +30,9 @@ import CreatNewQuiz from "@/Pages/Dashboard/Menu/Quiz/CreatNewQuiz.vue";
 import { open, close } from "@/functions/Anime";
 
 import { reactive, ref } from "@vue/reactivity";
-import { watch } from "@vue/runtime-core";
 
-const props = defineProps(["show"]);
-const emits = defineEmits(["chengShow"]);
+defineProps(["show"]);
+defineEmits(["chengShow"]);
 
 const showIndex = ref(-1);
 function chengShowIndex(index) {

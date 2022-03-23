@@ -13,11 +13,12 @@
 </template>
 
 <script setup>
+// Dashboard component
 import SubTitle from "@/component/Dashboard/SubTitle.vue";
-
+// Icons
 import ChevronLeft from "@/component/Icons/ChevronLeft.vue";
 import ChevronRight from "@/component/Icons/ChevronRight.vue";
-
+// Props & Emits
 defineProps(["answer", "show", "index"]);
 defineEmits(["showThis"]);
 </script>

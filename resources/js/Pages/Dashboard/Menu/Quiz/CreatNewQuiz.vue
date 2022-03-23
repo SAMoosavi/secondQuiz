@@ -10,10 +10,11 @@
 </template>
 
 <script setup>
+// Dashboard component
 import SubTitle from "@/component/Dashboard/SubTitle.vue";
-
+// Icons
 import Plus from "@/component/Icons/Plus.vue";
-
+// Props & Emits
 defineProps(["show"]);
 defineEmits(["showThis"]);
 </script>

@@ -5,8 +5,9 @@
 </template>
 
 <script setup>
+// Dashboard component
 import MyTitle from "@/component/Dashboard/Title.vue";
-
+// Props & Emits
 defineEmits(["sendShowQuiz"]);
 defineProps(["show"]);
 </script>

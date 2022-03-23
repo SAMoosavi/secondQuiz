@@ -3,16 +3,9 @@
         <div
             class="fixed inset-0 right-0 z-20 w-1/5 overflow-y-auto bg-base-200 top-16 text-base-content"
         >
-        
-            <quiz-index
-                :show="showQuiz"
-                @chengShow="showQuiz = !showQuiz"
-            />
+            <quiz-index :show="showQuiz" @chengShow="showQuiz = !showQuiz" />
 
-            <answer-index
-                :show="!showQuiz"
-                @chengShow="showQuiz = !showQuiz"
-            />
+            <answer-index :show="!showQuiz" @chengShow="showQuiz = !showQuiz" />
         </div>
         <div
             class="fixed inset-0 left-0 z-10 w-auto overflow-y-auto bg-neutral top-16"
@@ -27,11 +20,13 @@
 </template>
 
 <script setup>
+// Layouts
 import AppLayout from "@/Layouts/AppLayout.vue";
-
+// Call Menus
 import QuizIndex from "@/Pages/Dashboard/Menu/Quiz/Index.vue";
 import AnswerIndex from "@/Pages/Dashboard/Menu/Answer/Index.vue";
+// vue functions
 import { ref } from "@vue/reactivity";
-
+// show Quiz Or Answer
 const showQuiz = ref(true);
 </script>

@@ -27,34 +27,34 @@
 </template>
 
 <script setup>
+// Call Dashboard Menu Quiz
 import MyTitle from "@/Pages/Dashboard/Menu/Quiz/Title.vue";
 import Quiz from "@/Pages/Dashboard/Menu/Quiz/Quiz.vue";
 import CreatNewQuiz from "@/Pages/Dashboard/Menu/Quiz/CreatNewQuiz.vue";
-
+// functions Anime
 import { open, close } from "@/functions/Anime";
-
+// vue functions
 import { reactive, ref } from "@vue/reactivity";
-
+// Props & Emits
 defineProps(["show"]);
 defineEmits(["chengShow"]);
-
+// show subtitle
 const showIndex = ref(-1);
 function chengShowIndex(index) {
     showIndex.value = index;
 }
-
+// functions of transition
 function onEnter(el, done) {
     open(el, done);
 }
-
 function onLeave(el, done) {
     close(el, done);
 }
-
-const quizs = reactive([
-    { name: "Test1" },
-    { name: "Test2" },
-    { name: "Test3" },
-    { name: "Test4" },
+// Test Value
+const answers = reactive([
+    { name: "مورد1" },
+    { name: "مورد2" },
+    { name: "مورد3" },
+    { name: "مورد4" },
 ]);
 </script>

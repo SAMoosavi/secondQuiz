@@ -15,12 +15,12 @@ return new class extends Migration
     {
         Schema::create('questions', function (Blueprint $table) {
             $table->uuid('id');
+            $table->foreignId('quiz_id')->constrained('quizzes')->onUpdate('cascade')->onDelete('cascade');
             $table->string('questions');
             $table->string('type');
             $table->json('option')->nullable();
             $table->string('answer')->nullable();
             $table->double('score', 8, 2);
-            $table->foreignId('quiz_id')->constrained('quizzes')->onUpdate('cascade')->onDelete('cascade');
             $table->timestamps();
         });
     }

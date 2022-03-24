@@ -1275,6 +1275,7 @@ html {
   color: hsl(var(--nc) / var(--tw-text-opacity));
 }
 .checkbox {
+  flex-shrink: 0;
   --chkbg: var(--bc);
   --chkfg: var(--b1);
   height: 1.5rem;
@@ -1427,7 +1428,6 @@ html {
   bottom: 0px;
   left: 0px;
   display: flex;
-  align-items: flex-end;
   justify-content: center;
   opacity: 0;
   z-index: 999;
@@ -1440,11 +1440,8 @@ html {
   -ms-scroll-chaining: none;
       overscroll-behavior: contain;
 }
-@media (min-width: 640px) {
-
-  .modal {
-    align-items: center;
-  }
+:where(.modal) {
+  align-items: center;
 }
 .modal-open, .modal:target, .modal-toggle:checked + .modal {
   pointer-events: auto;
@@ -1880,12 +1877,12 @@ html {
 .btn-group > input[type="radio"]:checked.btn:focus-visible, .btn-group > .btn-active:focus-visible {
   outline: 2px solid hsl(var(--p));
 }
-.btn-group > .btn:not(:first-child) {
+.btn-group > .btn:not(:first-of-type) {
   margin-left: -1px;
   border-top-left-radius: 0px;
   border-bottom-left-radius: 0px;
 }
-.btn-group > .btn:not(:last-child) {
+.btn-group > .btn:not(:last-of-type) {
   border-top-right-radius: 0px;
   border-bottom-right-radius: 0px;
 }
@@ -2066,9 +2063,6 @@ body[dir="rtl"] .checkbox:checked,
   color: hsl(var(--bc) / var(--tw-placeholder-opacity));
   --tw-placeholder-opacity: 0.2;
 }
-.input::-webkit-calendar-picker-indicator {
-  display: none;
-}
 .link:focus {
   outline: 2px solid transparent;
   outline-offset: 2px;
@@ -2083,7 +2077,7 @@ body[dir="rtl"] .checkbox:checked,
   --tw-border-opacity: 1;
   border-color: hsl(var(--p) / var(--tw-border-opacity));
 }
-.menu[class*="p-"] li *, .menu[class*="p-"] li button {
+.menu[class*="p-"] li > * {
   border-radius: var(--rounded-btn, 0.5rem);
 }
 .menu :where(li.bordered > *) {
@@ -2231,6 +2225,18 @@ body[dir="rtl"] .checkbox:checked,
   --tw-scale-y: 1;
   transform: translate(var(--tw-translate-x), var(--tw-translate-y)) rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y));
 }
+@-webkit-keyframes progress-loading {
+
+  50% {
+    left: 107%;
+  }
+}
+@keyframes progress-loading {
+
+  50% {
+    left: 107%;
+  }
+}
 @-webkit-keyframes radiomark {
 
   0% {
@@ -2329,6 +2335,8 @@ body[dir="rtl"] .checkbox:checked,
 .tab:focus-visible {
   outline: 2px solid currentColor;
   outline-offset: -3px;
+}
+.tab:focus-visible.tab-lifted {
   border-bottom-right-radius: var(--tab-radius, 0.5rem);
   border-bottom-left-radius: var(--tab-radius, 0.5rem);
 }
@@ -3912,8 +3920,8 @@ body[dir="rtl"] .checkbox:checked,
     width: 100%;
   }
 
-  .sm\:navbar > * {
-    display: flex;
+  :where(.sm\:navbar > *) {
+    display: inline-flex;
     align-items: center;
   }
 

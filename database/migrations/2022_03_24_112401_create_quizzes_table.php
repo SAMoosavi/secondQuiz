@@ -13,7 +13,8 @@ return new class extends Migration {
     public function up()
     {
         Schema::create('quizzes', function (Blueprint $table) {
-            $table->uuid('id');
+            $table->id();
+            $table->uuid();
             $table->foreignId('user_id')->constrained('users')->onUpdate('cascade')->onDelete('cascade');
             $table->string('name');
             $table->timestamp('start')->nullable();

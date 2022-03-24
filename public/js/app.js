@@ -23795,7 +23795,7 @@ __webpack_require__.r(__webpack_exports__);
     } // Test Value
 
 
-    var answers = (0,_vue_reactivity__WEBPACK_IMPORTED_MODULE_4__.reactive)([{
+    var quizs = (0,_vue_reactivity__WEBPACK_IMPORTED_MODULE_4__.reactive)([{
       name: "مورد1"
     }, {
       name: "مورد2"
@@ -23809,12 +23809,12 @@ __webpack_require__.r(__webpack_exports__);
       chengShowIndex: chengShowIndex,
       onEnter: onEnter,
       onLeave: onLeave,
-      answers: answers,
+      quizs: quizs,
       MyTitle: _Pages_Dashboard_Menu_Quiz_Title_vue__WEBPACK_IMPORTED_MODULE_0__["default"],
       Quiz: _Pages_Dashboard_Menu_Quiz_Quiz_vue__WEBPACK_IMPORTED_MODULE_1__["default"],
       CreatNewQuiz: _Pages_Dashboard_Menu_Quiz_CreatNewQuiz_vue__WEBPACK_IMPORTED_MODULE_2__["default"],
-      open: _functions_Anime__WEBPACK_IMPORTED_MODULE_3__.open,
       close: _functions_Anime__WEBPACK_IMPORTED_MODULE_3__.close,
+      open: _functions_Anime__WEBPACK_IMPORTED_MODULE_3__.open,
       reactive: _vue_reactivity__WEBPACK_IMPORTED_MODULE_4__.reactive,
       ref: _vue_reactivity__WEBPACK_IMPORTED_MODULE_4__.ref
     };
@@ -26043,36 +26043,35 @@ var _hoisted_1 = {
 };
 function render(_ctx, _cache, $props, $setup, $data, $options) {
   return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)(vue__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)($setup["MyTitle"], {
+    show: $props.show,
     onSendShowQuiz: _cache[0] || (_cache[0] = function () {
       $setup.showIndex = -2;
 
       _ctx.$emit('chengShow');
-    }),
-    show: $props.show
+    })
   }, null, 8
   /* PROPS */
   , ["show"]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(vue__WEBPACK_IMPORTED_MODULE_0__.Transition, {
-    onBeforeEnter: _ctx.onBeforEnter,
     onEnter: $setup.onEnter,
     onLeave: $setup.onLeave
   }, {
     "default": (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function () {
       return [$props.show ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", _hoisted_1, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)($setup["CreatNewQuiz"], {
-        show: -1 == $setup.showIndex,
+        show: -1 === $setup.showIndex,
         onShowThis: $setup.chengShowIndex
       }, null, 8
       /* PROPS */
-      , ["show"]), ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(true), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)(vue__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, (0,vue__WEBPACK_IMPORTED_MODULE_0__.renderList)(_ctx.quizs, function (quiz, index) {
+      , ["show"]), ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(true), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)(vue__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, (0,vue__WEBPACK_IMPORTED_MODULE_0__.renderList)($setup.quizs, function (quiz, index) {
         return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", {
           key: quiz.name
         }, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)($setup["Quiz"], {
-          quiz: quiz,
           index: index,
-          show: index == $setup.showIndex,
+          quiz: quiz,
+          show: index === $setup.showIndex,
           onShowThis: $setup.chengShowIndex
         }, null, 8
         /* PROPS */
-        , ["quiz", "index", "show"])]);
+        , ["index", "quiz", "show"])]);
       }), 128
       /* KEYED_FRAGMENT */
       ))])) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true)];
@@ -26080,9 +26079,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
     _: 1
     /* STABLE */
 
-  }, 8
-  /* PROPS */
-  , ["onBeforeEnter"])], 64
+  })], 64
   /* STABLE_FRAGMENT */
   );
 }

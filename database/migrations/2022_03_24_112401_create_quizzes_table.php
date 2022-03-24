@@ -18,7 +18,8 @@ return new class extends Migration {
             $table->timestamp('start')->nullable();
             $table->timestamp('end')->nullable();
             $table->time('time');
-            $table->foreignId('user_id')->constrained()->onUpdate('cascade')->onDelete('cascade');
+            $table->double('score', 8, 2);
+            $table->foreignId('user_id')->constrained('users')->onUpdate('cascade')->onDelete('cascade');
             $table->timestamps();
         });
     }

@@ -1,8 +1,8 @@
 <template>
     <button
+        :class="{ 'loading flex-row-reverse': loading }"
         :type="type"
         class="btn btn-primary transition-all duration-200 btn-sm"
-        :class="{ 'loading flex-row-reverse': loding }"
     >
         <slot></slot>
     </button>
@@ -14,7 +14,7 @@ defineProps({
         type: String,
         default: "submit",
     },
-    loding: {
+    loading: {
         type: Boolean,
         default: false,
     },

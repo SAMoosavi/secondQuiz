@@ -21,7 +21,7 @@
             </div>
 
             <div class="items-end justify-end mt-4 mr-auto form-control">
-                <my-button :loding="loding" :disabled="form.processing">
+                <my-button :loading="loading" :disabled="form.processing">
                     تایید
                 </my-button>
             </div>
@@ -43,10 +43,10 @@ const form = useForm({
     password: "",
 });
 
-const loding = ref(false);
+const loading = ref(false);
 
 function submit() {
-    loding.value = true;
+    loading.value = true;
     if (!form.password) {
         //
     } else {
@@ -55,7 +55,7 @@ function submit() {
         });
     }
     setTimeout(() => {
-        loding.value = false;
+        loading.value = false;
     }, 200);
 }
 </script>

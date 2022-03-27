@@ -60,7 +60,7 @@
 
                     <my-button
                         class="mr-4"
-                        :loding="loding"
+                        :loading="loading"
                         :disabled="form.processing"
                     >
                         ثبت نام
@@ -93,10 +93,10 @@ const form = useForm({
     password_confirmation: "",
     terms: false,
 });
-const loding = ref(false);
+const loading = ref(false);
 
 function submit() {
-    loding.value = true;
+    loading.value = true;
     if (
         !form.email ||
         !form.password ||
@@ -119,7 +119,7 @@ function submit() {
         });
     }
     setTimeout(() => {
-        loding.value = false;
+        loading.value = false;
     }, 200);
 }
 </script>

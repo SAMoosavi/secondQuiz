@@ -36,10 +36,10 @@ import {close, open} from "@/functions/Anime";
 // vue functions
 import {reactive, ref} from "@vue/reactivity";
 // Props & Emits
-defineProps(["show"]);
+const props = defineProps(["show", "showIndex"]);
 defineEmits(["chengShow"]);
 // show subtitle
-const showIndex = ref(-1);
+const showIndex = ref(props.showIndex);
 
 function chengShowIndex(index) {
     showIndex.value = index;

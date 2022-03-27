@@ -8,13 +8,13 @@
         "
         :show="show"
     />
-    <transition @before-enter="onBeforEnter" @enter="onEnter" @leave="onLeave">
+    <transition @enter="onEnter" @leave="onLeave">
         <div v-if="show" class="overflow-hidden">
             <div v-for="(answer, index) in answers" :key="answer.name">
                 <answer
                     :answer="answer"
                     :index="index"
-                    :show="index == showIndex"
+                    :show="index === showIndex"
                     @showThis="chengShowIndex"
                 />
             </div>

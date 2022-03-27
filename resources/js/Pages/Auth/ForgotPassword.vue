@@ -23,7 +23,7 @@
                 />
             </div>
             <div class="items-end justify-end mt-4 mr-auto form-control">
-                <my-button :loding="loding" :disabled="form.processing">
+                <my-button :loading="loading" :disabled="form.processing">
                     ارسال ایمیل
                 </my-button>
             </div>
@@ -46,17 +46,17 @@ const form = useForm({
     email: "",
 });
 
-const loding = ref(false);
+const loading = ref(false);
 
 function submit() {
-    loding.value = true;
+    loading.value = true;
     if (!form.email || !validEmail(form.email)) {
         //
     } else {
         form.post(route("password.email"));
     }
     setTimeout(() => {
-        loding.value = false;
+        loading.value = false;
     }, 200);
 }
 </script>

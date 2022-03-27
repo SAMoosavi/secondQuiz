@@ -44,7 +44,7 @@
             </div>
 
             <div class="items-end justify-end mt-4 mr-auto form-control">
-                <my-button :loding="loding" :disabled="form.processing">
+                <my-button :loading="loading" :disabled="form.processing">
                     بازیابی رمز عبور
                 </my-button>
             </div>
@@ -58,7 +58,7 @@ import MyButton from "@/component/Form/Button.vue";
 import MyLabel from "@/component/Form/Label.vue";
 import MyInput from "@/component/Form/Input.vue";
 
-import { validEmail, passwordConfirmation } from "@/functions/validations";
+import {validEmail, passwordConfirmation, password} from "@/functions/validations";
 import { Head, useForm } from "@inertiajs/inertia-vue3";
 import { ref } from "vue";
 
@@ -74,10 +74,10 @@ const form = useForm({
     password_confirmation: "",
 });
 
-const loding = ref(false);
+const loading = ref(false);
 
 function submit() {
-    loding.value = true;
+    loading.value = true;
     if (!form.email || !form.password || !form.password_confirmation) {
         //
     } else if (form.email && !validEmail(form.email)) {
@@ -94,7 +94,7 @@ function submit() {
         });
     }
     setTimeout(() => {
-        loding.value = false;
+        loading.value = false;
     }, 200);
 }
 </script>

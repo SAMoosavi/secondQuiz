@@ -44,7 +44,7 @@
                     </my-auth-link>
                     <my-button
                         class="mr-4"
-                        :loding="loding"
+                        :loading="loading"
                         :disabled="form.processing"
                     >
                         ورود
@@ -78,10 +78,10 @@ const form = useForm({
     remember: false,
 });
 
-const loding = ref(false);
+const loading = ref(false);
 
 function submit() {
-    loding.value = true;
+    loading.value = true;
     if (!form.email || !form.password) {
         //
     } else if (form.email && !validEmail(form.email)) {
@@ -95,7 +95,7 @@ function submit() {
         });
     }
     setTimeout(() => {
-        loding.value = false;
+        loading.value = false;
     }, 200);
 }
 </script>

@@ -16,7 +16,7 @@
                 <div class="flex items-center justify-end mt-4">
                     <my-button
                         class="mr-4"
-                        :loding="loding"
+                        :loading="loading"
                         :disabled="form.processing"
                     >
                         ایمیل تایید را دوباره بفرست
@@ -46,13 +46,13 @@ import { ref } from "@vue/reactivity";
 
 const form = useForm();
 
-const loding = ref(false);
+const loading = ref(false);
 
 function submit() {
-    loding.value = true;
+    loading.value = true;
     form.post(route("verification.send"));
     setTimeout(() => {
-        loding.value = false;
+        loading.value = false;
     }, 200);
 }
 </script>

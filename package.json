@@ -28,6 +28,7 @@
     },
     "dependencies": {
         "@vue/reactivity": "^3.2.31",
+        "@vue/runtime-core": "^3.2.31",
         "animejs": "^3.2.1",
         "daisyui": "^2.13.2",
         "pinia": "^2.0.12",

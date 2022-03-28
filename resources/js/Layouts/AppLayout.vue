@@ -30,7 +30,7 @@
                                 class="block w-auto h-9 text-neutral-content"
                             />
                         </Link>
-                        <togle-them/>
+                        <toggle-them/>
                     </div>
 
                     <!-- User -->
@@ -200,7 +200,8 @@
 
 <script setup>
 import MyNavLink from "@/component/Navbar/Link.vue";
-import ToggleThem from "@/component/TogleThem.vue";
+import ToggleThem from "@/component/ToggleThem.vue";
+import MyApplicationMark from "@/component/Logo/ApplicationMark.vue"
 
 import {Head, Link, useForm} from "@inertiajs/inertia-vue3";
 

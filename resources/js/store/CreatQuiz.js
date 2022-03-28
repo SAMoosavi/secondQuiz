@@ -18,12 +18,10 @@ export const useCreatQuiz = defineStore('CreatQuiz', {
                 this.content++;
                 this.questions = {...this.questions, [index]: question};
             }
-            localStorage.setItem(index, JSON.stringify(question))
         },
         remove(index) {
             this.content--;
             delete this.questions[index];
-            localStorage.removeItem(index)
         },
     }
 })

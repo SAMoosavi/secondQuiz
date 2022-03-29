@@ -10,8 +10,8 @@
                 <my-input id="score" v-model.lazy.number="question.score"/>
             </div>
             <div class="form-control md:col-span-2">
-                <my-label :required="true" for="type" value="نوع سؤال"/>
-                <my-select id="type" v-model="question.type">
+                <my-label :for="`type-question-${index}`" :required="true" value="نوع سؤال"/>
+                <my-select :id="`type-question-${index}`" v-model="question.type">
                     <my-option v-for="(txt,key) in options" :key="key" :selected="question.type === key" :value="key">
                         {{ txt }}
                     </my-option>

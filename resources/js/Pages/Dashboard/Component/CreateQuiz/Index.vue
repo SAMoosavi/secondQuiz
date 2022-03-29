@@ -92,6 +92,37 @@
                     </my-option>
                 </my-select>
             </div>
+            <!--Score-->
+            <div class="form-control">
+                <my-label
+                    :required="form.type === 'test'"
+                    for="score"
+                    value="نمره آزمون"
+                />
+                <my-input
+                    id="score"
+                    v-model.number="score"
+                    :disabled="form.type !== 'test'"
+                    autocomplete="score"
+                    required
+                    type="text"
+                />
+            </div>
+            <!--ScoreN-->
+            <div class="form-control" v-if="form.type === 'test'">
+                <my-label
+                    :required="true"
+                    for="scoreN"
+                    value="نمره منفی آزمون"
+                />
+                <my-input
+                    id="scoreN"
+                    v-model.number="form.scoreN"
+                    autocomplete="scoreN"
+                    required
+                    type="text"
+                />
+            </div>
         </div>
         <!-- Create Questions -->
         <section class="mt-6 col-span-full">
@@ -120,8 +151,8 @@
 
 <script setup>
 // Icons
-import Clock from "@/component/Icons/Clock";
-import Calendar from "@/component/Icons/Calendar";
+import Clock from "@/component/Icons/Clock.vue";
+import Calendar from "@/component/Icons/Calendar.vue";
 // Form component
 import MyLabel from "@/component/Form/Label.vue";
 import MyInput from "@/component/Form/Input.vue";
@@ -140,6 +171,7 @@ import {useForm} from "@inertiajs/inertia-vue3";
 // Vue functions
 import {ref} from "@vue/reactivity";
 import {onUnmounted} from "vue";
+import {watch} from "@vue/runtime-core";
 
 /**************** Const ****************/
 // Color for Persian datetime picker
@@ -147,7 +179,7 @@ const color = "#1fb10b";
 /**************** Pinia ****************/
 const CreateQuiz = useCreatQuiz()
 // create pinia states
-const {content, questions} = storeToRefs(CreateQuiz);
+const {content, questions, scoreQuiz} = storeToRefs(CreateQuiz);
 // create pinia actions
 const {add, clean} = CreateQuiz
 /**************** Properties ****************/
@@ -157,16 +189,21 @@ const form = useForm({
     start: null,
     end: null,
     time: null,
+    score: null,
+    scoreN: 3,
     type: 'descriptive',
     questions: {},
 });
+// score
+const score = ref(0);
 // Loading
 const loading = ref(false);
 
+/**************** Functions ****************/
+// watch
+watch(scoreQuiz, (value) => score.value = value);
 // onUnmounted
 onUnmounted(() => clean())
-
-/**************** Functions ****************/
 // Submit functions
 function submit() {
     loading.value = true;

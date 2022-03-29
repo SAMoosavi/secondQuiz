@@ -48,9 +48,9 @@ import MyTextarea from "@/component/Form/Textarea.vue";
 //Pinia
 import {useCreatQuiz} from "@/store/CreatQuiz";
 // types
-import Long from "./Types/Long.vue";
-import Test from "./Types/Test.vue";
-import Short from "./Types/Short.vue";
+import Long from "../Types/Long.vue";
+import Test from "../Types/Test.vue";
+import Short from "../Types/Short.vue";
 
 // Vue function
 import {onMounted, watch} from "vue";

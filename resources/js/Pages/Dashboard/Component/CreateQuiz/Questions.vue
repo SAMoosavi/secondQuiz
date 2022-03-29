@@ -6,15 +6,16 @@
         leave-active-class="transition duration-500 ease-in"
         leave-from-class="transform translate-x-0 opacity-100"
         leave-to-class="transform opacity-0 translate-x-1/4"
-        move-class="transition transform-all delay-200 duration-500"
+        move-class="transition transform-all duration-200"
         tag="div"
     >
-        <questions v-if="showTop" :showChildren="showChildrenTop"/>
+        <questions v-if="showTop" :showChildren="showChildrenTop" :type="type"/>
         <template v-if="showIn" :key="index">
             <div>
                 <div class="w-full flex flex-col md:flex-row items-center justify-between py-4 my-2">
                     <div class="w-full ml-3">
-                        <create-question :index="index"/>
+                        <create-question-descriptive v-if="type === 'descriptive'" :index="index"/>
+                        <create-question-test v-else :index="index"/>
                     </div>
                     <div
                         class="flex md:flex-col gap-3 z-10"
@@ -32,7 +33,7 @@
                 <div class="w-full md:w-2/3 border-b-2 border-primary opacity-25"></div>
             </div>
         </template>
-        <questions v-if="showBottom" :showChildren="showChildrenBottom"/>
+        <questions v-if="showBottom" :showChildren="showChildrenBottom" :type="type"/>
     </transition-group>
 </template>
 
@@ -44,7 +45,8 @@ import MyButton from "@/component/Form/Button.vue";
 import IconRemove from "@/component/Icons/Remove.vue";
 import IconAdd from "@/component/Icons/Add.vue";
 // Create Quiz component
-import CreateQuestion from "./DescriptiveQuiz/CreateQuestion.vue";
+import CreateQuestionDescriptive from "./DescriptiveQuiz/CreateQuestion.vue";
+import CreateQuestionTest from "./TestQuiz/CreateQuestion.vue";
 //Pinia
 import {useCreatQuiz} from "@/store/CreatQuiz";
 import {storeToRefs} from "pinia/dist/pinia";
@@ -52,7 +54,7 @@ import {storeToRefs} from "pinia/dist/pinia";
 import {ref} from "@vue/reactivity";
 import {watch} from "@vue/runtime-core";
 //Props
-const props = defineProps(['showChildren']);
+const props = defineProps(['showChildren', 'type']);
 /**************** Const ****************/
 // Index
 const index = new Date().getTime();

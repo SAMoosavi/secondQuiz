@@ -60,10 +60,5 @@ watch(
     () => question.question,
     () => add(props.index, question)
 );
-// watch score
-watch(
-    () => question.score,
-    () => add(props.index, question)
-);
 </script>
 

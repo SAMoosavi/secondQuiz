@@ -112,7 +112,7 @@ watch(
 // watch score
 watch(
     () => question.score,
-    () => add(props.index, question)
+    (val, pVal) => add(props.index, question, val - pVal)
 );
 </script>
 

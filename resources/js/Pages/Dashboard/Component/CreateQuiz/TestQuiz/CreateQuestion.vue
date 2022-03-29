@@ -22,14 +22,14 @@ import {useCreatQuiz} from "@/store/CreatQuiz";
 // types
 import Test from "../Types/Test.vue";
 // Vue function
-import {onMounted, watch} from "vue";
+import {onMounted, onUnmounted, watch} from "vue";
 import {reactive} from "@vue/reactivity";
 // Props
 const props = defineProps(["index"]);
 /**************** Pinia ****************/
 const CreateQuiz = useCreatQuiz();
 // create pinia actions
-const {add} = CreateQuiz;
+const {add, remove} = CreateQuiz;
 /**************** Properties ****************/
 // question object
 const question = reactive({
@@ -60,5 +60,7 @@ watch(
     () => question.question,
     () => add(props.index, question)
 );
+// onUnmounted
+onUnmounted(() => remove(props.index))
 </script>
 

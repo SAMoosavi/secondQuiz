@@ -60,8 +60,6 @@ const props = defineProps(['showChildren', 'type']);
 const index = new Date().getTime();
 /**************** Pinia ****************/
 const CreateQuiz = useCreatQuiz();
-// create pinia actions
-const {remove} = CreateQuiz;
 // Create pinia states
 const {content} = storeToRefs(CreateQuiz);
 /**************** Properties ****************/
@@ -111,7 +109,6 @@ watch(
 function removeQuestion() {
     if (content.value > 1) {
         setTimeout(() => {
-            remove(index);
             showIn.value = false;
         }, 200);
     } else {

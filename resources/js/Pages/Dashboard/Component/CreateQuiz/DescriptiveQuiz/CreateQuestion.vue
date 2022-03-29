@@ -7,7 +7,7 @@
         <div class="md:col-span-3 lg:col-span-1 grid md:grid-cols-3 gap-2">
             <div class="form-control md:col-span-1">
                 <my-label :required="true" for="score" value="نمره سؤال"/>
-                <my-input id="score" v-model.lazy.number="question.score"/>
+                <my-input id="score" v-model.number="question.score" :value="question.score"/>
             </div>
             <div class="form-control md:col-span-2">
                 <my-label :for="`type-question-${index}`" :required="true" value="نوع سؤال"/>
@@ -53,14 +53,14 @@ import Test from "../Types/Test.vue";
 import Short from "../Types/Short.vue";
 
 // Vue function
-import {onMounted, watch} from "vue";
+import {onMounted, onUnmounted, watch} from "vue";
 import {reactive} from "@vue/reactivity";
 // Props
 const props = defineProps(["index"]);
 /**************** Pinia ****************/
 const CreateQuiz = useCreatQuiz();
 // create pinia actions
-const {add} = CreateQuiz;
+const {add,remove} = CreateQuiz;
 /**************** Properties ****************/
 // question object
 const question = reactive({
@@ -112,7 +112,18 @@ watch(
 // watch score
 watch(
     () => question.score,
-    (val, pVal) => add(props.index, question, val - pVal)
+    (val, pVal) => {
+        let score = 0;
+        if (!isNaN(val)) {
+            score += +val;
+        }
+        if (!isNaN(pVal)) {
+            score -= +pVal;
+        }
+        add(props.index, question, score)
+    }
 );
+// onUnmounted
+onUnmounted(()=>remove(props.index))
 </script>
 

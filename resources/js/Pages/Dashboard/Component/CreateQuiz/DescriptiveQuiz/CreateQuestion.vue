@@ -6,8 +6,8 @@
         </div>
         <div class="md:col-span-3 lg:col-span-1 grid md:grid-cols-3 gap-2">
             <div class="form-control md:col-span-1">
-                <my-label :required="true" for="score" value="نمره سؤال"/>
-                <my-input id="score" v-model.number="question.score" :value="question.score"/>
+                <my-label :for="`score-question-${index}`" :required="true" value="نمره سؤال"/>
+                <my-input :id="`score-question-${index}`" v-model.number="question.score" :value="question.score"/>
             </div>
             <div class="form-control md:col-span-2">
                 <my-label :for="`type-question-${index}`" :required="true" value="نوع سؤال"/>
@@ -60,7 +60,7 @@ const props = defineProps(["index"]);
 /**************** Pinia ****************/
 const CreateQuiz = useCreatQuiz();
 // create pinia actions
-const {add,remove} = CreateQuiz;
+const {add, remove} = CreateQuiz;
 /**************** Properties ****************/
 // question object
 const question = reactive({
@@ -124,6 +124,6 @@ watch(
     }
 );
 // onUnmounted
-onUnmounted(()=>remove(props.index))
+onUnmounted(() => remove(props.index))
 </script>
 

@@ -5,9 +5,9 @@
         >
             <li v-for="(_, key) in options" :key="key" class="mx-3 mt-3">
                 <div class="flex items-center gap-1">
-                    <my-label :required="true"/>
+                    <my-label :for="`${key}-question-${index}`" :required="true"/>
                     <my-radio v-model="ans.num" :name="index" :value="key"/>
-                    <my-input v-model.lazy="options[key]"/>
+                    <my-input :id="`${key}-question-${index}`" v-model.lazy="options[key]"/>
                 </div>
             </li>
         </ol>

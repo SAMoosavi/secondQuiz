@@ -80,10 +80,10 @@
                     type="time"
                 />
             </div>
-            <!--Type Quiz-->
+            <!--Type-->
             <div class="form-control">
-                <my-label :required="true" for="type-quiz" value="نوع آزمون"/>
-                <my-select id="type-quiz" v-model="form.type">
+                <my-label :required="true" for="type" value="نوع آزمون"/>
+                <my-select id="type" v-model="form.type">
                     <my-option :selected="form.type === 'descriptive'" value="descriptive">
                         آزمون تشریحی
                     </my-option>

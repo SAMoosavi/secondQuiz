@@ -1,6 +1,6 @@
 <template>
     <form novalidate @submit.prevent="submit">
-        <div class="w-full grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-2">
+        <div class="w-full grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-2">
             <!--Name-->
             <div class="form-control">
                 <my-label
@@ -80,13 +80,25 @@
                     type="time"
                 />
             </div>
+            <!--Type Quiz-->
+            <div class="form-control">
+                <my-label :required="true" for="type-quiz" value="نوع آزمون"/>
+                <my-select id="type-quiz" v-model="form.type">
+                    <my-option :selected="form.type === 'descriptive'" value="descriptive">
+                        آزمون تشریحی
+                    </my-option>
+                    <my-option :selected="form.type === 'test'" value="test">
+                        آزمون تستی
+                    </my-option>
+                </my-select>
+            </div>
         </div>
         <!-- Create Questions -->
         <section class="mt-6 col-span-full">
             <div>
-                <questions/>
+                <questions :type="form.type"/>
             </div>
-            <div class="flex items-center justify-start gap-2">
+            <div class="flex items-center justify-start gap-2 transition transform-all duration-500">
                 <my-button
                     :disabled="loading"
                     :loading="loading"
@@ -114,6 +126,8 @@ import Calendar from "@/component/Icons/Calendar";
 import MyLabel from "@/component/Form/Label.vue";
 import MyInput from "@/component/Form/Input.vue";
 import MyButton from "@/component/Form/Button.vue";
+import MySelect from "@/component/Form/Select.vue";
+import MyOption from "@/component/Form/Option.vue";
 // Persian datetime picker
 import PersianDatetimePicker from "vue3-persian-datetime-picker";
 // Create Quiz component
@@ -125,6 +139,7 @@ import {useCreatQuiz} from "@/store/CreatQuiz";
 import {useForm} from "@inertiajs/inertia-vue3";
 // Vue functions
 import {ref} from "@vue/reactivity";
+import {onUnmounted} from "vue";
 
 /**************** Const ****************/
 // Color for Persian datetime picker
@@ -134,7 +149,7 @@ const CreateQuiz = useCreatQuiz()
 // create pinia states
 const {content, questions} = storeToRefs(CreateQuiz);
 // create pinia actions
-const {add} = CreateQuiz
+const {add, clean} = CreateQuiz
 /**************** Properties ****************/
 //Create form object
 const form = useForm({
@@ -147,6 +162,9 @@ const form = useForm({
 });
 // Loading
 const loading = ref(false);
+
+// onUnmounted
+onUnmounted(() => clean())
 
 /**************** Functions ****************/
 // Submit functions

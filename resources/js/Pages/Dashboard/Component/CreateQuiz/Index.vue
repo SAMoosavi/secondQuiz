@@ -11,8 +11,8 @@
                 <my-input
                     id="name"
                     v-model="form.name"
+                    :required="true"
                     autocomplete="name"
-                    required
                     type="text"
                 />
             </div>
@@ -46,6 +46,7 @@
                     v-model="form.end"
                     :disabled="!form.start"
                     :icon="true"
+                    :required="!!form.start"
                 >
                     <calendar/>
                 </my-input>
@@ -69,6 +70,7 @@
                     id="time"
                     v-model="form.time"
                     :icon="true"
+                    :required="true"
                 >
                     <clock/>
                 </my-input>
@@ -83,7 +85,7 @@
             <!--Type-->
             <div class="form-control">
                 <my-label :required="true" for="type" value="نوع آزمون"/>
-                <my-select id="type" v-model="form.type">
+                <my-select id="type" v-model="form.type" :required="true">
                     <my-option :selected="form.type === 'descriptive'" value="descriptive">
                         آزمون تشریحی
                     </my-option>
@@ -101,15 +103,15 @@
                 />
                 <my-input
                     id="score"
-                    v-model.number="score"
+                    v-model.number="form.score"
                     :disabled="form.type !== 'test'"
+                    :required="form.type === 'test'"
                     autocomplete="score"
-                    required
                     type="text"
                 />
             </div>
             <!--ScoreN-->
-            <div class="form-control" v-if="form.type === 'test'">
+            <div v-if="form.type === 'test'" class="form-control">
                 <my-label
                     :required="true"
                     for="scoreN"
@@ -118,8 +120,8 @@
                 <my-input
                     id="scoreN"
                     v-model.number="form.scoreN"
+                    :required="!!form.start"
                     autocomplete="scoreN"
-                    required
                     type="text"
                 />
             </div>
@@ -163,6 +165,8 @@ import MyOption from "@/component/Form/Option.vue";
 import PersianDatetimePicker from "vue3-persian-datetime-picker";
 // Create Quiz component
 import Questions from "./Questions.vue";
+// Function validations
+import {required, requiredAns} from "@/functions/validations";
 // Pinia
 import {storeToRefs} from 'pinia'
 import {useCreatQuiz} from "@/store/CreatQuiz";
@@ -172,6 +176,7 @@ import {useForm} from "@inertiajs/inertia-vue3";
 import {ref} from "@vue/reactivity";
 import {onUnmounted} from "vue";
 import {watch} from "@vue/runtime-core";
+
 
 /**************** Const ****************/
 // Color for Persian datetime picker
@@ -194,21 +199,32 @@ const form = useForm({
     type: 'descriptive',
     questions: {},
 });
-// score
-const score = ref(0);
 // Loading
 const loading = ref(false);
 
 /**************** Functions ****************/
 // watch
-watch(scoreQuiz, (value) => score.value = value);
+watch(scoreQuiz, (value) => form.score = value);
+watch(() => form.type, () => form.score = null);
 // onUnmounted
 onUnmounted(() => clean())
+
 // Submit functions
 function submit() {
     loading.value = true;
     form.questions = questions.value;
-    console.log(form)
+    if (!required()) {
+        console.error('required')
+    } else if (!requiredAns(form.questions)) {
+        console.error('requiredAns')
+    } else if (isNaN(form.score) || form.score <= 0) {
+        console.error(form.score)
+    } else if (form.type === 'test' && (isNaN(form.scoreN) || !Number.isInteger(form.scoreN))) {
+        console.error(form.scoreN)
+    } else {
+        console.log(form)
+        // form.post('',{})
+    }
     setTimeout(() => (loading.value = false), 200)
 }
 </script>

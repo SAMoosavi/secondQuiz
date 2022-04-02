@@ -2,7 +2,7 @@
     <div class="grid grid-cols-1">
         <div class="form-control">
             <my-label :required="true" for="question" value="سؤال"/>
-            <my-textarea id="question" v-model.lazy="question.question"/>
+            <my-textarea id="question" v-model.lazy="question.question" :required="true"/>
         </div>
     </div>
 

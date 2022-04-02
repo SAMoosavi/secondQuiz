@@ -1,17 +1,18 @@
-<template>
+<template>0
     <div class="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-5 md:justify-between md:items-center gap-2">
         <div class="form-control md:col-span-3 lg:col-span-4">
             <my-label :required="true" for="question" value="سؤال"/>
-            <my-textarea id="question" v-model.lazy="question.question"/>
+            <my-textarea id="question" v-model.lazy="question.question" :required="true"/>
         </div>
         <div class="md:col-span-3 lg:col-span-1 grid md:grid-cols-3 gap-2">
             <div class="form-control md:col-span-1">
                 <my-label :for="`score-question-${index}`" :required="true" value="نمره سؤال"/>
-                <my-input :id="`score-question-${index}`" v-model.number="question.score" :value="question.score"/>
+                <my-input :id="`score-question-${index}`" v-model.number="question.score" :required="true"
+                          :value="question.score"/>
             </div>
             <div class="form-control md:col-span-2">
                 <my-label :for="`type-question-${index}`" :required="true" value="نوع سؤال"/>
-                <my-select :id="`type-question-${index}`" v-model="question.type">
+                <my-select :id="`type-question-${index}`" v-model="question.type" :required="true">
                     <my-option v-for="(txt,key) in options" :key="key" :selected="question.type === key" :value="key">
                         {{ txt }}
                     </my-option>

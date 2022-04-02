@@ -1,10 +1,11 @@
 <template>
     <my-label class="justify-start gap-2">
         <input
-            type="checkbox"
-            :value="value"
             v-model="proxyChecked"
+            :required="required"
+            :value="value"
             class="checkbox ring-0 focus:ring-0 focus:ring-offset-0 focus:outline-0 checkbox-md checkbox-primary"
+            type="checkbox"
         />
         <span class="label-text">{{ txt }}</span>
     </my-label>
@@ -12,7 +13,7 @@
 
 <script setup>
 import MyLabel from "@/component/Form/Label.vue";
-import { ref, watch } from "@vue/runtime-core";
+import {ref, watch} from "@vue/runtime-core";
 
 const emit = defineEmits(["update:modelValue"]);
 
@@ -21,8 +22,12 @@ defineProps({
         type: [Array, Boolean],
         default: false,
     },
-    value: { default: null },
-    txt: { type: String },
+    value: {default: null},
+    txt: {type: String},
+    required: {
+        type: Boolean,
+        default: false,
+    }
 });
 const proxyChecked = ref();
 watch(proxyChecked, (val) => {

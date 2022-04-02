@@ -5,11 +5,12 @@
         class="ring-0 focus:ring-0 focus:ring-offset-0 focus:outline-0 bg-transparent radio-sm text-primary border-primary"
         type="radio"
         @input="$emit('update:modelValue', $event.target.value)"
+        :required="required"
     />
 </template>
 
 <script setup>
-defineProps(["value", "name"]);
+defineProps(["value", "name","required"]);
 defineEmits(['update:modelValue'])
 </script>
 

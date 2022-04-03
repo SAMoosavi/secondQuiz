@@ -14,14 +14,17 @@
                 :show="-1 === showIndex"
                 @showThis="chengShowIndex"
             />
-            <div v-for="(quiz, index) in quizs" :key="quiz.name">
-                <quiz
-                    :index="index"
-                    :quiz="quiz"
-                    :show="index === showIndex"
-                    @showThis="chengShowIndex"
-                />
-            </div>
+            <div v-if="quizzes === null" class="loading h-16 flex items-center justify-center"></div>
+            <template v-else>
+                <div v-for="quiz in quizzes" :key="quiz.name">
+                    <quiz
+                        :index="quiz.uuid"
+                        :quiz="quiz"
+                        :show="quiz.uuid === showIndex"
+                        @showThis="chengShowIndex"
+                    />
+                </div>
+            </template>
         </div>
     </transition>
 </template>
@@ -34,7 +37,8 @@ import CreatNewQuiz from "@/Pages/Dashboard/Menu/Quiz/CreatNewQuiz.vue";
 // functions Anime
 import {close, open} from "@/functions/Anime";
 // vue functions
-import {reactive, ref} from "@vue/reactivity";
+import {ref} from "@vue/reactivity";
+import {onMounted} from "vue";
 // Props & Emits
 const props = defineProps(["show", "showIndex"]);
 defineEmits(["chengShow"]);
@@ -54,11 +58,13 @@ function onLeave(el, done) {
     close(el, done);
 }
 
-// Test Value
-const quizs = reactive([
-    {name: "مورد1"},
-    {name: "مورد2"},
-    {name: "مورد3"},
-    {name: "مورد4"},
-]);
+// quizzes Value
+let quizzes = ref(null);
+onMounted(() => {
+    axios.get(route('get.teacher.quizzes'))
+        .then((result) => {
+            console.log(result.data.quizzes)
+            quizzes.value = result.data.quizzes;
+        })
+})
 </script>

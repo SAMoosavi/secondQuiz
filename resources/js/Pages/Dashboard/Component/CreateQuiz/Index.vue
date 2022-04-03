@@ -223,7 +223,10 @@ function submit() {
         console.error(form.scoreN)
     } else {
         console.log(form)
-        // form.post('',{})
+        form.post(route('store.quiz'), {
+            onSuccess: () => console.log('created'),
+            onError: errors => console.log(errors),
+        })
     }
     setTimeout(() => (loading.value = false), 200)
 }

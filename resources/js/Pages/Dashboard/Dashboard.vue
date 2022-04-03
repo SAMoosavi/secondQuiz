@@ -38,7 +38,7 @@ const props = defineProps({
         default: true,
     },
     showIndex: {
-        type: Number,
+        type: String ,
         default: -1,
     },
     component: {

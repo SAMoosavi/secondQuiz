@@ -39,6 +39,7 @@ import {close, open} from "@/functions/Anime";
 // vue functions
 import {ref} from "@vue/reactivity";
 import {onMounted} from "vue";
+import {watch} from "@vue/runtime-core";
 // Props & Emits
 const props = defineProps(["show", "showIndex"]);
 defineEmits(["chengShow"]);
@@ -60,11 +61,15 @@ function onLeave(el, done) {
 
 // quizzes Value
 let quizzes = ref(null);
-onMounted(() => {
+
+function getQuizzes() {
     axios.get(route('get.teacher.quizzes'))
         .then((result) => {
             console.log(result.data.quizzes)
             quizzes.value = result.data.quizzes;
         })
-})
+}
+
+onMounted(getQuizzes)
+watch(() => props.showIndex, getQuizzes)
 </script>

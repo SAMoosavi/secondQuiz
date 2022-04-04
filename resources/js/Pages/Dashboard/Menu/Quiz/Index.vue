@@ -65,7 +65,6 @@ let quizzes = ref(null);
 function getQuizzes() {
     axios.get(route('get.teacher.quizzes'))
         .then((result) => {
-            console.log(result.data.quizzes)
             quizzes.value = result.data.quizzes;
         })
 }

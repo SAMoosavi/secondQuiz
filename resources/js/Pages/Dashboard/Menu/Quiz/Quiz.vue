@@ -12,14 +12,14 @@
     </div>
 
     <transition @enter="onEnter" @leave="onLeave">
-        <div v-if="show" class="overflow-hidden border-t bg-primary-focus">
-            <sub-title-quiz :show="showSubTitle === 1" @click="chengShow(1)">
+        <div v-if="show" class="overflow-hidden border-t bg-base-300 text-base-content">
+            <sub-title-quiz :show="showSubTitle === 1" @click="onClickInformation()">
                 اطلاعات سوال
                 <template #icon>
                     <information-circle/>
                 </template>
             </sub-title-quiz>
-            <sub-title-quiz :show="showSubTitle === 2" @click="chengShow(2)">
+            <sub-title-quiz :show="showSubTitle === 2" @click="onClickEdit">
                 ویرایش سوال
                 <template #icon>
                     <pencil-alt/>
@@ -55,6 +55,7 @@ import {close, open} from "@/functions/Anime";
 // vue functions
 import {ref} from "@vue/reactivity";
 import {Inertia} from "@inertiajs/inertia";
+import {onMounted} from "vue";
 // Props & Emits
 const props = defineProps(["quiz", "show", "index"]);
 const emit = defineEmits(["showThis"]);
@@ -70,6 +71,13 @@ function onLeave(el, done) {
 
 // show subtitle
 const showSubTitle = ref(0);
+onMounted(() => {
+    if (route().current('teacher.information.quiz', [props.index])) {
+        chengShow(1);
+    } else if (route().current('teacher.edit.quiz', [props.index])) {
+        chengShow(2);
+    }
+})
 
 function chengShow(indexShow) {
     showSubTitle.value = indexShow;
@@ -78,8 +86,19 @@ function chengShow(indexShow) {
 function onClick() {
     showSubTitle.value = 0;
     emit('showThis', props.show ? -2 : props.index);
-    if (!route().current('teacher.show.quiz', [props.index])) {
-        setTimeout(() => Inertia.get(route('teacher.show.quiz', [props.index])), 500)
+}
+
+function onClickInformation() {
+    chengShow(1);
+    if (!route().current('teacher.information.quiz', [props.index])) {
+        setTimeout(() => Inertia.get(route('teacher.information.quiz', [props.index])), 500)
+    }
+}
+
+function onClickEdit() {
+    chengShow(2);
+    if (!route().current('teacher.edit.quiz', [props.index])) {
+        setTimeout(() => Inertia.get(route('teacher.edit.quiz', [props.index])), 500)
     }
 }
 </script>

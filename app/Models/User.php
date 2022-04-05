@@ -37,4 +37,10 @@ class User extends Authenticatable
     protected $appends = [
         'profile_photo_url',
     ];
+
+    public function TeacherQuizzes(): \Illuminate\Database\Eloquent\Relations\HasMany
+    {
+        return $this->hasMany(Quiz::class, 'user_id');
+    }
+
 }

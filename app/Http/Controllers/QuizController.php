@@ -12,7 +12,7 @@ use JetBrains\PhpStorm\NoReturn;
 class QuizController extends Controller
 {
 
-    #[NoReturn] public function store(Request $request)
+    public function store(Request $request)
     {
         $request->validate([
             'name' => "required|string",
@@ -46,5 +46,10 @@ class QuizController extends Controller
         }
 
         return Redirect::route('teacher.information.quiz', ['quiz' => $quiz->uuid]);
+    }
+
+    #[NoReturn] public function edit(Request $request)
+    {
+        dd($request);
     }
 }

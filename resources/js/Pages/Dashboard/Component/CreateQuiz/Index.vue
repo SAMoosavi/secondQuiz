@@ -167,6 +167,8 @@ import PersianDatetimePicker from "vue3-persian-datetime-picker";
 import Questions from "./Questions.vue";
 // Function validations
 import {required, requiredAns} from "@/functions/validations";
+// Const
+import {color} from "@/Consts/MyConsts";
 // Pinia
 import {storeToRefs} from 'pinia'
 import {useCreatQuiz} from "@/store/CreatQuiz";
@@ -177,10 +179,6 @@ import {ref} from "@vue/reactivity";
 import {onUnmounted} from "vue";
 import {watch} from "@vue/runtime-core";
 
-
-/**************** Const ****************/
-// Color for Persian datetime picker
-const color = "#1fb10b";
 /**************** Pinia ****************/
 const CreateQuiz = useCreatQuiz()
 // create pinia states

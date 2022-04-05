@@ -59,7 +59,15 @@ const props = defineProps({
     type: {type: String},
     question: {
         type: Object,
-        default: {score: null,}
+        default: {
+            score: null,
+            option: JSON.stringify({
+                ans1: null,
+                ans2: null,
+                ans3: null,
+                ans4: null,
+            })
+        }
     }
 
 });

@@ -3,7 +3,7 @@ import {defineStore} from 'pinia'
 export const useEditQuiz = defineStore('EditQuiz', {
     state: () => {
         return {
-            content: 0, scoreQuiz: 0, questions: {}, delete: [],
+            content: 0, scoreQuiz: 0, questions: {}, deleted: [],
         }
     }, getters: {
         //
@@ -21,7 +21,9 @@ export const useEditQuiz = defineStore('EditQuiz', {
             this.content--;
             this.scoreQuiz -= +this.questions[index].score;
             delete this.questions[index];
-            this.delete.push(index);
+            if (!isNaN(index)) {
+                this.deleted.push(index);
+            }
         }, clean() {
             this.content = 0;
             this.questions = {};

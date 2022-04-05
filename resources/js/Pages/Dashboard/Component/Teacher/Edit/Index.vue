@@ -186,9 +186,9 @@ const props = defineProps(['myProps']);
 /**************** Pinia ****************/
 const editQuiz = useEditQuiz()
 // create pinia states
-const {content, questions, scoreQuiz} = storeToRefs(editQuiz);
+const {content, questions, scoreQuiz, deleted} = storeToRefs(editQuiz);
 // create pinia actions
-const {add, clean, index} = editQuiz
+const {clean} = editQuiz
 /**************** Properties ****************/
 const form = useForm({
     id: props.myProps.quiz.id,
@@ -200,6 +200,7 @@ const form = useForm({
     scoreN: props.myProps.quiz.scoreN,
     type: props.myProps.quiz.type,
     questions: props.myProps.quiz.questions,
+    deleted: [],
 })
 
 const loading = ref(false);
@@ -216,6 +217,7 @@ onUnmounted(() => clean())
 function submit() {
     loading.value = true;
     form.questions = questions.value;
+    form.deleted = deleted.value;
     if (!required()) {
         console.error('required')
     } else if (!requiredAns(form.questions)) {

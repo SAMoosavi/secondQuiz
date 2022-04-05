@@ -21,6 +21,8 @@ return new class extends Migration {
             $table->timestamp('end')->nullable();
             $table->time('time');
             $table->double('score', 8, 2);
+            $table->integer('scoreN');
+            $table->char('type',30);
             $table->timestamps();
         });
     }

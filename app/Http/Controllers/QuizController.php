@@ -21,6 +21,7 @@ class QuizController extends Controller
             'time' => 'required|string',
             'score' => 'required|numeric',
             'scoreN' => 'nullable|numeric',
+            'type' => 'required|string',
             'questions.*.question' => 'required|string',
             'questions.*.type' => 'required',
             'questions.*.option' => 'nullable|array',
@@ -35,6 +36,8 @@ class QuizController extends Controller
             'end' => !!$request->end ? (new Jalali($request->end))->toGregorian()->format('Y-m-d H:i:s') : null,
             'time' => $request->time,
             'score' => $request->score,
+            'scoreN' => $request->scoreN,
+            'type' => $request->type,
             'uuid' => (string)Str::uuid(),
         ]);
 
@@ -42,6 +45,6 @@ class QuizController extends Controller
             QuestionController::store($question, $quiz->id);
         }
 
-        return Redirect::route('show.quiz', ['quiz' => $quiz->uuid]);
+        return Redirect::route('teacher.information.quiz', ['quiz' => $quiz->uuid]);
     }
 }

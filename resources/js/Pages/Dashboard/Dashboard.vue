@@ -3,15 +3,26 @@
         <div
             class="fixed inset-0 right-0 w-1/4 lg:w-1/5 overflow-y-auto bg-base-200 top-16 text-base-content"
         >
-            <quiz-index :show="showQuiz" :showIndex="showIndex" @chengShow="showQuiz = !showQuiz"/>
+            <quiz-index
+                :show="showQuiz"
+                :showIndex="showIndex"
+                @chengShow="showQuiz = !showQuiz"
+            />
 
-            <answer-index :show="!showQuiz" :showIndex="showIndex" @chengShow="showQuiz = !showQuiz"/>
+            <answer-index
+                :show="!showQuiz"
+                :showIndex="showIndex"
+                @chengShow="showQuiz = !showQuiz"
+            />
         </div>
         <div
             class="fixed inset-y-0 left-0 overflow-y-auto bg-base-100 top-16 w-3/4 lg:w-4/5 overflow-hidden"
         >
-            <div class=" sm:p-6 lg:p-8 pb-0">
-                <component :is="components[props.component]" :props="props.myProps"/>
+            <div class="sm:p-6 lg:p-8 pb-0">
+                <component
+                    :is="components[props.component]"
+                    :myProps="props.myProps"
+                />
             </div>
         </div>
     </app-layout>
@@ -24,9 +35,11 @@ import AppLayout from "@/Layouts/AppLayout.vue";
 import QuizIndex from "@/Pages/Dashboard/Menu/Quiz/Index.vue";
 import AnswerIndex from "@/Pages/Dashboard/Menu/Answer/Index.vue";
 // components in main
-import CreateQuiz from "@/Pages/Dashboard/Component/CreateQuiz/Index.vue"
+import CreateQuiz from "@/Pages/Dashboard/Component/CreateQuiz/Index.vue";
+import InformationQuiz from "@/Pages/Dashboard/Component/Teacher/Information/Index.vue";
+import EditQuiz from "@/Pages/Dashboard/Component/Teacher/Edit/Index.vue";
 // vue functions
-import {ref} from "@vue/reactivity";
+import { ref } from "@vue/reactivity";
 // Props
 const props = defineProps({
     title: {
@@ -38,22 +51,24 @@ const props = defineProps({
         default: true,
     },
     showIndex: {
-        type: String ,
+        type: String,
         default: -1,
     },
     component: {
         type: String,
-        default: 'create-quiz',
+        default: "create-quiz",
     },
     myProps: {
         type: Object,
         default: {},
-    }
-})
+    },
+});
 // show Quiz Or Answer
 const showQuiz = ref(props.showQuiz);
-
+// components
 const components = {
-    'create-quiz': CreateQuiz,
-}
+    "create-quiz": CreateQuiz,
+    "information-quiz": InformationQuiz,
+    "edit-quiz": EditQuiz,
+};
 </script>

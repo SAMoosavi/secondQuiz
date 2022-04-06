@@ -82,18 +82,6 @@
                     type="time"
                 />
             </div>
-            <!--Type-->
-            <div class="form-control">
-                <my-label :required="true" for="type" value="نوع آزمون"/>
-                <my-select id="type" v-model="form.type" :required="true">
-                    <my-option :selected="form.type === 'descriptive'" value="descriptive">
-                        آزمون تشریحی
-                    </my-option>
-                    <my-option :selected="form.type === 'test'" value="test">
-                        آزمون تستی
-                    </my-option>
-                </my-select>
-            </div>
             <!--Score-->
             <div class="form-control">
                 <my-label
@@ -138,7 +126,7 @@
                     :loading="loading"
                     class="mr-4"
                 >
-                    ساخت آزمون
+                    ویرایش آزمون
                 </my-button>
                 <div>
                     <p class="text-gray-800 dark:text-gray-300">
@@ -160,8 +148,6 @@ import Calendar from "@/component/Icons/Calendar.vue";
 import MyLabel from "@/component/Form/Label.vue";
 import MyInput from "@/component/Form/Input.vue";
 import MyButton from "@/component/Form/Button.vue";
-import MySelect from "@/component/Form/Select.vue";
-import MyOption from "@/component/Form/Option.vue";
 //Edit Component
 import Questions from "./Questions.vue";
 // Persian datetime picker
@@ -227,9 +213,11 @@ function submit() {
     } else if (form.type === 'test' && (isNaN(form.scoreN) || !Number.isInteger(form.scoreN))) {
         console.error(form.scoreN)
     } else {
-        console.log(form)
         form.put(route('edit.quiz', [props.myProps.quiz.uuid]), {
-            onSuccess: () => console.log('created'),
+            onSuccess: () => {
+                console.log('created');
+                clean();
+            },
             onError: errors => console.log(errors),
         })
     }

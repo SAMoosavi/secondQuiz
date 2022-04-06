@@ -1,38 +1,38 @@
 <template>
-    <Head title="ورود" />
+    <Head title="ورود"/>
 
     <my-auth-card>
 
         <template #title>ورود</template>
 
-        <form @submit.prevent="submit" novalidate>
+        <form novalidate @submit.prevent="submit">
             <div class="form-control">
-                <my-label for="email" value="ایمیل" :required="true" />
+                <my-label :required="true" for="email" value="ایمیل"/>
                 <my-input
                     id="email"
-                    type="email"
                     v-model="form.email"
-                    required
-                    autofocus
                     autocomplete="email"
+                    autofocus
+                    required
+                    type="email"
                 />
             </div>
 
             <div class="mt-4 form-control">
-                <my-label for="password" value="رمز ورود" :required="true" />
+                <my-label :required="true" for="password" value="رمز ورود"/>
                 <my-input
                     id="password"
-                    type="password"
                     v-model="form.password"
-                    required
                     autocomplete="current-password"
+                    required
+                    type="password"
                 />
             </div>
 
             <div class="block mt-4 form-control">
                 <my-checkbox
-                    txt="من را به خاطر بسپار"
                     v-model="form.remember"
+                    txt="من را به خاطر بسپار"
                 />
             </div>
             <div class="flex-col items-start justify-end card-actions">
@@ -43,9 +43,9 @@
                         ساخت حساب جدید
                     </my-auth-link>
                     <my-button
-                        class="mr-4"
-                        :loading="loading"
                         :disabled="form.processing"
+                        :loading="loading"
+                        class="mr-4"
                     >
                         ورود
                     </my-button>
@@ -68,9 +68,10 @@ import MyButton from "@/component/Form/Button.vue";
 import MyLabel from "@/component/Form/Label.vue";
 import MyInput from "@/component/Form/Input.vue";
 
-import { validEmail } from "@/functions/validations";
-import { Head, useForm } from "@inertiajs/inertia-vue3";
-import { ref } from "vue";
+import {validEmail} from "@/functions/validations";
+import {Head, useForm} from "@inertiajs/inertia-vue3";
+import {ref} from "vue";
+import {errorMessage, successMessage} from "@/functions/Message";
 
 const form = useForm({
     email: "",
@@ -91,6 +92,12 @@ function submit() {
             ...data,
             remember: form.remember ? "on" : "",
         })).post(route("login"), {
+            onSuccess: () => successMessage('با موفقیت وارد شدید'),
+            onError: errors => {
+                for (const error of errors) {
+                    errorMessage(error);
+                }
+            },
             onFinish: () => form.reset("password"),
         });
     }

@@ -1,5 +1,5 @@
 <template>
-    <Head title="فراموشی رمز عبور" />
+    <Head title="فراموشی رمز عبور"/>
 
     <my-auth-card>
         <template #title>فراموشی رمز عبور</template>
@@ -10,20 +10,20 @@
             که به شما امکان می دهد رمز جدیدی را انتخاب کنید.
         </my-auth-text>
 
-        <form @submit.prevent="submit" novalidate>
+        <form novalidate @submit.prevent="submit">
             <div class="form-control">
-                <my-label for="email" value="ایمیل" :required="true" />
+                <my-label :required="true" for="email" value="ایمیل"/>
                 <my-input
                     id="email"
-                    type="email"
                     v-model="form.email"
-                    required
-                    autofocus
+                    :required="true"
                     autocomplete="email"
+                    autofocus
+                    type="email"
                 />
             </div>
             <div class="items-end justify-end mt-4 mr-auto form-control">
-                <my-button :loading="loading" :disabled="form.processing">
+                <my-button :disabled="form.processing" :loading="loading">
                     ارسال ایمیل
                 </my-button>
             </div>
@@ -38,9 +38,10 @@ import MyButton from "@/component/Form/Button.vue";
 import MyLabel from "@/component/Form/Label.vue";
 import MyInput from "@/component/Form/Input.vue";
 
-import { validEmail } from "@/functions/validations";
-import { Head, useForm } from "@inertiajs/inertia-vue3";
-import { ref } from "@vue/reactivity";
+import {validEmail} from "@/functions/validations";
+import {Head, useForm} from "@inertiajs/inertia-vue3";
+import {ref} from "@vue/reactivity";
+import {errorMessage, successMessage} from "@/functions/Message";
 
 const form = useForm({
     email: "",
@@ -53,7 +54,14 @@ function submit() {
     if (!form.email || !validEmail(form.email)) {
         //
     } else {
-        form.post(route("password.email"));
+        form.post(route("password.email"),{
+            onSuccess:()=>successMessage('ایمیل با موفقیت ارسال شد'),
+            onError: errors => {
+                for (const error of errors) {
+                    errorMessage(error);
+                }
+            },
+        });
     }
     setTimeout(() => {
         loading.value = false;

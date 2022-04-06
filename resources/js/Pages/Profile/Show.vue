@@ -9,8 +9,7 @@
                         class="tab"
                         :class="{
                             'tab-active':
-                                isComponent ==
-                                'update-profile-information-form',
+                                isComponent === 'update-profile-information-form',
                         }"
                         @click="chengTab('update-profile-information-form')"
                     >
@@ -19,7 +18,7 @@
                     <button
                         class="tab"
                         :class="{
-                            'tab-active': isComponent == 'update-password-form',
+                            'tab-active': isComponent === 'update-password-form',
                         }"
                         @click="chengTab('update-password-form')"
                     >

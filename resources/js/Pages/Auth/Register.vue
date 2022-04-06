@@ -1,55 +1,55 @@
 <template>
-    <Head title="ثبت نام" />
+    <Head title="ثبت نام"/>
 
     <my-auth-card>
         <template #title>ثبت نام</template>
 
-        <form @submit.prevent="submit" novalidate>
+        <form novalidate @submit.prevent="submit">
             <div class="form-control">
-                <my-label for="name" value="نام" :required="true" />
+                <my-label :required="true" for="name" value="نام"/>
                 <my-input
                     id="name"
-                    type="text"
                     v-model="form.name"
-                    required
-                    autofocus
                     autocomplete="name"
+                    autofocus
+                    required
+                    type="text"
                 />
             </div>
 
             <div class="mt-4 form-control">
-                <my-label for="email" value="ایمیل" :required="true" />
+                <my-label :required="true" for="email" value="ایمیل"/>
                 <my-input
                     id="email"
-                    type="email"
                     v-model="form.email"
                     required
+                    type="email"
                 />
             </div>
 
             <div class="mt-4 form-control">
-                <my-label for="password" value="رمز ورود" :required="true" />
+                <my-label :required="true" for="password" value="رمز ورود"/>
                 <my-input
                     id="password"
-                    type="password"
                     v-model="form.password"
-                    required
                     autocomplete="new-password"
+                    required
+                    type="password"
                 />
             </div>
 
             <div class="mt-4 form-control">
                 <my-label
+                    :required="true"
                     for="password_confirmation"
                     value="تایید رمز عبور"
-                    :required="true"
                 />
                 <my-input
                     id="password_confirmation"
-                    type="password"
                     v-model="form.password_confirmation"
-                    required
                     autocomplete="new-password"
+                    required
+                    type="password"
                 />
             </div>
             <div class="flex-col items-start justify-end">
@@ -59,9 +59,9 @@
                     </my-auth-link>
 
                     <my-button
-                        class="mr-4"
-                        :loading="loading"
                         :disabled="form.processing"
+                        :loading="loading"
+                        class="mr-4"
                     >
                         ثبت نام
                     </my-button>
@@ -83,8 +83,9 @@ import {
     passwordConfirmation,
     password,
 } from "@/functions/validations";
-import { Head, useForm } from "@inertiajs/inertia-vue3";
-import { ref } from "@vue/reactivity";
+import {Head, useForm} from "@inertiajs/inertia-vue3";
+import {ref} from "@vue/reactivity";
+import {errorMessage, successMessage} from "@/functions/Message";
 
 const form = useForm({
     name: "",
@@ -115,6 +116,12 @@ function submit() {
         //password(form.password) return errors
     } else {
         form.post(route("register"), {
+            onSuccess: () => successMessage('با موفقیت ثبت نام شدید'),
+            onError: errors => {
+                for (const error of errors) {
+                    errorMessage(error);
+                }
+            },
             onFinish: () => form.reset("password", "password_confirmation"),
         });
     }

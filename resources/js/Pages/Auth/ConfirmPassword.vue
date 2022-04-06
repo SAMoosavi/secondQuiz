@@ -1,5 +1,5 @@
 <template>
-    <Head title="منطقه امن" />
+    <Head title="منطقه امن"/>
     <my-auth-card>
         <template #title>منطقه امن</template>
         <my-auth-text>
@@ -7,21 +7,21 @@
             تأیید کنید.
         </my-auth-text>
 
-        <form @submit.prevent="submit" novalidate>
+        <form novalidate @submit.prevent="submit">
             <div class="form-control">
-                <my-label for="password" value="رمز عبور" :required="true" />
+                <my-label :required="true" for="password" value="رمز عبور"/>
                 <my-input
                     id="password"
-                    type="password"
                     v-model="form.password"
-                    required
                     autocomplete="current-password"
                     autofocus
+                    required
+                    type="password"
                 />
             </div>
 
             <div class="items-end justify-end mt-4 mr-auto form-control">
-                <my-button :loading="loading" :disabled="form.processing">
+                <my-button :disabled="form.processing" :loading="loading">
                     تایید
                 </my-button>
             </div>
@@ -36,8 +36,9 @@ import MyButton from "@/component/Form/Button.vue";
 import MyLabel from "@/component/Form/Label.vue";
 import MyInput from "@/component/Form/Input.vue";
 
-import { Head, useForm } from "@inertiajs/inertia-vue3";
-import { ref } from "@vue/reactivity";
+import {Head, useForm} from "@inertiajs/inertia-vue3";
+import {ref} from "@vue/reactivity";
+import {errorMessage, successMessage} from "@/functions/Message";
 
 const form = useForm({
     password: "",
@@ -50,7 +51,13 @@ function submit() {
     if (!form.password) {
         //
     } else {
-        form.post(route("password.confirml"), {
+        form.post(route("password.confirm"), {
+            onSuccess: () => successMessage('تایید شد'),
+            onError: errors => {
+                for (const error of errors) {
+                    errorMessage(error);
+                }
+            },
             onFinish: () => form.reset(),
         });
     }

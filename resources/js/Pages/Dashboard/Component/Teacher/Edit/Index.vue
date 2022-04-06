@@ -165,6 +165,7 @@ import {storeToRefs} from "pinia";
 // Vue functions
 import {ref} from "@vue/reactivity";
 import {onUnmounted, watch} from "@vue/runtime-core";
+import {errorMessage, successMessage} from "@/functions/Message";
 
 
 // Props
@@ -215,10 +216,14 @@ function submit() {
     } else {
         form.put(route('edit.quiz', [props.myProps.quiz.uuid]), {
             onSuccess: () => {
-                console.log('created');
+                successMessage('آزمون با موفقیت ویرایش شد');
                 clean();
             },
-            onError: errors => console.log(errors),
+            onError: errors => {
+                for (const error of errors) {
+                    errorMessage(error);
+                }
+            },
         })
     }
     setTimeout(() => (loading.value = false), 200)

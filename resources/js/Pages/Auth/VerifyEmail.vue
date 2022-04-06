@@ -43,14 +43,22 @@ import MyButton from "@/component/Form/Button.vue";
 
 import { Head, useForm } from "@inertiajs/inertia-vue3";
 import { ref } from "@vue/reactivity";
+import {errorMessage, successMessage} from "@/functions/Message";
 
-const form = useForm();
+const form = useForm({});
 
 const loading = ref(false);
 
 function submit() {
     loading.value = true;
-    form.post(route("verification.send"));
+    form.post(route("verification.send"),{
+        onError: errors => {
+            for (const error of errors) {
+                errorMessage(error);
+            }
+        },
+        onSuccess:()=>successMessage('ایمیل برای شما ارسال شد')
+    });
     setTimeout(() => {
         loading.value = false;
     }, 200);

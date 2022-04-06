@@ -1,50 +1,50 @@
 <template>
-    <Head title="بازیابی رمز عبور" />
+    <Head title="بازیابی رمز عبور"/>
 
     <my-auth-card>
         <template #title>بازیابی رمز عبور</template>
 
-        <form @submit.prevent="submit" novalidate>
+        <form novalidate @submit.prevent="submit">
             <div class="form-control">
-                <my-label for="email" value="ایمیل" :required="true" />
+                <my-label :required="true" for="email" value="ایمیل"/>
                 <my-input
                     id="email"
-                    type="email"
                     v-model="form.email"
-                    required
-                    autofocus
                     autocomplete="email"
+                    autofocus
+                    required
+                    type="email"
                 />
             </div>
 
             <div class="mt-4 form-control">
-                <my-label for="password" value="رمز ورود" :required="true" />
+                <my-label :required="true" for="password" value="رمز ورود"/>
                 <my-input
                     id="password"
-                    type="password"
                     v-model="form.password"
-                    required
                     autocomplete="new-password"
+                    required
+                    type="password"
                 />
             </div>
 
             <div class="mt-4 form-control">
                 <my-label
+                    :required="true"
                     for="password_confirmation"
                     value="تایید رمز عبور"
-                    :required="true"
                 />
                 <my-input
                     id="password_confirmation"
-                    type="password"
                     v-model="form.password_confirmation"
-                    required
                     autocomplete="new-password"
+                    required
+                    type="password"
                 />
             </div>
 
             <div class="items-end justify-end mt-4 mr-auto form-control">
-                <my-button :loading="loading" :disabled="form.processing">
+                <my-button :disabled="form.processing" :loading="loading">
                     بازیابی رمز عبور
                 </my-button>
             </div>
@@ -59,8 +59,9 @@ import MyLabel from "@/component/Form/Label.vue";
 import MyInput from "@/component/Form/Input.vue";
 
 import {validEmail, passwordConfirmation, password} from "@/functions/validations";
-import { Head, useForm } from "@inertiajs/inertia-vue3";
-import { ref } from "vue";
+import {Head, useForm} from "@inertiajs/inertia-vue3";
+import {ref} from "vue";
+import {errorMessage, successMessage} from "@/functions/Message";
 
 const props = defineProps({
     email: String,
@@ -90,6 +91,12 @@ function submit() {
         //password(form.password) return errors
     } else {
         form.post(route("password.update"), {
+            onSuccess: () => successMessage('رمز با موفقیت تغییر کرد'),
+            onError: errors => {
+                for (const error of errors) {
+                    errorMessage(error);
+                }
+            },
             onFinish: () => form.reset("password", "password_confirmation"),
         });
     }

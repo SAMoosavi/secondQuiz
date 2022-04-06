@@ -178,6 +178,7 @@ import {useForm} from "@inertiajs/inertia-vue3";
 import {ref} from "@vue/reactivity";
 import {onUnmounted} from "vue";
 import {watch} from "@vue/runtime-core";
+import {errorMessage, successMessage} from "@/functions/Message";
 
 /**************** Pinia ****************/
 const CreateQuiz = useCreatQuiz()
@@ -222,8 +223,12 @@ function submit() {
     } else {
         console.log(form)
         form.post(route('store.quiz'), {
-            onSuccess: () => console.log('created'),
-            onError: errors => console.log(errors),
+            onSuccess: () => successMessage('آزمون با موفقیت ساخته شد'),
+            onError: errors => {
+                for (const error of errors) {
+                    errorMessage(error);
+                }
+            },
         })
     }
     setTimeout(() => (loading.value = false), 200)

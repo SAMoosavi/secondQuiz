@@ -1,37 +1,37 @@
 <template>
     <div class="flex justify-center w-full">
-        <form @submit.prevent="send" class="w-full md:w-1/2" novalidate>
+        <form class="w-full md:w-1/2" novalidate @submit.prevent="send">
             <!-- Profile Photo -->
             <div class="form-control">
                 <!-- Profile Photo File Input -->
                 <input
-                    type="file"
-                    class="hidden"
                     ref="photo"
+                    class="hidden"
+                    type="file"
                     @change="updatePhotoPreview"
                 />
 
-                <my-label for="photo" value="تصویر" />
+                <my-label for="photo" value="تصویر"/>
                 <div class="flex items-center justify-between">
                     <!-- Current Profile Photo -->
-                    <div class="mt-2 avatar" v-if="!photoPreview">
+                    <div v-if="!photoPreview" class="mt-2 avatar">
                         <div class="w-24 overflow-hidden rounded-full">
                             <img
-                                :src="user.profile_photo_url"
                                 :alt="user.name"
+                                :src="user.profile_photo_url"
                             />
                         </div>
                     </div>
 
                     <!-- New Profile Photo Preview -->
-                    <div class="mt-2 avatar" v-if="photoPreview">
+                    <div v-if="photoPreview" class="mt-2 avatar">
                         <span
-                            class="block h-20 bg-center bg-no-repeat bg-cover rounded-full"
                             :style="
                                 'background-image: url(\'' +
                                 photoPreview +
                                 '\');'
                             "
+                            class="block h-20 bg-center bg-no-repeat bg-cover rounded-full"
                         >
                         </span>
                     </div>
@@ -45,10 +45,10 @@
                         </my-button>
 
                         <my-button
-                            type="button"
-                            class="mt-2 btn-secondary"
-                            @click.prevent="deletePhoto"
                             v-if="user.profile_photo_path"
+                            class="mt-2 btn-secondary"
+                            type="button"
+                            @click.prevent="deletePhoto"
                         >
                             حذف تصویر
                         </my-button>
@@ -58,28 +58,28 @@
 
             <!-- Name -->
             <div class="form-control">
-                <my-label for="name" value="نام" :required="true" />
+                <my-label :required="true" for="name" value="نام"/>
                 <my-input
                     id="name"
-                    type="text"
                     v-model="form.name"
                     autocomplete="name"
+                    type="text"
                 />
             </div>
 
             <!-- Email -->
             <div class="form-control">
-                <my-label for="email" value="ایمیل" :required="true" />
+                <my-label :required="true" for="email" value="ایمیل"/>
                 <my-input
                     id="email"
-                    type="email"
                     v-model="form.email"
                     autocomplete="email"
+                    type="email"
                 />
             </div>
 
             <div class="mt-2 form-control">
-                <my-button :loding="loding" :disabled="form.processing">
+                <my-button :disabled="form.processing" :loding="loding">
                     ذخیره
                 </my-button>
             </div>
@@ -88,14 +88,14 @@
 </template>
 
 <script setup>
-import myButton from "@/component/Form/Button.vue";
-import myInput from "@/component/Form/Input.vue";
-import myLabel from "@/component/Form/Label.vue";
+import MyButton from "@/component/Form/Button.vue";
+import MyLabel from "@/component/Form/Label.vue";
 
-import { validEmail } from "@/functions/validations";
+import {validEmail} from "@/functions/validations";
 
-import { useForm } from "@inertiajs/inertia-vue3";
-import { ref } from "@vue/reactivity";
+import {useForm} from "@inertiajs/inertia-vue3";
+import {ref} from "@vue/reactivity";
+import {errorMessage, successMessage} from "@/functions/Message";
 
 const props = defineProps(["user"]);
 
@@ -108,6 +108,7 @@ const form = useForm({
 
 const photoPreview = ref();
 const loding = ref(false);
+
 function send() {
     loding.value = true;
     if (photo.value) {
@@ -121,7 +122,15 @@ function send() {
         form.post(route("user-profile-information.update"), {
             errorBag: "updateProfileInformation",
             preserveScroll: true,
-            onSuccess: () => clearPhotoFileInput(),
+            onSuccess: () => {
+                successMessage('پروفایل با موفقیت ویرایش شد')
+                clearPhotoFileInput()
+            },
+            onError: errors => {
+                for (const error of errors) {
+                    errorMessage(error);
+                }
+            }
         });
     }
     setTimeout(() => {
@@ -130,6 +139,7 @@ function send() {
 }
 
 const photo = ref();
+
 function selectNewPhoto() {
     photo.value.click();
 }

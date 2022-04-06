@@ -1,3 +1,4 @@
+<!--suppress ALL -->
 <template>
     <div @click="onClick">
         <sub-title :show="show">
@@ -71,13 +72,27 @@ function onLeave(el, done) {
 
 // show subtitle
 const showSubTitle = ref(0);
-onMounted(() => {
+
+function checkRoute() {
     if (route().current('teacher.information.quiz', [props.index])) {
         chengShow(1);
     } else if (route().current('teacher.edit.quiz', [props.index])) {
         chengShow(2);
     }
+}
+
+onMounted(() => {
+    checkRoute();
 })
+
+let myRoute = route().current()
+setInterval(() => {
+    if (myRoute !== route().current()) {
+        myRoute = route().current();
+        checkRoute();
+    }
+}, 400)
+
 
 function chengShow(indexShow) {
     showSubTitle.value = indexShow;

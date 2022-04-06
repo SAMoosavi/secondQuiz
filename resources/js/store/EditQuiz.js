@@ -27,6 +27,7 @@ export const useEditQuiz = defineStore('EditQuiz', {
         }, clean() {
             this.content = 0;
             this.questions = {};
+            this.deleted = [];
         }
     }
 })

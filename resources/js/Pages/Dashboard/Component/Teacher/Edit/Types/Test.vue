@@ -25,11 +25,12 @@ import {onMounted} from "vue";
 
 const props = defineProps(['index', 'answer', 'option'])
 const emits = defineEmits(['option', 'answer'])
-const options = reactive({
-    ans1: props.option.ans1,
-    ans2: props.option.ans2,
-    ans3: props.option.ans3,
-    ans4: props.option.ans4,
+
+let options = reactive({
+    ans1: null,
+    ans2: null,
+    ans3: null,
+    ans4: null,
 });
 const ans = reactive({
     num: 'ans',
@@ -37,12 +38,12 @@ const ans = reactive({
 });
 onMounted(() => {
     let option = JSON.parse(props.option);
-    for (const key in options) {
-        options[key] = option[key];
-        console.log(ans.ans === options[key], ans.ans, options[key])
-        if (ans.ans === options[key]) {
-            console.log(ans.num = key, ans.num, key)
-            ans.num = key;
+    if (props.option) {
+        for (const key in options) {
+            options[key] = option[key];
+            if (ans.ans === options[key]) {
+                ans.num = key;
+            }
         }
     }
 })
@@ -50,7 +51,7 @@ for (const key in options) {
     watch(
         () => options[key],
         (val) => {
-            emits("option", options);
+            emits("option", JSON.stringify(options));
             if (key === ans.num) {
                 ans.ans = val;
             }

@@ -1,3 +1,25 @@
 @import 'tailwindcss/base';
 @import 'tailwindcss/components';
 @import 'tailwindcss/utilities';
+
+.Vue-Toastification__container.top-right .Vue-Toastification__toast,
+.Vue-Toastification__container.bottom-right .Vue-Toastification__toast {
+    margin-right: auto !important;
+    margin-left: 0 !important;
+}
+
+.Vue-Toastification__toast--success {
+    @apply bg-success opacity-90 !important;
+}
+
+.Vue-Toastification__toast--info {
+    @apply bg-info opacity-90 !important;
+}
+
+.Vue-Toastification__toast--error {
+    @apply bg-error opacity-90 !important;
+}
+
+.Vue-Toastification__toast--warning {
+    @apply bg-warning opacity-90 !important;
+}

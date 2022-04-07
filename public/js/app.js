@@ -24822,7 +24822,8 @@ function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len 
         form.deleted = deleted.value;
         form.put(route('edit.quiz', [props.myProps.quiz.uuid]), {
           onSuccess: function onSuccess() {
-            (0,_functions_Message__WEBPACK_IMPORTED_MODULE_12__.successMessage)('آزمون با موفقیت ویرایش شد'); // clean();
+            (0,_functions_Message__WEBPACK_IMPORTED_MODULE_12__.successMessage)('آزمون با موفقیت ویرایش شد');
+            clean();
           },
           onError: function onError(errors) {
             var _iterator = _createForOfIteratorHelper(errors),

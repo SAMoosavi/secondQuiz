@@ -3770,6 +3770,31 @@ body[dir="rtl"] .checkbox:checked,
 .ease-in {
   transition-timing-function: cubic-bezier(0.4, 0, 1, 1);
 }
+.Vue-Toastification__container.top-right .Vue-Toastification__toast,
+.Vue-Toastification__container.bottom-right .Vue-Toastification__toast {
+    margin-right: auto !important;
+    margin-left: 0 !important;
+}
+.Vue-Toastification__toast--success {
+  --tw-bg-opacity: 1 !important;
+  background-color: hsl(var(--su) / var(--tw-bg-opacity)) !important;
+  opacity: 0.9 !important;
+}
+.Vue-Toastification__toast--info {
+  --tw-bg-opacity: 1 !important;
+  background-color: hsl(var(--in) / var(--tw-bg-opacity)) !important;
+  opacity: 0.9 !important;
+}
+.Vue-Toastification__toast--error {
+  --tw-bg-opacity: 1 !important;
+  background-color: hsl(var(--er) / var(--tw-bg-opacity)) !important;
+  opacity: 0.9 !important;
+}
+.Vue-Toastification__toast--warning {
+  --tw-bg-opacity: 1 !important;
+  background-color: hsl(var(--wa) / var(--tw-bg-opacity)) !important;
+  opacity: 0.9 !important;
+}
 .after\:mr-0\.5::after {
   content: var(--tw-content);
   margin-right: 0.125rem;

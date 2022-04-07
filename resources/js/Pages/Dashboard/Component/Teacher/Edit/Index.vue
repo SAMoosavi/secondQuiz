@@ -218,7 +218,7 @@ function submit() {
         form.put(route('edit.quiz', [props.myProps.quiz.uuid]), {
             onSuccess: () => {
                 successMessage('آزمون با موفقیت ویرایش شد');
-                // clean();
+                clean();
             },
             onError: errors => {
                 for (const error of errors) {

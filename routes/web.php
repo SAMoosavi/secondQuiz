@@ -26,6 +26,8 @@ Route::get('/create-quiz', function () {
 Route::post('/create-quiz', [QuizController::class, 'store'])->name('store.quiz');
 
 Route::get('/teacher/edit/{quiz:uuid}', function (\App\Models\Quiz $quiz) {
+    $quiz->start = !!$quiz->start ? (new \Date\Date($quiz->start))->toJalali()->format('Y-m-d H:i:s') : null;
+    $quiz->end = !!$quiz->end ? (new \Date\Date($quiz->end))->toJalali()->format('Y-m-d H:i:s') : null;
     return Inertia::render('Dashboard/Dashboard', [
         'showQuiz' => true,
         'showIndex' => $quiz->uuid,

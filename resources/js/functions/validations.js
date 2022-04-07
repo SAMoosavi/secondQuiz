@@ -41,3 +41,11 @@ export function requiredAns(v) {
     }
     return true;
 }
+
+export function score(v){
+    return  (isNaN(v) || v <= 0)
+}
+
+export function scoreN(v,t){
+    return t === 'test' && (isNaN(v) || !Number.isInteger(v));
+}

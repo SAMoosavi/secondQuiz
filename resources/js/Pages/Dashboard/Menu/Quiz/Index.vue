@@ -70,5 +70,8 @@ function getQuizzes() {
 }
 
 onMounted(getQuizzes)
-watch(() => props.showIndex, getQuizzes)
+watch(() => props.showIndex, () => {
+    getQuizzes();
+    chengShowIndex(props.showIndex)
+})
 </script>

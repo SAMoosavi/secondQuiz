@@ -603,7 +603,7 @@ html {
 
   :root {
     --p: 141 73% 34%;
-    --inc: 202 100% 90%;
+    --inc: 202 100% 10%;
     --suc: 89 100% 10%;
     --wac: 54 100% 10%;
     --erc: 0 100% 90%;
@@ -680,7 +680,7 @@ html {
 
 [data-theme=dark] {
   --p: 141 73% 34%;
-  --inc: 202 100% 90%;
+  --inc: 202 100% 10%;
   --suc: 89 100% 10%;
   --wac: 54 100% 10%;
   --erc: 0 100% 90%;
@@ -1147,6 +1147,8 @@ html {
   font-weight: 600;
   text-transform: uppercase;
   text-transform: var(--btn-text-case, uppercase);
+  -webkit-text-decoration-line: none;
+  text-decoration-line: none;
   border-width: var(--border-btn, 1px);
   -webkit-animation: button-pop var(--animation-btn, 0.25s) ease-out;
           animation: button-pop var(--animation-btn, 0.25s) ease-out;
@@ -1158,11 +1160,6 @@ html {
 }
 .btn-disabled, .btn[disabled] {
   pointer-events: none;
-  --tw-border-opacity: 0;
-  background-color: hsl(var(--n) / var(--tw-bg-opacity));
-  --tw-bg-opacity: 0.2;
-  color: hsl(var(--bc) / var(--tw-text-opacity));
-  --tw-text-opacity: 0.2;
 }
 .btn.loading, .btn.loading:hover {
   pointer-events: none;
@@ -1921,6 +1918,13 @@ html {
   --tw-text-opacity: 1;
   color: hsl(var(--erc, var(--nc)) / var(--tw-text-opacity));
 }
+.btn-disabled, .btn-disabled:hover, .btn[disabled], .btn[disabled]:hover {
+  --tw-border-opacity: 0;
+  background-color: hsl(var(--n) / var(--tw-bg-opacity));
+  --tw-bg-opacity: 0.2;
+  color: hsl(var(--bc) / var(--tw-text-opacity));
+  --tw-text-opacity: 0.2;
+}
 .btn.loading.btn-square:before, .btn.loading.btn-circle:before {
   margin-right: 0px;
 }
@@ -2252,7 +2256,7 @@ body[dir="rtl"] .checkbox:checked,
 .menu > :where(li) > :where(ul) :where(li) :where(ul) {
   padding-left: 1rem;
 }
-.menu > :where(li) > :where(ul) :where(li) :where(:not(ul)) {
+.menu > :where(li) > :where(ul) :where(li) > :where(:not(ul)) {
   width: 100%;
   white-space: nowrap;
 }
@@ -2927,6 +2931,9 @@ body[dir="rtl"] .checkbox:checked,
 .w-10 {
   width: 2.5rem;
 }
+.w-1\/2 {
+  width: 50%;
+}
 .w-20 {
   width: 5rem;
 }
@@ -2938,9 +2945,6 @@ body[dir="rtl"] .checkbox:checked,
 }
 .w-24 {
   width: 6rem;
-}
-.w-1\/2 {
-  width: 50%;
 }
 .min-w-0 {
   min-width: 0px;

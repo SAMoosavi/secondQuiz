@@ -23103,7 +23103,17 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _component_Form_Label_vue__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @/component/Form/Label.vue */ "./resources/js/component/Form/Label.vue");
 /* harmony import */ var _component_Form_Input_vue__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @/component/Form/Input.vue */ "./resources/js/component/Form/Input.vue");
 /* harmony import */ var _inertiajs_inertia_vue3__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! @inertiajs/inertia-vue3 */ "./node_modules/@inertiajs/inertia-vue3/dist/index.js");
-/* harmony import */ var _vue_reactivity__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! @vue/reactivity */ "./node_modules/@vue/reactivity/dist/reactivity.esm-bundler.js");
+/* harmony import */ var _vue_reactivity__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! @vue/reactivity */ "./node_modules/@vue/reactivity/dist/reactivity.esm-bundler.js");
+/* harmony import */ var _functions_Message__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! @/functions/Message */ "./resources/js/functions/Message.js");
+/* harmony import */ var _Consts_Message__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! @/Consts/Message */ "./resources/js/Consts/Message.js");
+function _createForOfIteratorHelper(o, allowArrayLike) { var it = typeof Symbol !== "undefined" && o[Symbol.iterator] || o["@@iterator"]; if (!it) { if (Array.isArray(o) || (it = _unsupportedIterableToArray(o)) || allowArrayLike && o && typeof o.length === "number") { if (it) o = it; var i = 0; var F = function F() {}; return { s: F, n: function n() { if (i >= o.length) return { done: true }; return { done: false, value: o[i++] }; }, e: function e(_e) { throw _e; }, f: F }; } throw new TypeError("Invalid attempt to iterate non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); } var normalCompletion = true, didErr = false, err; return { s: function s() { it = it.call(o); }, n: function n() { var step = it.next(); normalCompletion = step.done; return step; }, e: function e(_e2) { didErr = true; err = _e2; }, f: function f() { try { if (!normalCompletion && it["return"] != null) it["return"](); } finally { if (didErr) throw err; } } }; }
+
+function _unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o === "string") return _arrayLikeToArray(o, minLen); var n = Object.prototype.toString.call(o).slice(8, -1); if (n === "Object" && o.constructor) n = o.constructor.name; if (n === "Map" || n === "Set") return Array.from(o); if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen); }
+
+function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) { arr2[i] = arr[i]; } return arr2; }
+
+
+
 
 
 
@@ -23118,14 +23128,33 @@ __webpack_require__.r(__webpack_exports__);
     var form = (0,_inertiajs_inertia_vue3__WEBPACK_IMPORTED_MODULE_5__.useForm)({
       password: ""
     });
-    var loading = (0,_vue_reactivity__WEBPACK_IMPORTED_MODULE_6__.ref)(false);
+    var loading = (0,_vue_reactivity__WEBPACK_IMPORTED_MODULE_8__.ref)(false);
 
     function submit() {
       loading.value = true;
 
-      if (!form.password) {//
+      if (!form.password) {
+        (0,_functions_Message__WEBPACK_IMPORTED_MODULE_6__.errorMessage)(_Consts_Message__WEBPACK_IMPORTED_MODULE_7__.requiredMessage);
       } else {
-        form.post(route("password.confirml"), {
+        form.post(route("password.confirm"), {
+          onSuccess: function onSuccess() {
+            return (0,_functions_Message__WEBPACK_IMPORTED_MODULE_6__.successMessage)('تایید شد');
+          },
+          onError: function onError(errors) {
+            var _iterator = _createForOfIteratorHelper(errors),
+                _step;
+
+            try {
+              for (_iterator.s(); !(_step = _iterator.n()).done;) {
+                var error = _step.value;
+                (0,_functions_Message__WEBPACK_IMPORTED_MODULE_6__.errorMessage)(error);
+              }
+            } catch (err) {
+              _iterator.e(err);
+            } finally {
+              _iterator.f();
+            }
+          },
           onFinish: function onFinish() {
             return form.reset();
           }
@@ -23148,7 +23177,10 @@ __webpack_require__.r(__webpack_exports__);
       MyInput: _component_Form_Input_vue__WEBPACK_IMPORTED_MODULE_4__["default"],
       Head: _inertiajs_inertia_vue3__WEBPACK_IMPORTED_MODULE_5__.Head,
       useForm: _inertiajs_inertia_vue3__WEBPACK_IMPORTED_MODULE_5__.useForm,
-      ref: _vue_reactivity__WEBPACK_IMPORTED_MODULE_6__.ref
+      ref: _vue_reactivity__WEBPACK_IMPORTED_MODULE_8__.ref,
+      errorMessage: _functions_Message__WEBPACK_IMPORTED_MODULE_6__.errorMessage,
+      successMessage: _functions_Message__WEBPACK_IMPORTED_MODULE_6__.successMessage,
+      requiredMessage: _Consts_Message__WEBPACK_IMPORTED_MODULE_7__.requiredMessage
     };
     Object.defineProperty(__returned__, '__isScriptSetup', {
       enumerable: false,
@@ -23178,7 +23210,17 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _component_Form_Input_vue__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @/component/Form/Input.vue */ "./resources/js/component/Form/Input.vue");
 /* harmony import */ var _functions_validations__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! @/functions/validations */ "./resources/js/functions/validations.js");
 /* harmony import */ var _inertiajs_inertia_vue3__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! @inertiajs/inertia-vue3 */ "./node_modules/@inertiajs/inertia-vue3/dist/index.js");
-/* harmony import */ var _vue_reactivity__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! @vue/reactivity */ "./node_modules/@vue/reactivity/dist/reactivity.esm-bundler.js");
+/* harmony import */ var _vue_reactivity__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! @vue/reactivity */ "./node_modules/@vue/reactivity/dist/reactivity.esm-bundler.js");
+/* harmony import */ var _functions_Message__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! @/functions/Message */ "./resources/js/functions/Message.js");
+/* harmony import */ var _Consts_Message__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! @/Consts/Message */ "./resources/js/Consts/Message.js");
+function _createForOfIteratorHelper(o, allowArrayLike) { var it = typeof Symbol !== "undefined" && o[Symbol.iterator] || o["@@iterator"]; if (!it) { if (Array.isArray(o) || (it = _unsupportedIterableToArray(o)) || allowArrayLike && o && typeof o.length === "number") { if (it) o = it; var i = 0; var F = function F() {}; return { s: F, n: function n() { if (i >= o.length) return { done: true }; return { done: false, value: o[i++] }; }, e: function e(_e) { throw _e; }, f: F }; } throw new TypeError("Invalid attempt to iterate non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); } var normalCompletion = true, didErr = false, err; return { s: function s() { it = it.call(o); }, n: function n() { var step = it.next(); normalCompletion = step.done; return step; }, e: function e(_e2) { didErr = true; err = _e2; }, f: function f() { try { if (!normalCompletion && it["return"] != null) it["return"](); } finally { if (didErr) throw err; } } }; }
+
+function _unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o === "string") return _arrayLikeToArray(o, minLen); var n = Object.prototype.toString.call(o).slice(8, -1); if (n === "Object" && o.constructor) n = o.constructor.name; if (n === "Map" || n === "Set") return Array.from(o); if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen); }
+
+function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) { arr2[i] = arr[i]; } return arr2; }
+
+
+
 
 
 
@@ -23194,14 +23236,36 @@ __webpack_require__.r(__webpack_exports__);
     var form = (0,_inertiajs_inertia_vue3__WEBPACK_IMPORTED_MODULE_6__.useForm)({
       email: ""
     });
-    var loading = (0,_vue_reactivity__WEBPACK_IMPORTED_MODULE_7__.ref)(false);
+    var loading = (0,_vue_reactivity__WEBPACK_IMPORTED_MODULE_9__.ref)(false);
 
     function submit() {
       loading.value = true;
 
-      if (!form.email || !(0,_functions_validations__WEBPACK_IMPORTED_MODULE_5__.validEmail)(form.email)) {//
+      if (!form.email) {
+        (0,_functions_Message__WEBPACK_IMPORTED_MODULE_7__.errorMessage)(_Consts_Message__WEBPACK_IMPORTED_MODULE_8__.requiredMessage);
+      } else if (!(0,_functions_validations__WEBPACK_IMPORTED_MODULE_5__.validEmail)(form.email)) {
+        (0,_functions_Message__WEBPACK_IMPORTED_MODULE_7__.errorMessage)();
       } else {
-        form.post(route("password.email"));
+        form.post(route("password.email"), {
+          onSuccess: function onSuccess() {
+            return (0,_functions_Message__WEBPACK_IMPORTED_MODULE_7__.successMessage)('ایمیل با موفقیت ارسال شد');
+          },
+          onError: function onError(errors) {
+            var _iterator = _createForOfIteratorHelper(errors),
+                _step;
+
+            try {
+              for (_iterator.s(); !(_step = _iterator.n()).done;) {
+                var error = _step.value;
+                (0,_functions_Message__WEBPACK_IMPORTED_MODULE_7__.errorMessage)(error);
+              }
+            } catch (err) {
+              _iterator.e(err);
+            } finally {
+              _iterator.f();
+            }
+          }
+        });
       }
 
       setTimeout(function () {
@@ -23221,7 +23285,10 @@ __webpack_require__.r(__webpack_exports__);
       validEmail: _functions_validations__WEBPACK_IMPORTED_MODULE_5__.validEmail,
       Head: _inertiajs_inertia_vue3__WEBPACK_IMPORTED_MODULE_6__.Head,
       useForm: _inertiajs_inertia_vue3__WEBPACK_IMPORTED_MODULE_6__.useForm,
-      ref: _vue_reactivity__WEBPACK_IMPORTED_MODULE_7__.ref
+      ref: _vue_reactivity__WEBPACK_IMPORTED_MODULE_9__.ref,
+      errorMessage: _functions_Message__WEBPACK_IMPORTED_MODULE_7__.errorMessage,
+      successMessage: _functions_Message__WEBPACK_IMPORTED_MODULE_7__.successMessage,
+      requiredMessage: _Consts_Message__WEBPACK_IMPORTED_MODULE_8__.requiredMessage
     };
     Object.defineProperty(__returned__, '__isScriptSetup', {
       enumerable: false,
@@ -23253,11 +23320,21 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _functions_validations__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! @/functions/validations */ "./resources/js/functions/validations.js");
 /* harmony import */ var _inertiajs_inertia_vue3__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! @inertiajs/inertia-vue3 */ "./node_modules/@inertiajs/inertia-vue3/dist/index.js");
 /* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.esm-bundler.js");
+/* harmony import */ var _functions_Message__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! @/functions/Message */ "./resources/js/functions/Message.js");
+/* harmony import */ var _Consts_Message__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! @/Consts/Message */ "./resources/js/Consts/Message.js");
+function _createForOfIteratorHelper(o, allowArrayLike) { var it = typeof Symbol !== "undefined" && o[Symbol.iterator] || o["@@iterator"]; if (!it) { if (Array.isArray(o) || (it = _unsupportedIterableToArray(o)) || allowArrayLike && o && typeof o.length === "number") { if (it) o = it; var i = 0; var F = function F() {}; return { s: F, n: function n() { if (i >= o.length) return { done: true }; return { done: false, value: o[i++] }; }, e: function e(_e) { throw _e; }, f: F }; } throw new TypeError("Invalid attempt to iterate non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); } var normalCompletion = true, didErr = false, err; return { s: function s() { it = it.call(o); }, n: function n() { var step = it.next(); normalCompletion = step.done; return step; }, e: function e(_e2) { didErr = true; err = _e2; }, f: function f() { try { if (!normalCompletion && it["return"] != null) it["return"](); } finally { if (didErr) throw err; } } }; }
+
+function _unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o === "string") return _arrayLikeToArray(o, minLen); var n = Object.prototype.toString.call(o).slice(8, -1); if (n === "Object" && o.constructor) n = o.constructor.name; if (n === "Map" || n === "Set") return Array.from(o); if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen); }
+
+function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) { arr2[i] = arr[i]; } return arr2; }
+
 function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); enumerableOnly && (symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; })), keys.push.apply(keys, symbols); } return keys; }
 
 function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = null != arguments[i] ? arguments[i] : {}; i % 2 ? ownKeys(Object(source), !0).forEach(function (key) { _defineProperty(target, key, source[key]); }) : Object.getOwnPropertyDescriptors ? Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)) : ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } return target; }
 
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
+
 
 
 
@@ -23282,14 +23359,34 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
     function submit() {
       loading.value = true;
 
-      if (!form.email || !form.password) {//
-      } else if (form.email && !(0,_functions_validations__WEBPACK_IMPORTED_MODULE_6__.validEmail)(form.email)) {//
+      if (!form.email || !form.password) {
+        (0,_functions_Message__WEBPACK_IMPORTED_MODULE_9__.errorMessage)(_Consts_Message__WEBPACK_IMPORTED_MODULE_10__.requiredMessage);
+      } else if (!(0,_functions_validations__WEBPACK_IMPORTED_MODULE_6__.validEmail)(form.email)) {
+        (0,_functions_Message__WEBPACK_IMPORTED_MODULE_9__.errorMessage)(_Consts_Message__WEBPACK_IMPORTED_MODULE_10__.emailMessage);
       } else {
         form.transform(function (data) {
           return _objectSpread(_objectSpread({}, data), {}, {
             remember: form.remember ? "on" : ""
           });
         }).post(route("login"), {
+          onSuccess: function onSuccess() {
+            return (0,_functions_Message__WEBPACK_IMPORTED_MODULE_9__.successMessage)('با موفقیت وارد شدید');
+          },
+          onError: function onError(errors) {
+            var _iterator = _createForOfIteratorHelper(errors),
+                _step;
+
+            try {
+              for (_iterator.s(); !(_step = _iterator.n()).done;) {
+                var error = _step.value;
+                (0,_functions_Message__WEBPACK_IMPORTED_MODULE_9__.errorMessage)(error);
+              }
+            } catch (err) {
+              _iterator.e(err);
+            } finally {
+              _iterator.f();
+            }
+          },
           onFinish: function onFinish() {
             return form.reset("password");
           }
@@ -23314,7 +23411,11 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       validEmail: _functions_validations__WEBPACK_IMPORTED_MODULE_6__.validEmail,
       Head: _inertiajs_inertia_vue3__WEBPACK_IMPORTED_MODULE_7__.Head,
       useForm: _inertiajs_inertia_vue3__WEBPACK_IMPORTED_MODULE_7__.useForm,
-      ref: vue__WEBPACK_IMPORTED_MODULE_8__.ref
+      ref: vue__WEBPACK_IMPORTED_MODULE_8__.ref,
+      errorMessage: _functions_Message__WEBPACK_IMPORTED_MODULE_9__.errorMessage,
+      successMessage: _functions_Message__WEBPACK_IMPORTED_MODULE_9__.successMessage,
+      emailMessage: _Consts_Message__WEBPACK_IMPORTED_MODULE_10__.emailMessage,
+      requiredMessage: _Consts_Message__WEBPACK_IMPORTED_MODULE_10__.requiredMessage
     };
     Object.defineProperty(__returned__, '__isScriptSetup', {
       enumerable: false,
@@ -23344,7 +23445,17 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _component_Form_Label_vue__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @/component/Form/Label.vue */ "./resources/js/component/Form/Label.vue");
 /* harmony import */ var _functions_validations__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! @/functions/validations */ "./resources/js/functions/validations.js");
 /* harmony import */ var _inertiajs_inertia_vue3__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! @inertiajs/inertia-vue3 */ "./node_modules/@inertiajs/inertia-vue3/dist/index.js");
-/* harmony import */ var _vue_reactivity__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! @vue/reactivity */ "./node_modules/@vue/reactivity/dist/reactivity.esm-bundler.js");
+/* harmony import */ var _vue_reactivity__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! @vue/reactivity */ "./node_modules/@vue/reactivity/dist/reactivity.esm-bundler.js");
+/* harmony import */ var _functions_Message__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! @/functions/Message */ "./resources/js/functions/Message.js");
+/* harmony import */ var _Consts_Message__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! @/Consts/Message */ "./resources/js/Consts/Message.js");
+function _createForOfIteratorHelper(o, allowArrayLike) { var it = typeof Symbol !== "undefined" && o[Symbol.iterator] || o["@@iterator"]; if (!it) { if (Array.isArray(o) || (it = _unsupportedIterableToArray(o)) || allowArrayLike && o && typeof o.length === "number") { if (it) o = it; var i = 0; var F = function F() {}; return { s: F, n: function n() { if (i >= o.length) return { done: true }; return { done: false, value: o[i++] }; }, e: function e(_e) { throw _e; }, f: F }; } throw new TypeError("Invalid attempt to iterate non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); } var normalCompletion = true, didErr = false, err; return { s: function s() { it = it.call(o); }, n: function n() { var step = it.next(); normalCompletion = step.done; return step; }, e: function e(_e2) { didErr = true; err = _e2; }, f: function f() { try { if (!normalCompletion && it["return"] != null) it["return"](); } finally { if (didErr) throw err; } } }; }
+
+function _unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o === "string") return _arrayLikeToArray(o, minLen); var n = Object.prototype.toString.call(o).slice(8, -1); if (n === "Object" && o.constructor) n = o.constructor.name; if (n === "Map" || n === "Set") return Array.from(o); if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen); }
+
+function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) { arr2[i] = arr[i]; } return arr2; }
+
+
+
 
 
 
@@ -23364,17 +23475,43 @@ __webpack_require__.r(__webpack_exports__);
       password_confirmation: "",
       terms: false
     });
-    var loading = (0,_vue_reactivity__WEBPACK_IMPORTED_MODULE_7__.ref)(false);
+    var loading = (0,_vue_reactivity__WEBPACK_IMPORTED_MODULE_9__.ref)(false);
 
     function submit() {
       loading.value = true;
 
-      if (!form.email || !form.password || !form.name || !form.password || !form.password_confirmation) {//
-      } else if (form.email && !(0,_functions_validations__WEBPACK_IMPORTED_MODULE_5__.validEmail)(form.email)) {//
-      } else if (!(0,_functions_validations__WEBPACK_IMPORTED_MODULE_5__.passwordConfirmation)(form.password, form.password_confirmation)) {//
-      } else if (!(0,_functions_validations__WEBPACK_IMPORTED_MODULE_5__.password)(form.password)) {//password(form.password) return errors
+      if (!form.email || !form.password || !form.name || !form.password || !form.password_confirmation) {
+        (0,_functions_Message__WEBPACK_IMPORTED_MODULE_7__.errorMessage)(_Consts_Message__WEBPACK_IMPORTED_MODULE_8__.requiredMessage);
+      } else if (!(0,_functions_validations__WEBPACK_IMPORTED_MODULE_5__.validEmail)(form.email)) {
+        (0,_functions_Message__WEBPACK_IMPORTED_MODULE_7__.errorMessage)(_Consts_Message__WEBPACK_IMPORTED_MODULE_8__.emailMessage);
+      } else if (!(0,_functions_validations__WEBPACK_IMPORTED_MODULE_5__.passwordConfirmation)(form.password, form.password_confirmation)) {
+        (0,_functions_Message__WEBPACK_IMPORTED_MODULE_7__.errorMessage)(_Consts_Message__WEBPACK_IMPORTED_MODULE_8__.confirmPasswordMessage);
+      } else if (!(0,_functions_validations__WEBPACK_IMPORTED_MODULE_5__.password)(form.password)) {
+        var errors = (0,_functions_validations__WEBPACK_IMPORTED_MODULE_5__.password)(form.password);
+
+        for (var key in errors) {
+          (0,_functions_Message__WEBPACK_IMPORTED_MODULE_7__.errorMessage)(errors[key]);
+        }
       } else {
         form.post(route("register"), {
+          onSuccess: function onSuccess() {
+            return (0,_functions_Message__WEBPACK_IMPORTED_MODULE_7__.successMessage)('با موفقیت ثبت نام شدید');
+          },
+          onError: function onError(errors) {
+            var _iterator = _createForOfIteratorHelper(errors),
+                _step;
+
+            try {
+              for (_iterator.s(); !(_step = _iterator.n()).done;) {
+                var error = _step.value;
+                (0,_functions_Message__WEBPACK_IMPORTED_MODULE_7__.errorMessage)(error);
+              }
+            } catch (err) {
+              _iterator.e(err);
+            } finally {
+              _iterator.f();
+            }
+          },
           onFinish: function onFinish() {
             return form.reset("password", "password_confirmation");
           }
@@ -23398,9 +23535,15 @@ __webpack_require__.r(__webpack_exports__);
       validEmail: _functions_validations__WEBPACK_IMPORTED_MODULE_5__.validEmail,
       passwordConfirmation: _functions_validations__WEBPACK_IMPORTED_MODULE_5__.passwordConfirmation,
       password: _functions_validations__WEBPACK_IMPORTED_MODULE_5__.password,
+      validationsPassword: _functions_validations__WEBPACK_IMPORTED_MODULE_5__.password,
       Head: _inertiajs_inertia_vue3__WEBPACK_IMPORTED_MODULE_6__.Head,
       useForm: _inertiajs_inertia_vue3__WEBPACK_IMPORTED_MODULE_6__.useForm,
-      ref: _vue_reactivity__WEBPACK_IMPORTED_MODULE_7__.ref
+      ref: _vue_reactivity__WEBPACK_IMPORTED_MODULE_9__.ref,
+      errorMessage: _functions_Message__WEBPACK_IMPORTED_MODULE_7__.errorMessage,
+      successMessage: _functions_Message__WEBPACK_IMPORTED_MODULE_7__.successMessage,
+      confirmPasswordMessage: _Consts_Message__WEBPACK_IMPORTED_MODULE_8__.confirmPasswordMessage,
+      emailMessage: _Consts_Message__WEBPACK_IMPORTED_MODULE_8__.emailMessage,
+      requiredMessage: _Consts_Message__WEBPACK_IMPORTED_MODULE_8__.requiredMessage
     };
     Object.defineProperty(__returned__, '__isScriptSetup', {
       enumerable: false,
@@ -23430,6 +23573,16 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _functions_validations__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @/functions/validations */ "./resources/js/functions/validations.js");
 /* harmony import */ var _inertiajs_inertia_vue3__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! @inertiajs/inertia-vue3 */ "./node_modules/@inertiajs/inertia-vue3/dist/index.js");
 /* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.esm-bundler.js");
+/* harmony import */ var _functions_Message__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! @/functions/Message */ "./resources/js/functions/Message.js");
+/* harmony import */ var _Consts_Message__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! @/Consts/Message */ "./resources/js/Consts/Message.js");
+function _createForOfIteratorHelper(o, allowArrayLike) { var it = typeof Symbol !== "undefined" && o[Symbol.iterator] || o["@@iterator"]; if (!it) { if (Array.isArray(o) || (it = _unsupportedIterableToArray(o)) || allowArrayLike && o && typeof o.length === "number") { if (it) o = it; var i = 0; var F = function F() {}; return { s: F, n: function n() { if (i >= o.length) return { done: true }; return { done: false, value: o[i++] }; }, e: function e(_e) { throw _e; }, f: F }; } throw new TypeError("Invalid attempt to iterate non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); } var normalCompletion = true, didErr = false, err; return { s: function s() { it = it.call(o); }, n: function n() { var step = it.next(); normalCompletion = step.done; return step; }, e: function e(_e2) { didErr = true; err = _e2; }, f: function f() { try { if (!normalCompletion && it["return"] != null) it["return"](); } finally { if (didErr) throw err; } } }; }
+
+function _unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o === "string") return _arrayLikeToArray(o, minLen); var n = Object.prototype.toString.call(o).slice(8, -1); if (n === "Object" && o.constructor) n = o.constructor.name; if (n === "Map" || n === "Set") return Array.from(o); if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen); }
+
+function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) { arr2[i] = arr[i]; } return arr2; }
+
+
+
 
 
 
@@ -23457,12 +23610,38 @@ __webpack_require__.r(__webpack_exports__);
     function submit() {
       loading.value = true;
 
-      if (!form.email || !form.password || !form.password_confirmation) {//
-      } else if (form.email && !(0,_functions_validations__WEBPACK_IMPORTED_MODULE_4__.validEmail)(form.email)) {//
-      } else if (!(0,_functions_validations__WEBPACK_IMPORTED_MODULE_4__.passwordConfirmation)(form.password, form.password_confirmation)) {//
-      } else if (!(0,_functions_validations__WEBPACK_IMPORTED_MODULE_4__.password)(form.password)) {//password(form.password) return errors
+      if (!form.email || !form.password || !form.password_confirmation) {
+        (0,_functions_Message__WEBPACK_IMPORTED_MODULE_7__.errorMessage)(_Consts_Message__WEBPACK_IMPORTED_MODULE_8__.requiredMessage);
+      } else if (!(0,_functions_validations__WEBPACK_IMPORTED_MODULE_4__.validEmail)(form.email)) {
+        (0,_functions_Message__WEBPACK_IMPORTED_MODULE_7__.errorMessage)(_Consts_Message__WEBPACK_IMPORTED_MODULE_8__.emailMessage);
+      } else if (!(0,_functions_validations__WEBPACK_IMPORTED_MODULE_4__.passwordConfirmation)(form.password, form.password_confirmation)) {
+        (0,_functions_Message__WEBPACK_IMPORTED_MODULE_7__.errorMessage)(_Consts_Message__WEBPACK_IMPORTED_MODULE_8__.confirmPasswordMessage);
+      } else if (!(0,_functions_validations__WEBPACK_IMPORTED_MODULE_4__.password)(form.password)) {
+        var errors = (0,_functions_validations__WEBPACK_IMPORTED_MODULE_4__.password)(form.password);
+
+        for (var key in errors) {
+          (0,_functions_Message__WEBPACK_IMPORTED_MODULE_7__.errorMessage)(errors[key]);
+        }
       } else {
         form.post(route("password.update"), {
+          onSuccess: function onSuccess() {
+            return (0,_functions_Message__WEBPACK_IMPORTED_MODULE_7__.successMessage)('رمز با موفقیت تغییر کرد');
+          },
+          onError: function onError(errors) {
+            var _iterator = _createForOfIteratorHelper(errors),
+                _step;
+
+            try {
+              for (_iterator.s(); !(_step = _iterator.n()).done;) {
+                var error = _step.value;
+                (0,_functions_Message__WEBPACK_IMPORTED_MODULE_7__.errorMessage)(error);
+              }
+            } catch (err) {
+              _iterator.e(err);
+            } finally {
+              _iterator.f();
+            }
+          },
           onFinish: function onFinish() {
             return form.reset("password", "password_confirmation");
           }
@@ -23486,9 +23665,15 @@ __webpack_require__.r(__webpack_exports__);
       validEmail: _functions_validations__WEBPACK_IMPORTED_MODULE_4__.validEmail,
       passwordConfirmation: _functions_validations__WEBPACK_IMPORTED_MODULE_4__.passwordConfirmation,
       password: _functions_validations__WEBPACK_IMPORTED_MODULE_4__.password,
+      validationsPassword: _functions_validations__WEBPACK_IMPORTED_MODULE_4__.password,
       Head: _inertiajs_inertia_vue3__WEBPACK_IMPORTED_MODULE_5__.Head,
       useForm: _inertiajs_inertia_vue3__WEBPACK_IMPORTED_MODULE_5__.useForm,
-      ref: vue__WEBPACK_IMPORTED_MODULE_6__.ref
+      ref: vue__WEBPACK_IMPORTED_MODULE_6__.ref,
+      errorMessage: _functions_Message__WEBPACK_IMPORTED_MODULE_7__.errorMessage,
+      successMessage: _functions_Message__WEBPACK_IMPORTED_MODULE_7__.successMessage,
+      confirmPasswordMessage: _Consts_Message__WEBPACK_IMPORTED_MODULE_8__.confirmPasswordMessage,
+      emailMessage: _Consts_Message__WEBPACK_IMPORTED_MODULE_8__.emailMessage,
+      requiredMessage: _Consts_Message__WEBPACK_IMPORTED_MODULE_8__.requiredMessage
     };
     Object.defineProperty(__returned__, '__isScriptSetup', {
       enumerable: false,
@@ -23516,7 +23701,15 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _component_Auth_Text_vue__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @/component/Auth/Text.vue */ "./resources/js/component/Auth/Text.vue");
 /* harmony import */ var _component_Form_Button_vue__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @/component/Form/Button.vue */ "./resources/js/component/Form/Button.vue");
 /* harmony import */ var _inertiajs_inertia_vue3__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @inertiajs/inertia-vue3 */ "./node_modules/@inertiajs/inertia-vue3/dist/index.js");
-/* harmony import */ var _vue_reactivity__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! @vue/reactivity */ "./node_modules/@vue/reactivity/dist/reactivity.esm-bundler.js");
+/* harmony import */ var _vue_reactivity__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! @vue/reactivity */ "./node_modules/@vue/reactivity/dist/reactivity.esm-bundler.js");
+/* harmony import */ var _functions_Message__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! @/functions/Message */ "./resources/js/functions/Message.js");
+function _createForOfIteratorHelper(o, allowArrayLike) { var it = typeof Symbol !== "undefined" && o[Symbol.iterator] || o["@@iterator"]; if (!it) { if (Array.isArray(o) || (it = _unsupportedIterableToArray(o)) || allowArrayLike && o && typeof o.length === "number") { if (it) o = it; var i = 0; var F = function F() {}; return { s: F, n: function n() { if (i >= o.length) return { done: true }; return { done: false, value: o[i++] }; }, e: function e(_e) { throw _e; }, f: F }; } throw new TypeError("Invalid attempt to iterate non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); } var normalCompletion = true, didErr = false, err; return { s: function s() { it = it.call(o); }, n: function n() { var step = it.next(); normalCompletion = step.done; return step; }, e: function e(_e2) { didErr = true; err = _e2; }, f: function f() { try { if (!normalCompletion && it["return"] != null) it["return"](); } finally { if (didErr) throw err; } } }; }
+
+function _unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o === "string") return _arrayLikeToArray(o, minLen); var n = Object.prototype.toString.call(o).slice(8, -1); if (n === "Object" && o.constructor) n = o.constructor.name; if (n === "Map" || n === "Set") return Array.from(o); if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen); }
+
+function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) { arr2[i] = arr[i]; } return arr2; }
+
+
 
 
 
@@ -23527,12 +23720,31 @@ __webpack_require__.r(__webpack_exports__);
   setup: function setup(__props, _ref) {
     var expose = _ref.expose;
     expose();
-    var form = (0,_inertiajs_inertia_vue3__WEBPACK_IMPORTED_MODULE_4__.useForm)();
-    var loading = (0,_vue_reactivity__WEBPACK_IMPORTED_MODULE_5__.ref)(false);
+    var form = (0,_inertiajs_inertia_vue3__WEBPACK_IMPORTED_MODULE_4__.useForm)({});
+    var loading = (0,_vue_reactivity__WEBPACK_IMPORTED_MODULE_6__.ref)(false);
 
     function submit() {
       loading.value = true;
-      form.post(route("verification.send"));
+      form.post(route("verification.send"), {
+        onError: function onError(errors) {
+          var _iterator = _createForOfIteratorHelper(errors),
+              _step;
+
+          try {
+            for (_iterator.s(); !(_step = _iterator.n()).done;) {
+              var error = _step.value;
+              (0,_functions_Message__WEBPACK_IMPORTED_MODULE_5__.errorMessage)(error);
+            }
+          } catch (err) {
+            _iterator.e(err);
+          } finally {
+            _iterator.f();
+          }
+        },
+        onSuccess: function onSuccess() {
+          return (0,_functions_Message__WEBPACK_IMPORTED_MODULE_5__.successMessage)('ایمیل برای شما ارسال شد');
+        }
+      });
       setTimeout(function () {
         loading.value = false;
       }, 200);
@@ -23548,7 +23760,9 @@ __webpack_require__.r(__webpack_exports__);
       MyButton: _component_Form_Button_vue__WEBPACK_IMPORTED_MODULE_3__["default"],
       Head: _inertiajs_inertia_vue3__WEBPACK_IMPORTED_MODULE_4__.Head,
       useForm: _inertiajs_inertia_vue3__WEBPACK_IMPORTED_MODULE_4__.useForm,
-      ref: _vue_reactivity__WEBPACK_IMPORTED_MODULE_5__.ref
+      ref: _vue_reactivity__WEBPACK_IMPORTED_MODULE_6__.ref,
+      errorMessage: _functions_Message__WEBPACK_IMPORTED_MODULE_5__.errorMessage,
+      successMessage: _functions_Message__WEBPACK_IMPORTED_MODULE_5__.successMessage
     };
     Object.defineProperty(__returned__, '__isScriptSetup', {
       enumerable: false,
@@ -23738,13 +23952,21 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var vue3_persian_datetime_picker__WEBPACK_IMPORTED_MODULE_7___default = /*#__PURE__*/__webpack_require__.n(vue3_persian_datetime_picker__WEBPACK_IMPORTED_MODULE_7__);
 /* harmony import */ var _Questions_vue__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./Questions.vue */ "./resources/js/Pages/Dashboard/Component/CreateQuiz/Questions.vue");
 /* harmony import */ var _functions_validations__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! @/functions/validations */ "./resources/js/functions/validations.js");
-/* harmony import */ var _Consts_MyConsts__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! @/Consts/MyConsts */ "./resources/js/Consts/MyConsts.js");
-/* harmony import */ var pinia__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__(/*! pinia */ "./node_modules/pinia/dist/pinia.esm-browser.js");
-/* harmony import */ var _store_CreatQuiz__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! @/store/CreatQuiz */ "./resources/js/store/CreatQuiz.js");
-/* harmony import */ var _inertiajs_inertia_vue3__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! @inertiajs/inertia-vue3 */ "./node_modules/@inertiajs/inertia-vue3/dist/index.js");
-/* harmony import */ var _vue_reactivity__WEBPACK_IMPORTED_MODULE_15__ = __webpack_require__(/*! @vue/reactivity */ "./node_modules/@vue/reactivity/dist/reactivity.esm-bundler.js");
-/* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.esm-bundler.js");
-/* harmony import */ var _vue_runtime_core__WEBPACK_IMPORTED_MODULE_16__ = __webpack_require__(/*! @vue/runtime-core */ "./node_modules/@vue/runtime-core/dist/runtime-core.esm-bundler.js");
+/* harmony import */ var _Consts_Message__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! @/Consts/Message */ "./resources/js/Consts/Message.js");
+/* harmony import */ var _Consts_property__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! @/Consts/property */ "./resources/js/Consts/property.js");
+/* harmony import */ var pinia__WEBPACK_IMPORTED_MODULE_16__ = __webpack_require__(/*! pinia */ "./node_modules/pinia/dist/pinia.esm-browser.js");
+/* harmony import */ var _store_CreatQuiz__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! @/store/CreatQuiz */ "./resources/js/store/CreatQuiz.js");
+/* harmony import */ var _inertiajs_inertia_vue3__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! @inertiajs/inertia-vue3 */ "./node_modules/@inertiajs/inertia-vue3/dist/index.js");
+/* harmony import */ var _vue_reactivity__WEBPACK_IMPORTED_MODULE_17__ = __webpack_require__(/*! @vue/reactivity */ "./node_modules/@vue/reactivity/dist/reactivity.esm-bundler.js");
+/* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.esm-bundler.js");
+/* harmony import */ var _vue_runtime_core__WEBPACK_IMPORTED_MODULE_18__ = __webpack_require__(/*! @vue/runtime-core */ "./node_modules/@vue/runtime-core/dist/runtime-core.esm-bundler.js");
+/* harmony import */ var _functions_Message__WEBPACK_IMPORTED_MODULE_15__ = __webpack_require__(/*! @/functions/Message */ "./resources/js/functions/Message.js");
+function _createForOfIteratorHelper(o, allowArrayLike) { var it = typeof Symbol !== "undefined" && o[Symbol.iterator] || o["@@iterator"]; if (!it) { if (Array.isArray(o) || (it = _unsupportedIterableToArray(o)) || allowArrayLike && o && typeof o.length === "number") { if (it) o = it; var i = 0; var F = function F() {}; return { s: F, n: function n() { if (i >= o.length) return { done: true }; return { done: false, value: o[i++] }; }, e: function e(_e) { throw _e; }, f: F }; } throw new TypeError("Invalid attempt to iterate non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); } var normalCompletion = true, didErr = false, err; return { s: function s() { it = it.call(o); }, n: function n() { var step = it.next(); normalCompletion = step.done; return step; }, e: function e(_e2) { didErr = true; err = _e2; }, f: function f() { try { if (!normalCompletion && it["return"] != null) it["return"](); } finally { if (didErr) throw err; } } }; }
+
+function _unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o === "string") return _arrayLikeToArray(o, minLen); var n = Object.prototype.toString.call(o).slice(8, -1); if (n === "Object" && o.constructor) n = o.constructor.name; if (n === "Map" || n === "Set") return Array.from(o); if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen); }
+
+function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) { arr2[i] = arr[i]; } return arr2; }
+
 
  // Form component
 
@@ -23760,12 +23982,14 @@ __webpack_require__.r(__webpack_exports__);
 
  // Const
 
+
  // Pinia
 
 
  // Inertia functions
 
  // Vue functions
+
 
 
 
@@ -23777,9 +24001,9 @@ __webpack_require__.r(__webpack_exports__);
     var expose = _ref.expose;
     expose(); // Icons
 
-    var CreateQuiz = (0,_store_CreatQuiz__WEBPACK_IMPORTED_MODULE_11__.useCreatQuiz)(); // create pinia states
+    var CreateQuiz = (0,_store_CreatQuiz__WEBPACK_IMPORTED_MODULE_12__.useCreatQuiz)(); // create pinia states
 
-    var _storeToRefs = (0,pinia__WEBPACK_IMPORTED_MODULE_14__.storeToRefs)(CreateQuiz),
+    var _storeToRefs = (0,pinia__WEBPACK_IMPORTED_MODULE_16__.storeToRefs)(CreateQuiz),
         content = _storeToRefs.content,
         questions = _storeToRefs.questions,
         scoreQuiz = _storeToRefs.scoreQuiz; // create pinia actions
@@ -23790,7 +24014,7 @@ __webpack_require__.r(__webpack_exports__);
     /**************** Properties ****************/
     //Create form object
 
-    var form = (0,_inertiajs_inertia_vue3__WEBPACK_IMPORTED_MODULE_12__.useForm)({
+    var form = (0,_inertiajs_inertia_vue3__WEBPACK_IMPORTED_MODULE_13__.useForm)({
       name: null,
       start: null,
       end: null,
@@ -23801,43 +24025,54 @@ __webpack_require__.r(__webpack_exports__);
       questions: {}
     }); // Loading
 
-    var loading = (0,_vue_reactivity__WEBPACK_IMPORTED_MODULE_15__.ref)(false);
+    var loading = (0,_vue_reactivity__WEBPACK_IMPORTED_MODULE_17__.ref)(false);
     /**************** Functions ****************/
     // watch
 
-    (0,_vue_runtime_core__WEBPACK_IMPORTED_MODULE_16__.watch)(scoreQuiz, function (value) {
+    (0,_vue_runtime_core__WEBPACK_IMPORTED_MODULE_18__.watch)(scoreQuiz, function (value) {
       return form.score = value;
     });
-    (0,_vue_runtime_core__WEBPACK_IMPORTED_MODULE_16__.watch)(function () {
+    (0,_vue_runtime_core__WEBPACK_IMPORTED_MODULE_18__.watch)(function () {
       return form.type;
     }, function () {
       return form.score = null;
     }); // onUnmounted
 
-    (0,vue__WEBPACK_IMPORTED_MODULE_13__.onUnmounted)(function () {
+    (0,vue__WEBPACK_IMPORTED_MODULE_14__.onUnmounted)(function () {
       return clean();
     }); // Submit functions
 
     function submit() {
       loading.value = true;
-      form.questions = questions.value;
 
       if (!(0,_functions_validations__WEBPACK_IMPORTED_MODULE_9__.required)()) {
-        console.error('required');
+        (0,_functions_Message__WEBPACK_IMPORTED_MODULE_15__.errorMessage)(_Consts_Message__WEBPACK_IMPORTED_MODULE_10__.requiredMessage);
       } else if (!(0,_functions_validations__WEBPACK_IMPORTED_MODULE_9__.requiredAns)(form.questions)) {
-        console.error('requiredAns');
-      } else if (isNaN(form.score) || form.score <= 0) {
-        console.error(form.score);
-      } else if (form.type === 'test' && (isNaN(form.scoreN) || !Number.isInteger(form.scoreN))) {
-        console.error(form.scoreN);
+        (0,_functions_Message__WEBPACK_IMPORTED_MODULE_15__.errorMessage)(_Consts_Message__WEBPACK_IMPORTED_MODULE_10__.requiredAnsMessage);
+      } else if ((0,_functions_validations__WEBPACK_IMPORTED_MODULE_9__.score)(form.score)) {
+        (0,_functions_Message__WEBPACK_IMPORTED_MODULE_15__.errorMessage)(_Consts_Message__WEBPACK_IMPORTED_MODULE_10__.scoreMessage);
+      } else if ((0,_functions_validations__WEBPACK_IMPORTED_MODULE_9__.scoreN)(form.scoreN, form.type)) {
+        (0,_functions_Message__WEBPACK_IMPORTED_MODULE_15__.errorMessage)(_Consts_Message__WEBPACK_IMPORTED_MODULE_10__.scoreNMessage);
       } else {
-        console.log(form);
+        form.questions = questions.value;
         form.post(route('store.quiz'), {
           onSuccess: function onSuccess() {
-            return console.log('created');
+            return (0,_functions_Message__WEBPACK_IMPORTED_MODULE_15__.successMessage)('آزمون با موفقیت ساخته شد');
           },
           onError: function onError(errors) {
-            return console.log(errors);
+            var _iterator = _createForOfIteratorHelper(errors),
+                _step;
+
+            try {
+              for (_iterator.s(); !(_step = _iterator.n()).done;) {
+                var error = _step.value;
+                (0,_functions_Message__WEBPACK_IMPORTED_MODULE_15__.errorMessage)(error);
+              }
+            } catch (err) {
+              _iterator.e(err);
+            } finally {
+              _iterator.f();
+            }
           }
         });
       }
@@ -23868,13 +24103,21 @@ __webpack_require__.r(__webpack_exports__);
       Questions: _Questions_vue__WEBPACK_IMPORTED_MODULE_8__["default"],
       required: _functions_validations__WEBPACK_IMPORTED_MODULE_9__.required,
       requiredAns: _functions_validations__WEBPACK_IMPORTED_MODULE_9__.requiredAns,
-      color: _Consts_MyConsts__WEBPACK_IMPORTED_MODULE_10__.color,
-      storeToRefs: pinia__WEBPACK_IMPORTED_MODULE_14__.storeToRefs,
-      useCreatQuiz: _store_CreatQuiz__WEBPACK_IMPORTED_MODULE_11__.useCreatQuiz,
-      useForm: _inertiajs_inertia_vue3__WEBPACK_IMPORTED_MODULE_12__.useForm,
-      ref: _vue_reactivity__WEBPACK_IMPORTED_MODULE_15__.ref,
-      onUnmounted: vue__WEBPACK_IMPORTED_MODULE_13__.onUnmounted,
-      watch: _vue_runtime_core__WEBPACK_IMPORTED_MODULE_16__.watch
+      score: _functions_validations__WEBPACK_IMPORTED_MODULE_9__.score,
+      scoreN: _functions_validations__WEBPACK_IMPORTED_MODULE_9__.scoreN,
+      requiredAnsMessage: _Consts_Message__WEBPACK_IMPORTED_MODULE_10__.requiredAnsMessage,
+      requiredMessage: _Consts_Message__WEBPACK_IMPORTED_MODULE_10__.requiredMessage,
+      scoreMessage: _Consts_Message__WEBPACK_IMPORTED_MODULE_10__.scoreMessage,
+      scoreNMessage: _Consts_Message__WEBPACK_IMPORTED_MODULE_10__.scoreNMessage,
+      color: _Consts_property__WEBPACK_IMPORTED_MODULE_11__.color,
+      storeToRefs: pinia__WEBPACK_IMPORTED_MODULE_16__.storeToRefs,
+      useCreatQuiz: _store_CreatQuiz__WEBPACK_IMPORTED_MODULE_12__.useCreatQuiz,
+      useForm: _inertiajs_inertia_vue3__WEBPACK_IMPORTED_MODULE_13__.useForm,
+      ref: _vue_reactivity__WEBPACK_IMPORTED_MODULE_17__.ref,
+      onUnmounted: vue__WEBPACK_IMPORTED_MODULE_14__.onUnmounted,
+      watch: _vue_runtime_core__WEBPACK_IMPORTED_MODULE_18__.watch,
+      errorMessage: _functions_Message__WEBPACK_IMPORTED_MODULE_15__.errorMessage,
+      successMessage: _functions_Message__WEBPACK_IMPORTED_MODULE_15__.successMessage
     };
     Object.defineProperty(__returned__, '__isScriptSetup', {
       enumerable: false,
@@ -24473,13 +24716,21 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _Questions_vue__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./Questions.vue */ "./resources/js/Pages/Dashboard/Component/Teacher/Edit/Questions.vue");
 /* harmony import */ var vue3_persian_datetime_picker__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! vue3-persian-datetime-picker */ "./node_modules/vue3-persian-datetime-picker/dist/vue3-persian-datetime-picker.common.js");
 /* harmony import */ var vue3_persian_datetime_picker__WEBPACK_IMPORTED_MODULE_6___default = /*#__PURE__*/__webpack_require__.n(vue3_persian_datetime_picker__WEBPACK_IMPORTED_MODULE_6__);
-/* harmony import */ var _Consts_MyConsts__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! @/Consts/MyConsts */ "./resources/js/Consts/MyConsts.js");
-/* harmony import */ var _inertiajs_inertia_vue3__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! @inertiajs/inertia-vue3 */ "./node_modules/@inertiajs/inertia-vue3/dist/index.js");
-/* harmony import */ var _functions_validations__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! @/functions/validations */ "./resources/js/functions/validations.js");
-/* harmony import */ var _store_EditQuiz__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! @/store/EditQuiz */ "./resources/js/store/EditQuiz.js");
-/* harmony import */ var pinia__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! pinia */ "./node_modules/pinia/dist/pinia.esm-browser.js");
-/* harmony import */ var _vue_reactivity__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! @vue/reactivity */ "./node_modules/@vue/reactivity/dist/reactivity.esm-bundler.js");
-/* harmony import */ var _vue_runtime_core__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! @vue/runtime-core */ "./node_modules/@vue/runtime-core/dist/runtime-core.esm-bundler.js");
+/* harmony import */ var _Consts_Message__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! @/Consts/Message */ "./resources/js/Consts/Message.js");
+/* harmony import */ var _Consts_property__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! @/Consts/property */ "./resources/js/Consts/property.js");
+/* harmony import */ var _inertiajs_inertia_vue3__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! @inertiajs/inertia-vue3 */ "./node_modules/@inertiajs/inertia-vue3/dist/index.js");
+/* harmony import */ var _functions_validations__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! @/functions/validations */ "./resources/js/functions/validations.js");
+/* harmony import */ var _store_EditQuiz__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! @/store/EditQuiz */ "./resources/js/store/EditQuiz.js");
+/* harmony import */ var pinia__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! pinia */ "./node_modules/pinia/dist/pinia.esm-browser.js");
+/* harmony import */ var _vue_reactivity__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__(/*! @vue/reactivity */ "./node_modules/@vue/reactivity/dist/reactivity.esm-bundler.js");
+/* harmony import */ var _vue_runtime_core__WEBPACK_IMPORTED_MODULE_15__ = __webpack_require__(/*! @vue/runtime-core */ "./node_modules/@vue/runtime-core/dist/runtime-core.esm-bundler.js");
+/* harmony import */ var _functions_Message__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! @/functions/Message */ "./resources/js/functions/Message.js");
+function _createForOfIteratorHelper(o, allowArrayLike) { var it = typeof Symbol !== "undefined" && o[Symbol.iterator] || o["@@iterator"]; if (!it) { if (Array.isArray(o) || (it = _unsupportedIterableToArray(o)) || allowArrayLike && o && typeof o.length === "number") { if (it) o = it; var i = 0; var F = function F() {}; return { s: F, n: function n() { if (i >= o.length) return { done: true }; return { done: false, value: o[i++] }; }, e: function e(_e) { throw _e; }, f: F }; } throw new TypeError("Invalid attempt to iterate non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); } var normalCompletion = true, didErr = false, err; return { s: function s() { it = it.call(o); }, n: function n() { var step = it.next(); normalCompletion = step.done; return step; }, e: function e(_e2) { didErr = true; err = _e2; }, f: function f() { try { if (!normalCompletion && it["return"] != null) it["return"](); } finally { if (didErr) throw err; } } }; }
+
+function _unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o === "string") return _arrayLikeToArray(o, minLen); var n = Object.prototype.toString.call(o).slice(8, -1); if (n === "Object" && o.constructor) n = o.constructor.name; if (n === "Map" || n === "Set") return Array.from(o); if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen); }
+
+function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) { arr2[i] = arr[i]; } return arr2; }
+
 
  // Form component
 
@@ -24491,6 +24742,7 @@ __webpack_require__.r(__webpack_exports__);
 
  // Const
 
+
  // Inertia functions
 
  // validation functions
@@ -24499,6 +24751,7 @@ __webpack_require__.r(__webpack_exports__);
 
 
  // Vue functions
+
 
 
  // Props
@@ -24512,9 +24765,9 @@ __webpack_require__.r(__webpack_exports__);
 
     /**************** Pinia ****************/
 
-    var editQuiz = (0,_store_EditQuiz__WEBPACK_IMPORTED_MODULE_10__.useEditQuiz)(); // create pinia states
+    var editQuiz = (0,_store_EditQuiz__WEBPACK_IMPORTED_MODULE_11__.useEditQuiz)(); // create pinia states
 
-    var _storeToRefs = (0,pinia__WEBPACK_IMPORTED_MODULE_11__.storeToRefs)(editQuiz),
+    var _storeToRefs = (0,pinia__WEBPACK_IMPORTED_MODULE_13__.storeToRefs)(editQuiz),
         content = _storeToRefs.content,
         questions = _storeToRefs.questions,
         scoreQuiz = _storeToRefs.scoreQuiz,
@@ -24524,7 +24777,7 @@ __webpack_require__.r(__webpack_exports__);
     var clean = editQuiz.clean;
     /**************** Properties ****************/
 
-    var form = (0,_inertiajs_inertia_vue3__WEBPACK_IMPORTED_MODULE_8__.useForm)({
+    var form = (0,_inertiajs_inertia_vue3__WEBPACK_IMPORTED_MODULE_9__.useForm)({
       id: props.myProps.quiz.id,
       name: props.myProps.quiz.name,
       start: props.myProps.quiz.start,
@@ -24536,44 +24789,55 @@ __webpack_require__.r(__webpack_exports__);
       questions: props.myProps.quiz.questions,
       deleted: []
     });
-    var loading = (0,_vue_reactivity__WEBPACK_IMPORTED_MODULE_12__.ref)(false);
+    var loading = (0,_vue_reactivity__WEBPACK_IMPORTED_MODULE_14__.ref)(false);
     /**************** Functions ****************/
     // watch
 
-    (0,_vue_runtime_core__WEBPACK_IMPORTED_MODULE_13__.watch)(scoreQuiz, function (value) {
+    (0,_vue_runtime_core__WEBPACK_IMPORTED_MODULE_15__.watch)(scoreQuiz, function (value) {
       return form.score = value;
     });
-    (0,_vue_runtime_core__WEBPACK_IMPORTED_MODULE_13__.watch)(function () {
+    (0,_vue_runtime_core__WEBPACK_IMPORTED_MODULE_15__.watch)(function () {
       return form.type;
     }, function () {
       return form.score = null;
     }); // onUnmounted
 
-    (0,_vue_runtime_core__WEBPACK_IMPORTED_MODULE_13__.onUnmounted)(function () {
+    (0,_vue_runtime_core__WEBPACK_IMPORTED_MODULE_15__.onUnmounted)(function () {
       return clean();
     }); // Submit functions
 
     function submit() {
       loading.value = true;
-      form.questions = questions.value;
-      form.deleted = deleted.value;
 
-      if (!(0,_functions_validations__WEBPACK_IMPORTED_MODULE_9__.required)()) {
-        console.error('required');
-      } else if (!(0,_functions_validations__WEBPACK_IMPORTED_MODULE_9__.requiredAns)(form.questions)) {
-        console.error('requiredAns');
-      } else if (isNaN(form.score) || form.score <= 0) {
-        console.error(form.score);
-      } else if (form.type === 'test' && (isNaN(form.scoreN) || !Number.isInteger(form.scoreN))) {
-        console.error(form.scoreN);
+      if (!(0,_functions_validations__WEBPACK_IMPORTED_MODULE_10__.required)()) {
+        (0,_functions_Message__WEBPACK_IMPORTED_MODULE_12__.errorMessage)(_Consts_Message__WEBPACK_IMPORTED_MODULE_7__.requiredMessage);
+      } else if (!(0,_functions_validations__WEBPACK_IMPORTED_MODULE_10__.requiredAns)(form.questions)) {
+        (0,_functions_Message__WEBPACK_IMPORTED_MODULE_12__.errorMessage)(_Consts_Message__WEBPACK_IMPORTED_MODULE_7__.requiredAnsMessage);
+      } else if ((0,_functions_validations__WEBPACK_IMPORTED_MODULE_10__.score)(form.score)) {
+        (0,_functions_Message__WEBPACK_IMPORTED_MODULE_12__.errorMessage)(_Consts_Message__WEBPACK_IMPORTED_MODULE_7__.scoreMessage);
+      } else if ((0,_functions_validations__WEBPACK_IMPORTED_MODULE_10__.scoreN)(form.scoreN, form.type)) {
+        (0,_functions_Message__WEBPACK_IMPORTED_MODULE_12__.errorMessage)(_Consts_Message__WEBPACK_IMPORTED_MODULE_7__.scoreNMessage);
       } else {
+        form.questions = questions.value;
+        form.deleted = deleted.value;
         form.put(route('edit.quiz', [props.myProps.quiz.uuid]), {
           onSuccess: function onSuccess() {
-            console.log('created');
-            clean();
+            (0,_functions_Message__WEBPACK_IMPORTED_MODULE_12__.successMessage)('آزمون با موفقیت ویرایش شد'); // clean();
           },
           onError: function onError(errors) {
-            return console.log(errors);
+            var _iterator = _createForOfIteratorHelper(errors),
+                _step;
+
+            try {
+              for (_iterator.s(); !(_step = _iterator.n()).done;) {
+                var error = _step.value;
+                (0,_functions_Message__WEBPACK_IMPORTED_MODULE_12__.errorMessage)(error);
+              }
+            } catch (err) {
+              _iterator.e(err);
+            } finally {
+              _iterator.f();
+            }
           }
         });
       }
@@ -24601,15 +24865,23 @@ __webpack_require__.r(__webpack_exports__);
       MyButton: _component_Form_Button_vue__WEBPACK_IMPORTED_MODULE_4__["default"],
       Questions: _Questions_vue__WEBPACK_IMPORTED_MODULE_5__["default"],
       PersianDatetimePicker: (vue3_persian_datetime_picker__WEBPACK_IMPORTED_MODULE_6___default()),
-      color: _Consts_MyConsts__WEBPACK_IMPORTED_MODULE_7__.color,
-      useForm: _inertiajs_inertia_vue3__WEBPACK_IMPORTED_MODULE_8__.useForm,
-      required: _functions_validations__WEBPACK_IMPORTED_MODULE_9__.required,
-      requiredAns: _functions_validations__WEBPACK_IMPORTED_MODULE_9__.requiredAns,
-      useEditQuiz: _store_EditQuiz__WEBPACK_IMPORTED_MODULE_10__.useEditQuiz,
-      storeToRefs: pinia__WEBPACK_IMPORTED_MODULE_11__.storeToRefs,
-      ref: _vue_reactivity__WEBPACK_IMPORTED_MODULE_12__.ref,
-      onUnmounted: _vue_runtime_core__WEBPACK_IMPORTED_MODULE_13__.onUnmounted,
-      watch: _vue_runtime_core__WEBPACK_IMPORTED_MODULE_13__.watch
+      requiredAnsMessage: _Consts_Message__WEBPACK_IMPORTED_MODULE_7__.requiredAnsMessage,
+      requiredMessage: _Consts_Message__WEBPACK_IMPORTED_MODULE_7__.requiredMessage,
+      scoreMessage: _Consts_Message__WEBPACK_IMPORTED_MODULE_7__.scoreMessage,
+      scoreNMessage: _Consts_Message__WEBPACK_IMPORTED_MODULE_7__.scoreNMessage,
+      color: _Consts_property__WEBPACK_IMPORTED_MODULE_8__.color,
+      useForm: _inertiajs_inertia_vue3__WEBPACK_IMPORTED_MODULE_9__.useForm,
+      required: _functions_validations__WEBPACK_IMPORTED_MODULE_10__.required,
+      requiredAns: _functions_validations__WEBPACK_IMPORTED_MODULE_10__.requiredAns,
+      score: _functions_validations__WEBPACK_IMPORTED_MODULE_10__.score,
+      scoreN: _functions_validations__WEBPACK_IMPORTED_MODULE_10__.scoreN,
+      useEditQuiz: _store_EditQuiz__WEBPACK_IMPORTED_MODULE_11__.useEditQuiz,
+      storeToRefs: pinia__WEBPACK_IMPORTED_MODULE_13__.storeToRefs,
+      ref: _vue_reactivity__WEBPACK_IMPORTED_MODULE_14__.ref,
+      onUnmounted: _vue_runtime_core__WEBPACK_IMPORTED_MODULE_15__.onUnmounted,
+      watch: _vue_runtime_core__WEBPACK_IMPORTED_MODULE_15__.watch,
+      errorMessage: _functions_Message__WEBPACK_IMPORTED_MODULE_12__.errorMessage,
+      successMessage: _functions_Message__WEBPACK_IMPORTED_MODULE_12__.successMessage
     };
     Object.defineProperty(__returned__, '__isScriptSetup', {
       enumerable: false,
@@ -25544,13 +25816,25 @@ __webpack_require__.r(__webpack_exports__);
 
 
     var showSubTitle = (0,_vue_reactivity__WEBPACK_IMPORTED_MODULE_11__.ref)(0);
-    (0,vue__WEBPACK_IMPORTED_MODULE_10__.onMounted)(function () {
+
+    function checkRoute() {
       if (route().current('teacher.information.quiz', [props.index])) {
         chengShow(1);
       } else if (route().current('teacher.edit.quiz', [props.index])) {
         chengShow(2);
       }
+    }
+
+    (0,vue__WEBPACK_IMPORTED_MODULE_10__.onMounted)(function () {
+      checkRoute();
     });
+    var myRoute = route().current();
+    setInterval(function () {
+      if (myRoute !== route().current()) {
+        myRoute = route().current();
+        checkRoute();
+      }
+    }, 400);
 
     function chengShow(indexShow) {
       showSubTitle.value = indexShow;
@@ -25587,6 +25871,8 @@ __webpack_require__.r(__webpack_exports__);
       onEnter: onEnter,
       onLeave: onLeave,
       showSubTitle: showSubTitle,
+      checkRoute: checkRoute,
+      myRoute: myRoute,
       chengShow: chengShow,
       onClick: onClick,
       onClickInformation: onClickInformation,
@@ -25665,7 +25951,17 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _component_Form_Label_vue__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @/component/Form/Label.vue */ "./resources/js/component/Form/Label.vue");
 /* harmony import */ var _functions_validations__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @/functions/validations */ "./resources/js/functions/validations.js");
 /* harmony import */ var _inertiajs_inertia_vue3__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @inertiajs/inertia-vue3 */ "./node_modules/@inertiajs/inertia-vue3/dist/index.js");
-/* harmony import */ var _vue_reactivity__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! @vue/reactivity */ "./node_modules/@vue/reactivity/dist/reactivity.esm-bundler.js");
+/* harmony import */ var _vue_reactivity__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! @vue/reactivity */ "./node_modules/@vue/reactivity/dist/reactivity.esm-bundler.js");
+/* harmony import */ var _functions_Message__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! @/functions/Message */ "./resources/js/functions/Message.js");
+/* harmony import */ var _Consts_Message__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! @/Consts/Message */ "./resources/js/Consts/Message.js");
+function _createForOfIteratorHelper(o, allowArrayLike) { var it = typeof Symbol !== "undefined" && o[Symbol.iterator] || o["@@iterator"]; if (!it) { if (Array.isArray(o) || (it = _unsupportedIterableToArray(o)) || allowArrayLike && o && typeof o.length === "number") { if (it) o = it; var i = 0; var F = function F() {}; return { s: F, n: function n() { if (i >= o.length) return { done: true }; return { done: false, value: o[i++] }; }, e: function e(_e) { throw _e; }, f: F }; } throw new TypeError("Invalid attempt to iterate non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); } var normalCompletion = true, didErr = false, err; return { s: function s() { it = it.call(o); }, n: function n() { var step = it.next(); normalCompletion = step.done; return step; }, e: function e(_e2) { didErr = true; err = _e2; }, f: function f() { try { if (!normalCompletion && it["return"] != null) it["return"](); } finally { if (didErr) throw err; } } }; }
+
+function _unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o === "string") return _arrayLikeToArray(o, minLen); var n = Object.prototype.toString.call(o).slice(8, -1); if (n === "Object" && o.constructor) n = o.constructor.name; if (n === "Map" || n === "Set") return Array.from(o); if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen); }
+
+function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) { arr2[i] = arr[i]; } return arr2; }
+
+
+
 
 
 
@@ -25681,22 +25977,44 @@ __webpack_require__.r(__webpack_exports__);
       password: "",
       password_confirmation: ""
     });
-    var password = (0,_vue_reactivity__WEBPACK_IMPORTED_MODULE_5__.ref)();
-    var current_password = (0,_vue_reactivity__WEBPACK_IMPORTED_MODULE_5__.ref)();
-    var loding = (0,_vue_reactivity__WEBPACK_IMPORTED_MODULE_5__.ref)(false);
+    var password = (0,_vue_reactivity__WEBPACK_IMPORTED_MODULE_7__.ref)();
+    var current_password = (0,_vue_reactivity__WEBPACK_IMPORTED_MODULE_7__.ref)();
+    var loading = (0,_vue_reactivity__WEBPACK_IMPORTED_MODULE_7__.ref)(false);
 
     function send() {
-      loding.value = true;
+      loading.value = true;
 
-      if (!form.current_password || !form.password || !form.password_confirmation) {//
-      } else if (!(0,_functions_validations__WEBPACK_IMPORTED_MODULE_3__.password)(form.password)) {//password(form.password) return errors
-      } else if (!(0,_functions_validations__WEBPACK_IMPORTED_MODULE_3__.passwordConfirmation)(form.password, form.password_confirmation)) {//
+      if (!form.current_password || !form.password || !form.password_confirmation) {
+        (0,_functions_Message__WEBPACK_IMPORTED_MODULE_5__.errorMessage)(_Consts_Message__WEBPACK_IMPORTED_MODULE_6__.requiredMessage);
+      } else if (!(0,_functions_validations__WEBPACK_IMPORTED_MODULE_3__.password)(form.password)) {
+        var errors = (0,_functions_validations__WEBPACK_IMPORTED_MODULE_3__.password)(form.password);
+
+        for (var key in errors) {
+          (0,_functions_Message__WEBPACK_IMPORTED_MODULE_5__.errorMessage)(errors[key]);
+        }
+      } else if (!(0,_functions_validations__WEBPACK_IMPORTED_MODULE_3__.passwordConfirmation)(form.password, form.password_confirmation)) {
+        (0,_functions_Message__WEBPACK_IMPORTED_MODULE_5__.errorMessage)(_Consts_Message__WEBPACK_IMPORTED_MODULE_6__.confirmPasswordMessage);
       } else {
         form.put(route("user-password.update"), {
           onSuccess: function onSuccess() {
-            return form.reset();
+            form.reset();
+            (0,_functions_Message__WEBPACK_IMPORTED_MODULE_5__.successMessage)('رمز با موفقیت ویرایش شد');
           },
-          onError: function onError() {
+          onError: function onError(errors) {
+            var _iterator = _createForOfIteratorHelper(errors),
+                _step;
+
+            try {
+              for (_iterator.s(); !(_step = _iterator.n()).done;) {
+                var error = _step.value;
+                (0,_functions_Message__WEBPACK_IMPORTED_MODULE_5__.errorMessage)(error);
+              }
+            } catch (err) {
+              _iterator.e(err);
+            } finally {
+              _iterator.f();
+            }
+
             if (form.errors.password) {
               form.reset("password", "password_confirmation");
               password.value.focus();
@@ -25711,7 +26029,7 @@ __webpack_require__.r(__webpack_exports__);
       }
 
       setTimeout(function () {
-        loding.value = false;
+        loading.value = false;
       }, 200);
     }
 
@@ -25719,15 +26037,19 @@ __webpack_require__.r(__webpack_exports__);
       form: form,
       password: password,
       current_password: current_password,
-      loding: loding,
+      loading: loading,
       send: send,
-      myButton: _component_Form_Button_vue__WEBPACK_IMPORTED_MODULE_0__["default"],
-      myInput: _component_Form_Input_vue__WEBPACK_IMPORTED_MODULE_1__["default"],
-      myLabel: _component_Form_Label_vue__WEBPACK_IMPORTED_MODULE_2__["default"],
-      passwordConfirmation: _functions_validations__WEBPACK_IMPORTED_MODULE_3__.passwordConfirmation,
+      MyButton: _component_Form_Button_vue__WEBPACK_IMPORTED_MODULE_0__["default"],
+      MyInput: _component_Form_Input_vue__WEBPACK_IMPORTED_MODULE_1__["default"],
+      MyLabel: _component_Form_Label_vue__WEBPACK_IMPORTED_MODULE_2__["default"],
       validationsPassword: _functions_validations__WEBPACK_IMPORTED_MODULE_3__.password,
+      passwordConfirmation: _functions_validations__WEBPACK_IMPORTED_MODULE_3__.passwordConfirmation,
       useForm: _inertiajs_inertia_vue3__WEBPACK_IMPORTED_MODULE_4__.useForm,
-      ref: _vue_reactivity__WEBPACK_IMPORTED_MODULE_5__.ref
+      ref: _vue_reactivity__WEBPACK_IMPORTED_MODULE_7__.ref,
+      errorMessage: _functions_Message__WEBPACK_IMPORTED_MODULE_5__.errorMessage,
+      successMessage: _functions_Message__WEBPACK_IMPORTED_MODULE_5__.successMessage,
+      confirmPasswordMessage: _Consts_Message__WEBPACK_IMPORTED_MODULE_6__.confirmPasswordMessage,
+      requiredMessage: _Consts_Message__WEBPACK_IMPORTED_MODULE_6__.requiredMessage
     };
     Object.defineProperty(__returned__, '__isScriptSetup', {
       enumerable: false,
@@ -25755,7 +26077,17 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _component_Form_Label_vue__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @/component/Form/Label.vue */ "./resources/js/component/Form/Label.vue");
 /* harmony import */ var _functions_validations__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @/functions/validations */ "./resources/js/functions/validations.js");
 /* harmony import */ var _inertiajs_inertia_vue3__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @inertiajs/inertia-vue3 */ "./node_modules/@inertiajs/inertia-vue3/dist/index.js");
-/* harmony import */ var _vue_reactivity__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! @vue/reactivity */ "./node_modules/@vue/reactivity/dist/reactivity.esm-bundler.js");
+/* harmony import */ var _vue_reactivity__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! @vue/reactivity */ "./node_modules/@vue/reactivity/dist/reactivity.esm-bundler.js");
+/* harmony import */ var _functions_Message__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! @/functions/Message */ "./resources/js/functions/Message.js");
+/* harmony import */ var _Consts_Message__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! @/Consts/Message */ "./resources/js/Consts/Message.js");
+function _createForOfIteratorHelper(o, allowArrayLike) { var it = typeof Symbol !== "undefined" && o[Symbol.iterator] || o["@@iterator"]; if (!it) { if (Array.isArray(o) || (it = _unsupportedIterableToArray(o)) || allowArrayLike && o && typeof o.length === "number") { if (it) o = it; var i = 0; var F = function F() {}; return { s: F, n: function n() { if (i >= o.length) return { done: true }; return { done: false, value: o[i++] }; }, e: function e(_e) { throw _e; }, f: F }; } throw new TypeError("Invalid attempt to iterate non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); } var normalCompletion = true, didErr = false, err; return { s: function s() { it = it.call(o); }, n: function n() { var step = it.next(); normalCompletion = step.done; return step; }, e: function e(_e2) { didErr = true; err = _e2; }, f: function f() { try { if (!normalCompletion && it["return"] != null) it["return"](); } finally { if (didErr) throw err; } } }; }
+
+function _unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o === "string") return _arrayLikeToArray(o, minLen); var n = Object.prototype.toString.call(o).slice(8, -1); if (n === "Object" && o.constructor) n = o.constructor.name; if (n === "Map" || n === "Set") return Array.from(o); if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen); }
+
+function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) { arr2[i] = arr[i]; } return arr2; }
+
+
+
 
 
 
@@ -25769,39 +26101,56 @@ __webpack_require__.r(__webpack_exports__);
     expose();
     var props = __props;
     var form = (0,_inertiajs_inertia_vue3__WEBPACK_IMPORTED_MODULE_4__.useForm)({
-      _method: "PUT",
       name: props.user.name,
       email: props.user.email,
       photo: null
     });
-    var photoPreview = (0,_vue_reactivity__WEBPACK_IMPORTED_MODULE_5__.ref)();
-    var loding = (0,_vue_reactivity__WEBPACK_IMPORTED_MODULE_5__.ref)(false);
+    var photoPreview = (0,_vue_reactivity__WEBPACK_IMPORTED_MODULE_7__.ref)();
+    var loading = (0,_vue_reactivity__WEBPACK_IMPORTED_MODULE_7__.ref)(false);
 
     function send() {
-      loding.value = true;
+      loading.value = true;
 
       if (photo.value) {
         form.photo = photo.value.files[0];
       }
 
-      if (!form.name || !form.email) {//
-      } else if (!(0,_functions_validations__WEBPACK_IMPORTED_MODULE_3__.validEmail)(form.email)) {//
+      if (!form.name || !form.email) {
+        (0,_functions_Message__WEBPACK_IMPORTED_MODULE_5__.errorMessage)(_Consts_Message__WEBPACK_IMPORTED_MODULE_6__.requiredMessage);
+      } else if (!(0,_functions_validations__WEBPACK_IMPORTED_MODULE_3__.validEmail)(form.email)) {
+        (0,_functions_Message__WEBPACK_IMPORTED_MODULE_5__.errorMessage)(_Consts_Message__WEBPACK_IMPORTED_MODULE_6__.emailMessage);
       } else {
-        form.post(route("user-profile-information.update"), {
+        form.put(route("user-profile-information.update"), {
           errorBag: "updateProfileInformation",
           preserveScroll: true,
           onSuccess: function onSuccess() {
-            return clearPhotoFileInput();
+            (0,_functions_Message__WEBPACK_IMPORTED_MODULE_5__.successMessage)('پروفایل با موفقیت ویرایش شد');
+            clearPhotoFileInput();
+          },
+          onError: function onError(errors) {
+            var _iterator = _createForOfIteratorHelper(errors),
+                _step;
+
+            try {
+              for (_iterator.s(); !(_step = _iterator.n()).done;) {
+                var error = _step.value;
+                (0,_functions_Message__WEBPACK_IMPORTED_MODULE_5__.errorMessage)(error);
+              }
+            } catch (err) {
+              _iterator.e(err);
+            } finally {
+              _iterator.f();
+            }
           }
         });
       }
 
       setTimeout(function () {
-        loding.value = false;
+        loading.value = false;
       }, 200);
     }
 
-    var photo = (0,_vue_reactivity__WEBPACK_IMPORTED_MODULE_5__.ref)();
+    var photo = (0,_vue_reactivity__WEBPACK_IMPORTED_MODULE_7__.ref)();
 
     function selectNewPhoto() {
       photo.value.click();
@@ -25839,19 +26188,23 @@ __webpack_require__.r(__webpack_exports__);
       props: props,
       form: form,
       photoPreview: photoPreview,
-      loding: loding,
+      loading: loading,
       send: send,
       photo: photo,
       selectNewPhoto: selectNewPhoto,
       updatePhotoPreview: updatePhotoPreview,
       deletePhoto: deletePhoto,
       clearPhotoFileInput: clearPhotoFileInput,
-      myButton: _component_Form_Button_vue__WEBPACK_IMPORTED_MODULE_0__["default"],
-      myInput: _component_Form_Input_vue__WEBPACK_IMPORTED_MODULE_1__["default"],
-      myLabel: _component_Form_Label_vue__WEBPACK_IMPORTED_MODULE_2__["default"],
+      MyButton: _component_Form_Button_vue__WEBPACK_IMPORTED_MODULE_0__["default"],
+      MyInput: _component_Form_Input_vue__WEBPACK_IMPORTED_MODULE_1__["default"],
+      MyLabel: _component_Form_Label_vue__WEBPACK_IMPORTED_MODULE_2__["default"],
       validEmail: _functions_validations__WEBPACK_IMPORTED_MODULE_3__.validEmail,
       useForm: _inertiajs_inertia_vue3__WEBPACK_IMPORTED_MODULE_4__.useForm,
-      ref: _vue_reactivity__WEBPACK_IMPORTED_MODULE_5__.ref
+      ref: _vue_reactivity__WEBPACK_IMPORTED_MODULE_7__.ref,
+      errorMessage: _functions_Message__WEBPACK_IMPORTED_MODULE_5__.errorMessage,
+      successMessage: _functions_Message__WEBPACK_IMPORTED_MODULE_5__.successMessage,
+      emailMessage: _Consts_Message__WEBPACK_IMPORTED_MODULE_6__.emailMessage,
+      requiredMessage: _Consts_Message__WEBPACK_IMPORTED_MODULE_6__.requiredMessage
     };
     Object.defineProperty(__returned__, '__isScriptSetup', {
       enumerable: false,
@@ -26932,27 +27285,27 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
         /* STABLE */
 
       }), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("form", {
-        onSubmit: (0,vue__WEBPACK_IMPORTED_MODULE_0__.withModifiers)($setup.submit, ["prevent"]),
-        novalidate: ""
+        novalidate: "",
+        onSubmit: (0,vue__WEBPACK_IMPORTED_MODULE_0__.withModifiers)($setup.submit, ["prevent"])
       }, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_4, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)($setup["MyLabel"], {
+        required: true,
         "for": "password",
-        value: "رمز عبور",
-        required: true
+        value: "رمز عبور"
       }), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)($setup["MyInput"], {
         id: "password",
-        type: "password",
         modelValue: $setup.form.password,
         "onUpdate:modelValue": _cache[0] || (_cache[0] = function ($event) {
           return $setup.form.password = $event;
         }),
-        required: "",
         autocomplete: "current-password",
-        autofocus: ""
+        autofocus: "",
+        required: "",
+        type: "password"
       }, null, 8
       /* PROPS */
       , ["modelValue"])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_5, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)($setup["MyButton"], {
-        loading: $setup.loading,
-        disabled: $setup.form.processing
+        disabled: $setup.form.processing,
+        loading: $setup.loading
       }, {
         "default": (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function () {
           return [_hoisted_6];
@@ -26962,7 +27315,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
 
       }, 8
       /* PROPS */
-      , ["loading", "disabled"])])], 40
+      , ["disabled", "loading"])])], 40
       /* PROPS, HYDRATE_EVENTS */
       , _hoisted_3)];
     }),
@@ -27020,27 +27373,27 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
         /* STABLE */
 
       }), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("form", {
-        onSubmit: (0,vue__WEBPACK_IMPORTED_MODULE_0__.withModifiers)($setup.submit, ["prevent"]),
-        novalidate: ""
+        novalidate: "",
+        onSubmit: (0,vue__WEBPACK_IMPORTED_MODULE_0__.withModifiers)($setup.submit, ["prevent"])
       }, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_4, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)($setup["MyLabel"], {
+        required: true,
         "for": "email",
-        value: "ایمیل",
-        required: true
+        value: "ایمیل"
       }), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)($setup["MyInput"], {
         id: "email",
-        type: "email",
         modelValue: $setup.form.email,
         "onUpdate:modelValue": _cache[0] || (_cache[0] = function ($event) {
           return $setup.form.email = $event;
         }),
-        required: "",
+        required: true,
+        autocomplete: "email",
         autofocus: "",
-        autocomplete: "email"
+        type: "email"
       }, null, 8
       /* PROPS */
       , ["modelValue"])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_5, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)($setup["MyButton"], {
-        loading: $setup.loading,
-        disabled: $setup.form.processing
+        disabled: $setup.form.processing,
+        loading: $setup.loading
       }, {
         "default": (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function () {
           return [_hoisted_6];
@@ -27050,7 +27403,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
 
       }, 8
       /* PROPS */
-      , ["loading", "disabled"])])], 40
+      , ["disabled", "loading"])])], 40
       /* PROPS, HYDRATE_EVENTS */
       , _hoisted_3)];
     }),
@@ -27116,45 +27469,45 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
     }),
     "default": (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function () {
       return [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("form", {
-        onSubmit: (0,vue__WEBPACK_IMPORTED_MODULE_0__.withModifiers)($setup.submit, ["prevent"]),
-        novalidate: ""
+        novalidate: "",
+        onSubmit: (0,vue__WEBPACK_IMPORTED_MODULE_0__.withModifiers)($setup.submit, ["prevent"])
       }, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_3, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)($setup["MyLabel"], {
+        required: true,
         "for": "email",
-        value: "ایمیل",
-        required: true
+        value: "ایمیل"
       }), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)($setup["MyInput"], {
         id: "email",
-        type: "email",
         modelValue: $setup.form.email,
         "onUpdate:modelValue": _cache[0] || (_cache[0] = function ($event) {
           return $setup.form.email = $event;
         }),
-        required: "",
+        autocomplete: "email",
         autofocus: "",
-        autocomplete: "email"
+        required: "",
+        type: "email"
       }, null, 8
       /* PROPS */
       , ["modelValue"])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_4, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)($setup["MyLabel"], {
+        required: true,
         "for": "password",
-        value: "رمز ورود",
-        required: true
+        value: "رمز ورود"
       }), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)($setup["MyInput"], {
         id: "password",
-        type: "password",
         modelValue: $setup.form.password,
         "onUpdate:modelValue": _cache[1] || (_cache[1] = function ($event) {
           return $setup.form.password = $event;
         }),
+        autocomplete: "current-password",
         required: "",
-        autocomplete: "current-password"
+        type: "password"
       }, null, 8
       /* PROPS */
       , ["modelValue"])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_5, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)($setup["MyCheckbox"], {
-        txt: "من را به خاطر بسپار",
         modelValue: $setup.form.remember,
         "onUpdate:modelValue": _cache[2] || (_cache[2] = function ($event) {
           return $setup.form.remember = $event;
-        })
+        }),
+        txt: "من را به خاطر بسپار"
       }, null, 8
       /* PROPS */
       , ["modelValue"])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_6, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_7, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)($setup["MyAuthLink"], {
@@ -27169,9 +27522,9 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
       }, 8
       /* PROPS */
       , ["href"]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)($setup["MyButton"], {
-        "class": "mr-4",
+        disabled: $setup.form.processing,
         loading: $setup.loading,
-        disabled: $setup.form.processing
+        "class": "mr-4"
       }, {
         "default": (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function () {
           return [_hoisted_9];
@@ -27181,7 +27534,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
 
       }, 8
       /* PROPS */
-      , ["loading", "disabled"])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_10, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)($setup["MyAuthLink"], {
+      , ["disabled", "loading"])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_10, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)($setup["MyAuthLink"], {
         href: _ctx.route('password.request')
       }, {
         "default": (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function () {
@@ -27255,66 +27608,66 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
     }),
     "default": (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function () {
       return [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("form", {
-        onSubmit: (0,vue__WEBPACK_IMPORTED_MODULE_0__.withModifiers)($setup.submit, ["prevent"]),
-        novalidate: ""
+        novalidate: "",
+        onSubmit: (0,vue__WEBPACK_IMPORTED_MODULE_0__.withModifiers)($setup.submit, ["prevent"])
       }, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_3, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)($setup["MyLabel"], {
+        required: true,
         "for": "name",
-        value: "نام",
-        required: true
+        value: "نام"
       }), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)($setup["MyInput"], {
         id: "name",
-        type: "text",
         modelValue: $setup.form.name,
         "onUpdate:modelValue": _cache[0] || (_cache[0] = function ($event) {
           return $setup.form.name = $event;
         }),
-        required: "",
+        autocomplete: "name",
         autofocus: "",
-        autocomplete: "name"
+        required: "",
+        type: "text"
       }, null, 8
       /* PROPS */
       , ["modelValue"])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_4, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)($setup["MyLabel"], {
+        required: true,
         "for": "email",
-        value: "ایمیل",
-        required: true
+        value: "ایمیل"
       }), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)($setup["MyInput"], {
         id: "email",
-        type: "email",
         modelValue: $setup.form.email,
         "onUpdate:modelValue": _cache[1] || (_cache[1] = function ($event) {
           return $setup.form.email = $event;
         }),
-        required: ""
+        required: "",
+        type: "email"
       }, null, 8
       /* PROPS */
       , ["modelValue"])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_5, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)($setup["MyLabel"], {
+        required: true,
         "for": "password",
-        value: "رمز ورود",
-        required: true
+        value: "رمز ورود"
       }), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)($setup["MyInput"], {
         id: "password",
-        type: "password",
         modelValue: $setup.form.password,
         "onUpdate:modelValue": _cache[2] || (_cache[2] = function ($event) {
           return $setup.form.password = $event;
         }),
+        autocomplete: "new-password",
         required: "",
-        autocomplete: "new-password"
+        type: "password"
       }, null, 8
       /* PROPS */
       , ["modelValue"])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_6, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)($setup["MyLabel"], {
+        required: true,
         "for": "password_confirmation",
-        value: "تایید رمز عبور",
-        required: true
+        value: "تایید رمز عبور"
       }), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)($setup["MyInput"], {
         id: "password_confirmation",
-        type: "password",
         modelValue: $setup.form.password_confirmation,
         "onUpdate:modelValue": _cache[3] || (_cache[3] = function ($event) {
           return $setup.form.password_confirmation = $event;
         }),
+        autocomplete: "new-password",
         required: "",
-        autocomplete: "new-password"
+        type: "password"
       }, null, 8
       /* PROPS */
       , ["modelValue"])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_7, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_8, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)($setup["MyAuthLink"], {
@@ -27329,9 +27682,9 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
       }, 8
       /* PROPS */
       , ["href"]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)($setup["MyButton"], {
-        "class": "mr-4",
+        disabled: $setup.form.processing,
         loading: $setup.loading,
-        disabled: $setup.form.processing
+        "class": "mr-4"
       }, {
         "default": (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function () {
           return [_hoisted_10];
@@ -27341,7 +27694,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
 
       }, 8
       /* PROPS */
-      , ["loading", "disabled"])])])], 40
+      , ["disabled", "loading"])])])], 40
       /* PROPS, HYDRATE_EVENTS */
       , _hoisted_2)];
     }),
@@ -27396,57 +27749,57 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
     }),
     "default": (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function () {
       return [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("form", {
-        onSubmit: (0,vue__WEBPACK_IMPORTED_MODULE_0__.withModifiers)($setup.submit, ["prevent"]),
-        novalidate: ""
+        novalidate: "",
+        onSubmit: (0,vue__WEBPACK_IMPORTED_MODULE_0__.withModifiers)($setup.submit, ["prevent"])
       }, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_3, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)($setup["MyLabel"], {
+        required: true,
         "for": "email",
-        value: "ایمیل",
-        required: true
+        value: "ایمیل"
       }), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)($setup["MyInput"], {
         id: "email",
-        type: "email",
         modelValue: $setup.form.email,
         "onUpdate:modelValue": _cache[0] || (_cache[0] = function ($event) {
           return $setup.form.email = $event;
         }),
-        required: "",
+        autocomplete: "email",
         autofocus: "",
-        autocomplete: "email"
+        required: "",
+        type: "email"
       }, null, 8
       /* PROPS */
       , ["modelValue"])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_4, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)($setup["MyLabel"], {
+        required: true,
         "for": "password",
-        value: "رمز ورود",
-        required: true
+        value: "رمز ورود"
       }), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)($setup["MyInput"], {
         id: "password",
-        type: "password",
         modelValue: $setup.form.password,
         "onUpdate:modelValue": _cache[1] || (_cache[1] = function ($event) {
           return $setup.form.password = $event;
         }),
+        autocomplete: "new-password",
         required: "",
-        autocomplete: "new-password"
+        type: "password"
       }, null, 8
       /* PROPS */
       , ["modelValue"])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_5, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)($setup["MyLabel"], {
+        required: true,
         "for": "password_confirmation",
-        value: "تایید رمز عبور",
-        required: true
+        value: "تایید رمز عبور"
       }), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)($setup["MyInput"], {
         id: "password_confirmation",
-        type: "password",
         modelValue: $setup.form.password_confirmation,
         "onUpdate:modelValue": _cache[2] || (_cache[2] = function ($event) {
           return $setup.form.password_confirmation = $event;
         }),
+        autocomplete: "new-password",
         required: "",
-        autocomplete: "new-password"
+        type: "password"
       }, null, 8
       /* PROPS */
       , ["modelValue"])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_6, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)($setup["MyButton"], {
-        loading: $setup.loading,
-        disabled: $setup.form.processing
+        disabled: $setup.form.processing,
+        loading: $setup.loading
       }, {
         "default": (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function () {
           return [_hoisted_7];
@@ -27456,7 +27809,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
 
       }, 8
       /* PROPS */
-      , ["loading", "disabled"])])], 40
+      , ["disabled", "loading"])])], 40
       /* PROPS, HYDRATE_EVENTS */
       , _hoisted_2)];
     }),
@@ -29383,56 +29736,56 @@ var _hoisted_7 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNod
 
 function render(_ctx, _cache, $props, $setup, $data, $options) {
   return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", _hoisted_1, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("form", {
-    onSubmit: (0,vue__WEBPACK_IMPORTED_MODULE_0__.withModifiers)($setup.send, ["prevent"]),
     "class": "w-full md:w-1/2",
-    novalidate: ""
-  }, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_3, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)($setup["myLabel"], {
+    novalidate: "",
+    onSubmit: (0,vue__WEBPACK_IMPORTED_MODULE_0__.withModifiers)($setup.send, ["prevent"])
+  }, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_3, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)($setup["MyLabel"], {
+    required: true,
     "for": "current_password",
-    value: "رمز عبور فعلی",
-    required: true
-  }), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)($setup["myInput"], {
+    value: "رمز عبور فعلی"
+  }), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)($setup["MyInput"], {
     id: "current_password",
-    type: "password",
+    ref: "current_password",
     modelValue: $setup.form.current_password,
     "onUpdate:modelValue": _cache[0] || (_cache[0] = function ($event) {
       return $setup.form.current_password = $event;
     }),
-    ref: "current_password",
-    autocomplete: "current-password"
+    autocomplete: "current-password",
+    type: "password"
   }, null, 8
   /* PROPS */
-  , ["modelValue"])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_4, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)($setup["myLabel"], {
+  , ["modelValue"])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_4, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)($setup["MyLabel"], {
+    required: true,
     "for": "password",
-    value: "رمز عبور جدید",
-    required: true
-  }), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)($setup["myInput"], {
+    value: "رمز عبور جدید"
+  }), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)($setup["MyInput"], {
     id: "password",
-    type: "password",
+    ref: "password",
     modelValue: $setup.form.password,
     "onUpdate:modelValue": _cache[1] || (_cache[1] = function ($event) {
       return $setup.form.password = $event;
     }),
-    ref: "password",
-    autocomplete: "new-password"
+    autocomplete: "new-password",
+    type: "password"
   }, null, 8
   /* PROPS */
-  , ["modelValue"])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_5, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)($setup["myLabel"], {
+  , ["modelValue"])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_5, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)($setup["MyLabel"], {
+    required: true,
     "for": "password_confirmation",
-    value: "تکرار رمز عبور جدید",
-    required: true
-  }), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)($setup["myInput"], {
+    value: "تکرار رمز عبور جدید"
+  }), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)($setup["MyInput"], {
     id: "password_confirmation",
-    type: "password",
     modelValue: $setup.form.password_confirmation,
     "onUpdate:modelValue": _cache[2] || (_cache[2] = function ($event) {
       return $setup.form.password_confirmation = $event;
     }),
-    autocomplete: "new-password"
+    autocomplete: "new-password",
+    type: "password"
   }, null, 8
   /* PROPS */
-  , ["modelValue"])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_6, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)($setup["myButton"], {
-    loding: $setup.loding,
-    disabled: $setup.form.processing
+  , ["modelValue"])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_6, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)($setup["MyButton"], {
+    disabled: $setup.form.processing,
+    loding: $setup.loading
   }, {
     "default": (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function () {
       return [_hoisted_7];
@@ -29442,7 +29795,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
 
   }, 8
   /* PROPS */
-  , ["loding", "disabled"])])], 40
+  , ["disabled", "loding"])])], 40
   /* PROPS, HYDRATE_EVENTS */
   , _hoisted_2)]);
 }
@@ -29479,7 +29832,7 @@ var _hoisted_5 = {
 var _hoisted_6 = {
   "class": "w-24 overflow-hidden rounded-full"
 };
-var _hoisted_7 = ["src", "alt"];
+var _hoisted_7 = ["alt", "src"];
 var _hoisted_8 = {
   key: 1,
   "class": "mt-2 avatar"
@@ -29503,30 +29856,30 @@ var _hoisted_14 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNo
 
 function render(_ctx, _cache, $props, $setup, $data, $options) {
   return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", _hoisted_1, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("form", {
-    onSubmit: (0,vue__WEBPACK_IMPORTED_MODULE_0__.withModifiers)($setup.send, ["prevent"]),
     "class": "w-full md:w-1/2",
-    novalidate: ""
+    novalidate: "",
+    onSubmit: (0,vue__WEBPACK_IMPORTED_MODULE_0__.withModifiers)($setup.send, ["prevent"])
   }, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" Profile Photo "), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_3, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" Profile Photo File Input "), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("input", {
-    type: "file",
-    "class": "hidden",
     ref: "photo",
+    "class": "hidden",
+    type: "file",
     onChange: $setup.updatePhotoPreview
   }, null, 544
   /* HYDRATE_EVENTS, NEED_PATCH */
-  ), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)($setup["myLabel"], {
+  ), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)($setup["MyLabel"], {
     "for": "photo",
     value: "تصویر"
   }), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_4, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" Current Profile Photo "), !$setup.photoPreview ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", _hoisted_5, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_6, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("img", {
-    src: $props.user.profile_photo_url,
-    alt: $props.user.name
+    alt: $props.user.name,
+    src: $props.user.profile_photo_url
   }, null, 8
   /* PROPS */
   , _hoisted_7)])])) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" New Profile Photo Preview "), $setup.photoPreview ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", _hoisted_8, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("span", {
-    "class": "block h-20 bg-center bg-no-repeat bg-cover rounded-full",
-    style: (0,vue__WEBPACK_IMPORTED_MODULE_0__.normalizeStyle)('background-image: url(\'' + $setup.photoPreview + '\');')
+    style: (0,vue__WEBPACK_IMPORTED_MODULE_0__.normalizeStyle)('background-image: url(\'' + $setup.photoPreview + '\');'),
+    "class": "block h-20 bg-center bg-no-repeat bg-cover rounded-full"
   }, null, 4
   /* STYLE */
-  )])) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", null, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)($setup["myButton"], {
+  )])) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", null, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)($setup["MyButton"], {
     "class": "mt-2 ml-2 btn-secondary",
     type: "button",
     onClick: (0,vue__WEBPACK_IMPORTED_MODULE_0__.withModifiers)($setup.selectNewPhoto, ["prevent"])
@@ -29539,10 +29892,10 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
 
   }, 8
   /* PROPS */
-  , ["onClick"]), $props.user.profile_photo_path ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)($setup["myButton"], {
+  , ["onClick"]), $props.user.profile_photo_path ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)($setup["MyButton"], {
     key: 0,
-    type: "button",
     "class": "mt-2 btn-secondary",
+    type: "button",
     onClick: (0,vue__WEBPACK_IMPORTED_MODULE_0__.withModifiers)($setup.deletePhoto, ["prevent"])
   }, {
     "default": (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function () {
@@ -29553,37 +29906,37 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
 
   }, 8
   /* PROPS */
-  , ["onClick"])) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true)])])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" Name "), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_11, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)($setup["myLabel"], {
+  , ["onClick"])) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true)])])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" Name "), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_11, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)($setup["MyLabel"], {
+    required: true,
     "for": "name",
-    value: "نام",
-    required: true
-  }), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)($setup["myInput"], {
+    value: "نام"
+  }), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)($setup["MyInput"], {
     id: "name",
-    type: "text",
     modelValue: $setup.form.name,
     "onUpdate:modelValue": _cache[0] || (_cache[0] = function ($event) {
       return $setup.form.name = $event;
     }),
-    autocomplete: "name"
+    autocomplete: "name",
+    type: "text"
   }, null, 8
   /* PROPS */
-  , ["modelValue"])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" Email "), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_12, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)($setup["myLabel"], {
+  , ["modelValue"])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" Email "), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_12, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)($setup["MyLabel"], {
+    required: true,
     "for": "email",
-    value: "ایمیل",
-    required: true
-  }), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)($setup["myInput"], {
+    value: "ایمیل"
+  }), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)($setup["MyInput"], {
     id: "email",
-    type: "email",
     modelValue: $setup.form.email,
     "onUpdate:modelValue": _cache[1] || (_cache[1] = function ($event) {
       return $setup.form.email = $event;
     }),
-    autocomplete: "email"
+    autocomplete: "email",
+    type: "email"
   }, null, 8
   /* PROPS */
-  , ["modelValue"])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_13, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)($setup["myButton"], {
-    loding: $setup.loding,
-    disabled: $setup.form.processing
+  , ["modelValue"])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_13, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)($setup["MyButton"], {
+    disabled: $setup.form.processing,
+    loding: $setup.loading
   }, {
     "default": (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function () {
       return [_hoisted_14];
@@ -29593,7 +29946,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
 
   }, 8
   /* PROPS */
-  , ["loding", "disabled"])])], 40
+  , ["disabled", "loding"])])], 40
   /* PROPS, HYDRATE_EVENTS */
   , _hoisted_2)]);
 }
@@ -29626,7 +29979,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
     "default": (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function () {
       return [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", null, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_1, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_2, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("button", {
         "class": (0,vue__WEBPACK_IMPORTED_MODULE_0__.normalizeClass)(["tab", {
-          'tab-active': $setup.isComponent == 'update-profile-information-form'
+          'tab-active': $setup.isComponent === 'update-profile-information-form'
         }]),
         onClick: _cache[0] || (_cache[0] = function ($event) {
           return $setup.chengTab('update-profile-information-form');
@@ -29635,7 +29988,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
       /* CLASS */
       ), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("button", {
         "class": (0,vue__WEBPACK_IMPORTED_MODULE_0__.normalizeClass)(["tab", {
-          'tab-active': $setup.isComponent == 'update-password-form'
+          'tab-active': $setup.isComponent === 'update-password-form'
         }]),
         onClick: _cache[1] || (_cache[1] = function ($event) {
           return $setup.chengTab('update-password-form');
@@ -30935,9 +31288,34 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
 
 /***/ }),
 
-/***/ "./resources/js/Consts/MyConsts.js":
+/***/ "./resources/js/Consts/Message.js":
+/*!****************************************!*\
+  !*** ./resources/js/Consts/Message.js ***!
+  \****************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "confirmPasswordMessage": () => (/* binding */ confirmPasswordMessage),
+/* harmony export */   "emailMessage": () => (/* binding */ emailMessage),
+/* harmony export */   "requiredAnsMessage": () => (/* binding */ requiredAnsMessage),
+/* harmony export */   "requiredMessage": () => (/* binding */ requiredMessage),
+/* harmony export */   "scoreMessage": () => (/* binding */ scoreMessage),
+/* harmony export */   "scoreNMessage": () => (/* binding */ scoreNMessage)
+/* harmony export */ });
+var requiredMessage = 'تمام فیلد های ستاره دار را پر کنید';
+var emailMessage = 'ایمیل وارد شده صحیح نمی باشد';
+var confirmPasswordMessage = 'تأیید رمز عبور با رمز عبور باید یکسان باشد';
+var requiredAnsMessage = 'پاسخ تمام سؤالات تستی را ثبت کنید';
+var scoreMessage = 'نمره باید به صورت عدیدی بزرگ تر از صفر باشد';
+var scoreNMessage = 'نمره منفی باید به صورت عدیدی مثبت و بدون اعشار باشد';
+
+/***/ }),
+
+/***/ "./resources/js/Consts/property.js":
 /*!*****************************************!*\
-  !*** ./resources/js/Consts/MyConsts.js ***!
+  !*** ./resources/js/Consts/property.js ***!
   \*****************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
@@ -30966,7 +31344,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var vue3_persian_datetime_picker__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(vue3_persian_datetime_picker__WEBPACK_IMPORTED_MODULE_3__);
 /* harmony import */ var vue_toastification__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! vue-toastification */ "./node_modules/vue-toastification/dist/index.mjs");
 /* harmony import */ var vue_toastification_dist_index_css__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! vue-toastification/dist/index.css */ "./node_modules/vue-toastification/dist/index.css");
-/* harmony import */ var _Consts_MyConsts__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! @/Consts/MyConsts */ "./resources/js/Consts/MyConsts.js");
+/* harmony import */ var _Consts_property__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! @/Consts/property */ "./resources/js/Consts/property.js");
 var _window$document$getE;
 
 
@@ -31005,7 +31383,7 @@ var appName = ((_window$document$getE = window.document.getElementsByTagName("ti
   }
 });
 _inertiajs_progress__WEBPACK_IMPORTED_MODULE_2__.InertiaProgress.init({
-  color: _Consts_MyConsts__WEBPACK_IMPORTED_MODULE_6__.color
+  color: _Consts_property__WEBPACK_IMPORTED_MODULE_6__.color
 });
 
 /***/ }),
@@ -31080,6 +31458,90 @@ function togel(el) {
 
 /***/ }),
 
+/***/ "./resources/js/functions/Message.js":
+/*!*******************************************!*\
+  !*** ./resources/js/functions/Message.js ***!
+  \*******************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "errorMessage": () => (/* binding */ errorMessage),
+/* harmony export */   "infoMessage": () => (/* binding */ infoMessage),
+/* harmony export */   "successMessage": () => (/* binding */ successMessage),
+/* harmony export */   "warningMessage": () => (/* binding */ warningMessage)
+/* harmony export */ });
+/* harmony import */ var vue_toastification__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! vue-toastification */ "./node_modules/vue-toastification/dist/index.mjs");
+
+var toast = (0,vue_toastification__WEBPACK_IMPORTED_MODULE_0__.useToast)();
+function successMessage(text) {
+  toast.success(text, {
+    position: "bottom-right",
+    timeout: 5000,
+    closeOnClick: true,
+    pauseOnFocusLoss: true,
+    pauseOnHover: true,
+    draggable: true,
+    draggablePercent: 0.6,
+    showCloseButtonOnHover: false,
+    hideProgressBar: false,
+    closeButton: "button",
+    icon: true,
+    rtl: false
+  });
+}
+function errorMessage(text) {
+  toast.error(text, {
+    position: "bottom-right",
+    timeout: 5000,
+    closeOnClick: true,
+    pauseOnFocusLoss: true,
+    pauseOnHover: true,
+    draggable: true,
+    draggablePercent: 0.6,
+    showCloseButtonOnHover: false,
+    hideProgressBar: false,
+    closeButton: "button",
+    icon: true,
+    rtl: false
+  });
+}
+function infoMessage(text) {
+  toast.info(text, {
+    position: "bottom-right",
+    timeout: 5000,
+    closeOnClick: true,
+    pauseOnFocusLoss: true,
+    pauseOnHover: true,
+    draggable: true,
+    draggablePercent: 0.6,
+    showCloseButtonOnHover: false,
+    hideProgressBar: false,
+    closeButton: "button",
+    icon: true,
+    rtl: false
+  });
+}
+function warningMessage(text) {
+  toast.warning(text, {
+    position: "bottom-right",
+    timeout: 5000,
+    closeOnClick: true,
+    pauseOnFocusLoss: true,
+    pauseOnHover: true,
+    draggable: true,
+    draggablePercent: 0.6,
+    showCloseButtonOnHover: false,
+    hideProgressBar: false,
+    closeButton: "button",
+    icon: true,
+    rtl: false
+  });
+}
+
+/***/ }),
+
 /***/ "./resources/js/functions/validations.js":
 /*!***********************************************!*\
   !*** ./resources/js/functions/validations.js ***!
@@ -31093,6 +31555,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "passwordConfirmation": () => (/* binding */ passwordConfirmation),
 /* harmony export */   "required": () => (/* binding */ required),
 /* harmony export */   "requiredAns": () => (/* binding */ requiredAns),
+/* harmony export */   "score": () => (/* binding */ score),
+/* harmony export */   "scoreN": () => (/* binding */ scoreN),
 /* harmony export */   "validEmail": () => (/* binding */ validEmail)
 /* harmony export */ });
 function _createForOfIteratorHelper(o, allowArrayLike) { var it = typeof Symbol !== "undefined" && o[Symbol.iterator] || o["@@iterator"]; if (!it) { if (Array.isArray(o) || (it = _unsupportedIterableToArray(o)) || allowArrayLike && o && typeof o.length === "number") { if (it) o = it; var i = 0; var F = function F() {}; return { s: F, n: function n() { if (i >= o.length) return { done: true }; return { done: false, value: o[i++] }; }, e: function e(_e) { throw _e; }, f: F }; } throw new TypeError("Invalid attempt to iterate non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); } var normalCompletion = true, didErr = false, err; return { s: function s() { it = it.call(o); }, n: function n() { var step = it.next(); normalCompletion = step.done; return step; }, e: function e(_e2) { didErr = true; err = _e2; }, f: function f() { try { if (!normalCompletion && it["return"] != null) it["return"](); } finally { if (didErr) throw err; } } }; }
@@ -31149,6 +31613,12 @@ function requiredAns(v) {
   }
 
   return true;
+}
+function score(v) {
+  return isNaN(v) || v <= 0;
+}
+function scoreN(v, t) {
+  return t === 'test' && (isNaN(v) || !Number.isInteger(v));
 }
 
 /***/ }),

@@ -4,7 +4,7 @@
             v-model="proxyChecked"
             :required="required"
             :value="value"
-            class="checkbox ring-0 focus:ring-0 focus:ring-offset-0 focus:outline-0 checkbox-md checkbox-primary"
+            class="checkbox ring-0 focus:ring-0 focus:ring-offset-0 focus:outline-0 checkbox-md checkbox-primary bg-transparent"
             type="checkbox"
         />
         <span class="label-text">{{ txt }}</span>

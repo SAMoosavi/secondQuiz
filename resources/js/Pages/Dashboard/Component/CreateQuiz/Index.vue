@@ -166,9 +166,10 @@ import PersianDatetimePicker from "vue3-persian-datetime-picker";
 // Create Quiz component
 import Questions from "./Questions.vue";
 // Function validations
-import {required, requiredAns} from "@/functions/validations";
+import {required, requiredAns, score, scoreN} from "@/functions/validations";
 // Const
-import {color} from "@/Consts/MyConsts";
+import {requiredAnsMessage, requiredMessage, scoreMessage, scoreNMessage} from "@/Consts/Message";
+import {color} from "@/Consts/property"
 // Pinia
 import {storeToRefs} from 'pinia'
 import {useCreatQuiz} from "@/store/CreatQuiz";
@@ -211,17 +212,16 @@ onUnmounted(() => clean())
 // Submit functions
 function submit() {
     loading.value = true;
-    form.questions = questions.value;
     if (!required()) {
-        console.error('required')
+        errorMessage(requiredMessage)
     } else if (!requiredAns(form.questions)) {
-        console.error('requiredAns')
-    } else if (isNaN(form.score) || form.score <= 0) {
-        console.error(form.score)
-    } else if (form.type === 'test' && (isNaN(form.scoreN) || !Number.isInteger(form.scoreN))) {
-        console.error(form.scoreN)
+        errorMessage(requiredAnsMessage)
+    } else if (score(form.score)) {
+        errorMessage(scoreMessage)
+    } else if (scoreN(form.scoreN, form.type)) {
+        errorMessage(scoreNMessage);
     } else {
-        console.log(form)
+        form.questions = questions.value;
         form.post(route('store.quiz'), {
             onSuccess: () => successMessage('آزمون با موفقیت ساخته شد'),
             onError: errors => {

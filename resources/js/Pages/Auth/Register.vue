@@ -81,11 +81,12 @@ import MyLabel from "@/component/Form/Label.vue";
 import {
     validEmail,
     passwordConfirmation,
-    password,
+    password, password as validationsPassword,
 } from "@/functions/validations";
 import {Head, useForm} from "@inertiajs/inertia-vue3";
 import {ref} from "@vue/reactivity";
 import {errorMessage, successMessage} from "@/functions/Message";
+import {confirmPasswordMessage, emailMessage, requiredMessage} from "@/Consts/Message";
 
 const form = useForm({
     name: "",
@@ -105,15 +106,18 @@ function submit() {
         !form.password ||
         !form.password_confirmation
     ) {
-        //
-    } else if (form.email && !validEmail(form.email)) {
-        //
+        errorMessage(requiredMessage)
+    } else if (!validEmail(form.email)) {
+        errorMessage(emailMessage)
     } else if (
         !passwordConfirmation(form.password, form.password_confirmation)
     ) {
-        //
+        errorMessage(confirmPasswordMessage)
     } else if (!password(form.password)) {
-        //password(form.password) return errors
+        const errors = validationsPassword(form.password)
+        for (const key in errors) {
+            errorMessage(errors[key])
+        }
     } else {
         form.post(route("register"), {
             onSuccess: () => successMessage('با موفقیت ثبت نام شدید'),

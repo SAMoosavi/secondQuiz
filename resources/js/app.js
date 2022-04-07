@@ -5,7 +5,7 @@ import {createPinia} from 'pinia'
 import Vue3PersianDatetimePicker from "vue3-persian-datetime-picker";
 import Toast from "vue-toastification";
 import "vue-toastification/dist/index.css";
-import {color} from "@/Consts/MyConsts";
+import {color} from "@/Consts/property";
 
 require("./bootstrap");
 

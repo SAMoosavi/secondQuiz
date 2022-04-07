@@ -153,12 +153,13 @@ import Questions from "./Questions.vue";
 // Persian datetime picker
 import PersianDatetimePicker from "vue3-persian-datetime-picker";
 // Const
-import {color} from "@/Consts/MyConsts";
+import {requiredAnsMessage, requiredMessage, scoreMessage, scoreNMessage} from "@/Consts/Message";
+import {color} from "@/Consts/property"
 // Inertia functions
 import {useForm} from "@inertiajs/inertia-vue3";
 
 // validation functions
-import {required, requiredAns} from "@/functions/validations";
+import {required, requiredAns, score, scoreN} from "@/functions/validations";
 // Pinia
 import {useEditQuiz} from "@/store/EditQuiz";
 import {storeToRefs} from "pinia";
@@ -203,21 +204,21 @@ onUnmounted(() => clean())
 // Submit functions
 function submit() {
     loading.value = true;
-    form.questions = questions.value;
-    form.deleted = deleted.value;
     if (!required()) {
-        console.error('required')
+        errorMessage(requiredMessage);
     } else if (!requiredAns(form.questions)) {
-        console.error('requiredAns')
-    } else if (isNaN(form.score) || form.score <= 0) {
-        console.error(form.score)
-    } else if (form.type === 'test' && (isNaN(form.scoreN) || !Number.isInteger(form.scoreN))) {
-        console.error(form.scoreN)
+        errorMessage(requiredAnsMessage);
+    } else if (score(form.score)) {
+        errorMessage(scoreMessage)
+    } else if (scoreN(form.scoreN, form.type)) {
+        errorMessage(scoreNMessage)
     } else {
+        form.questions = questions.value;
+        form.deleted = deleted.value;
         form.put(route('edit.quiz', [props.myProps.quiz.uuid]), {
             onSuccess: () => {
                 successMessage('آزمون با موفقیت ویرایش شد');
-                clean();
+                // clean();
             },
             onError: errors => {
                 for (const error of errors) {

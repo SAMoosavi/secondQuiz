@@ -45,7 +45,7 @@
                 />
             </div>
             <div class="mt-2 form-control">
-                <my-button :disabled="form.processing" :loding="loding">
+                <my-button :disabled="form.processing" :loding="loading">
                     ذخیره
                 </my-button>
             </div>
@@ -63,6 +63,7 @@ import {password as validationsPassword, passwordConfirmation,} from "@/function
 import {useForm} from "@inertiajs/inertia-vue3";
 import {ref} from "@vue/reactivity";
 import {errorMessage, successMessage} from "@/functions/Message";
+import {confirmPasswordMessage, requiredMessage} from "@/Consts/Message";
 
 const form = useForm({
     current_password: "",
@@ -72,22 +73,25 @@ const form = useForm({
 
 const password = ref();
 const current_password = ref();
-const loding = ref(false);
+const loading = ref(false);
 
 function send() {
-    loding.value = true;
+    loading.value = true;
     if (
         !form.current_password ||
         !form.password ||
         !form.password_confirmation
     ) {
-        //
+        errorMessage(requiredMessage)
     } else if (!validationsPassword(form.password)) {
-        //password(form.password) return errors
+        const errors = validationsPassword(form.password)
+        for (const key in errors) {
+            errorMessage(errors[key])
+        }
     } else if (
         !passwordConfirmation(form.password, form.password_confirmation)
     ) {
-        //
+        errorMessage(confirmPasswordMessage)
     } else {
         form.put(route("user-password.update"), {
             onSuccess: () => {
@@ -111,7 +115,7 @@ function send() {
         });
     }
     setTimeout(() => {
-        loding.value = false;
+        loading.value = false;
     }, 200);
 }
 </script>

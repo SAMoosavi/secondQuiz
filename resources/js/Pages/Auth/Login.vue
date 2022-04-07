@@ -72,6 +72,7 @@ import {validEmail} from "@/functions/validations";
 import {Head, useForm} from "@inertiajs/inertia-vue3";
 import {ref} from "vue";
 import {errorMessage, successMessage} from "@/functions/Message";
+import {emailMessage, requiredMessage} from "@/Consts/Message";
 
 const form = useForm({
     email: "",
@@ -84,9 +85,9 @@ const loading = ref(false);
 function submit() {
     loading.value = true;
     if (!form.email || !form.password) {
-        //
-    } else if (form.email && !validEmail(form.email)) {
-        //
+        errorMessage(requiredMessage)
+    } else if (!validEmail(form.email)) {
+        errorMessage(emailMessage)
     } else {
         form.transform((data) => ({
             ...data,

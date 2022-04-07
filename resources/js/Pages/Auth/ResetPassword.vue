@@ -58,10 +58,11 @@ import MyButton from "@/component/Form/Button.vue";
 import MyLabel from "@/component/Form/Label.vue";
 import MyInput from "@/component/Form/Input.vue";
 
-import {validEmail, passwordConfirmation, password} from "@/functions/validations";
+import {validEmail, passwordConfirmation, password, password as validationsPassword} from "@/functions/validations";
 import {Head, useForm} from "@inertiajs/inertia-vue3";
 import {ref} from "vue";
 import {errorMessage, successMessage} from "@/functions/Message";
+import {confirmPasswordMessage, emailMessage, requiredMessage} from "@/Consts/Message";
 
 const props = defineProps({
     email: String,
@@ -80,15 +81,18 @@ const loading = ref(false);
 function submit() {
     loading.value = true;
     if (!form.email || !form.password || !form.password_confirmation) {
-        //
-    } else if (form.email && !validEmail(form.email)) {
-        //
+        errorMessage(requiredMessage)
+    } else if ( !validEmail(form.email)) {
+        errorMessage(emailMessage)
     } else if (
         !passwordConfirmation(form.password, form.password_confirmation)
     ) {
-        //
+        errorMessage(confirmPasswordMessage)
     } else if (!password(form.password)) {
-        //password(form.password) return errors
+        const errors = validationsPassword(form.password)
+        for (const key in errors) {
+            errorMessage(errors[key])
+        }
     } else {
         form.post(route("password.update"), {
             onSuccess: () => successMessage('رمز با موفقیت تغییر کرد'),

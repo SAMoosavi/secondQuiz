@@ -42,6 +42,7 @@ import {validEmail} from "@/functions/validations";
 import {Head, useForm} from "@inertiajs/inertia-vue3";
 import {ref} from "@vue/reactivity";
 import {errorMessage, successMessage} from "@/functions/Message";
+import {requiredMessage} from "@/Consts/Message";
 
 const form = useForm({
     email: "",
@@ -51,11 +52,13 @@ const loading = ref(false);
 
 function submit() {
     loading.value = true;
-    if (!form.email || !validEmail(form.email)) {
-        //
+    if (!form.email) {
+        errorMessage(requiredMessage);
+    } else if (!validEmail(form.email)) {
+        errorMessage()
     } else {
-        form.post(route("password.email"),{
-            onSuccess:()=>successMessage('ایمیل با موفقیت ارسال شد'),
+        form.post(route("password.email"), {
+            onSuccess: () => successMessage('ایمیل با موفقیت ارسال شد'),
             onError: errors => {
                 for (const error of errors) {
                     errorMessage(error);

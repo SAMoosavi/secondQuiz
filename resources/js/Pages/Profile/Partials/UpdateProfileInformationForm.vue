@@ -79,7 +79,7 @@
             </div>
 
             <div class="mt-2 form-control">
-                <my-button :disabled="form.processing" :loding="loding">
+                <my-button :disabled="form.processing" :loding="loading">
                     ذخیره
                 </my-button>
             </div>
@@ -89,6 +89,7 @@
 
 <script setup>
 import MyButton from "@/component/Form/Button.vue";
+import MyInput from "@/component/Form/Input.vue";
 import MyLabel from "@/component/Form/Label.vue";
 
 import {validEmail} from "@/functions/validations";
@@ -96,30 +97,30 @@ import {validEmail} from "@/functions/validations";
 import {useForm} from "@inertiajs/inertia-vue3";
 import {ref} from "@vue/reactivity";
 import {errorMessage, successMessage} from "@/functions/Message";
+import {emailMessage, requiredMessage} from "@/Consts/Message";
 
 const props = defineProps(["user"]);
 
 const form = useForm({
-    _method: "PUT",
     name: props.user.name,
     email: props.user.email,
     photo: null,
 });
 
 const photoPreview = ref();
-const loding = ref(false);
+const loading = ref(false);
 
 function send() {
-    loding.value = true;
+    loading.value = true;
     if (photo.value) {
         form.photo = photo.value.files[0];
     }
     if (!form.name || !form.email) {
-        //
+        errorMessage(requiredMessage);
     } else if (!validEmail(form.email)) {
-        //
+        errorMessage(emailMessage)
     } else {
-        form.post(route("user-profile-information.update"), {
+        form.put(route("user-profile-information.update"), {
             errorBag: "updateProfileInformation",
             preserveScroll: true,
             onSuccess: () => {
@@ -134,7 +135,7 @@ function send() {
         });
     }
     setTimeout(() => {
-        loding.value = false;
+        loading.value = false;
     }, 200);
 }
 

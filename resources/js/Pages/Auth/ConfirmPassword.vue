@@ -39,6 +39,7 @@ import MyInput from "@/component/Form/Input.vue";
 import {Head, useForm} from "@inertiajs/inertia-vue3";
 import {ref} from "@vue/reactivity";
 import {errorMessage, successMessage} from "@/functions/Message";
+import {requiredMessage} from "@/Consts/Message";
 
 const form = useForm({
     password: "",
@@ -49,7 +50,7 @@ const loading = ref(false);
 function submit() {
     loading.value = true;
     if (!form.password) {
-        //
+        errorMessage(requiredMessage)
     } else {
         form.post(route("password.confirm"), {
             onSuccess: () => successMessage('تایید شد'),

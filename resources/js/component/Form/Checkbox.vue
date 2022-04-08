@@ -31,7 +31,6 @@ defineProps({
 });
 const proxyChecked = ref();
 watch(proxyChecked, (val) => {
-    console.log(val);
     emit("update:modelValue", val);
 });
 </script>

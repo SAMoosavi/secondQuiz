@@ -18,13 +18,13 @@
             </div>
             <!--Start-->
             <div class="form-control">
-                <my-label for="start" value="زمان شروع"/>
+                <my-label for="start" value="زمان شروع" />
                 <my-input
                     id="start"
                     v-model="form.start"
                     :icon="true"
                 >
-                    <calendar/>
+                    <calendar />
                 </my-input>
                 <persian-datetime-picker
                     v-model="form.start"
@@ -48,7 +48,7 @@
                     :icon="true"
                     :required="!!form.start"
                 >
-                    <calendar/>
+                    <calendar />
                 </my-input>
                 <persian-datetime-picker
                     v-model="form.end"
@@ -72,7 +72,7 @@
                     :icon="true"
                     :required="true"
                 >
-                    <clock/>
+                    <clock />
                 </my-input>
                 <persian-datetime-picker
                     v-model="form.time"
@@ -117,8 +117,10 @@
         <!-- Create Questions -->
         <section class="mt-6 col-span-full">
             <div>
-                <Questions v-for="(question,index) in form.questions" :key="index" :question="question"
-                           :type="form.type"/>
+                <Questions
+                    v-for="(question,index) in form.questions" :key="index" :question="question"
+                    :type="form.type"
+                />
             </div>
             <div class="flex items-center justify-start gap-2 transition transform-all duration-500">
                 <my-button
@@ -130,9 +132,7 @@
                 </my-button>
                 <div>
                     <p class="text-gray-800 dark:text-gray-300">
-                        آزمون دارای
-                        <span>{{ content }}</span>
-                        سؤال است
+                        آزمون دارای <span>{{ content }}</span> سؤال است
                     </p>
                 </div>
             </div>
@@ -154,7 +154,7 @@ import Questions from "./Questions.vue";
 import PersianDatetimePicker from "vue3-persian-datetime-picker";
 // Const
 import {requiredAnsMessage, requiredMessage, scoreMessage, scoreNMessage} from "@/Consts/Message";
-import {color} from "@/Consts/property"
+import {color} from "@/Consts/property";
 // Inertia functions
 import {useForm} from "@inertiajs/inertia-vue3";
 
@@ -170,13 +170,13 @@ import {errorMessage, successMessage} from "@/functions/Message";
 
 
 // Props
-const props = defineProps(['myProps']);
+const props = defineProps(["myProps"]);
 /**************** Pinia ****************/
-const editQuiz = useEditQuiz()
+const editQuiz = useEditQuiz();
 // create pinia states
 const {content, questions, scoreQuiz, deleted} = storeToRefs(editQuiz);
 // create pinia actions
-const {clean} = editQuiz
+const {clean} = editQuiz;
 /**************** Properties ****************/
 const form = useForm({
     id: props.myProps.quiz.id,
@@ -189,7 +189,7 @@ const form = useForm({
     type: props.myProps.quiz.type,
     questions: props.myProps.quiz.questions,
     deleted: [],
-})
+});
 
 const loading = ref(false);
 
@@ -199,35 +199,35 @@ const loading = ref(false);
 watch(scoreQuiz, (value) => form.score = value);
 watch(() => form.type, () => form.score = null);
 // onUnmounted
-onUnmounted(() => clean())
+onUnmounted(() => clean());
 
 // Submit functions
-function submit() {
+function submit(){
     loading.value = true;
-    if (!required()) {
+    form.questions = questions.value;
+    if ( !required()){
         errorMessage(requiredMessage);
-    } else if (!requiredAns(form.questions)) {
+    } else if ( !requiredAns(form.questions)){
         errorMessage(requiredAnsMessage);
-    } else if (score(form.score)) {
-        errorMessage(scoreMessage)
-    } else if (scoreN(form.scoreN, form.type)) {
-        errorMessage(scoreNMessage)
+    } else if (score(form.score)){
+        errorMessage(scoreMessage);
+    } else if (scoreN(form.scoreN, form.type)){
+        errorMessage(scoreNMessage);
     } else {
-        form.questions = questions.value;
         form.deleted = deleted.value;
-        form.put(route('edit.quiz', [props.myProps.quiz.uuid]), {
+        form.put(route("edit.quiz", [props.myProps.quiz.uuid]), {
             onSuccess: () => {
-                successMessage('آزمون با موفقیت ویرایش شد');
+                successMessage("آزمون با موفقیت ویرایش شد");
                 clean();
             },
             onError: errors => {
-                for (const error of errors) {
+                for (const error of errors){
                     errorMessage(error);
                 }
             },
-        })
+        });
     }
-    setTimeout(() => (loading.value = false), 200)
+    setTimeout(() => (loading.value = false), 200);
 }
 </script>
 

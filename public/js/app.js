@@ -27199,7 +27199,7 @@ __webpack_require__.r(__webpack_exports__);
  // Props & Emits
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
-  props: ["modelValue", "icon", "id", "disabled", "required"],
+  props: ["modelValue", "icon", "id", "disabled", "required", "type"],
   emits: ["update:modelValue"],
   setup: function setup(__props, _ref) {
     var expose = _ref.expose;
@@ -31441,12 +31441,12 @@ var _hoisted_1 = {
   "class": "flex"
 };
 var _hoisted_2 = ["disabled"];
-var _hoisted_3 = ["id", "disabled", "required", "value"];
-var _hoisted_4 = ["id", "disabled", "required", "value"];
+var _hoisted_3 = ["id", "disabled", "required", "value", "type"];
+var _hoisted_4 = ["id", "type", "disabled", "required", "value"];
 function render(_ctx, _cache, $props, $setup, $data, $options) {
   return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)(vue__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("Has Icon"), $props.icon ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", _hoisted_1, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("button", {
     disabled: $props.disabled,
-    "class": "btn btn-primary rounded-l-none",
+    "class": "rounded-l-none btn btn-primary",
     onClick: $setup.click
   }, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.renderSlot)(_ctx.$slots, "default")], 8
   /* PROPS */
@@ -31457,7 +31457,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
     disabled: $props.disabled,
     required: $props.required,
     value: $props.modelValue,
-    type: "text",
+    type: $props.type,
     onInput: _cache[0] || (_cache[0] = function ($event) {
       return _ctx.$emit('update:modelValue', $event.target.value);
     })
@@ -31469,6 +31469,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
     id: $props.id,
     ref: "input",
     "class": (0,vue__WEBPACK_IMPORTED_MODULE_0__.normalizeClass)($setup.classInput),
+    type: $props.type,
     disabled: $props.disabled,
     required: $props.required,
     value: $props.modelValue,

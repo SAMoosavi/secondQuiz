@@ -142,7 +142,7 @@ function submit() {
     form.transform((data) => ({
         ...data,
         answer: answer.value,
-    })).post(route("student.answered"), {
+    })).post(route("student.answered.descriptive"), {
         onSuccess: () => {
             clear();
             successMessage("پاسخ با موفقیت ثبت شد");

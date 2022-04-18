@@ -5,6 +5,16 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
+/**
+ * @property mixed $Questions
+ * @property mixed $id
+ * @property mixed $uuid
+ * @property mixed $user_id
+ * @property mixed $start
+ * @property mixed $end
+ * @property mixed $type
+ * @property mixed $time
+ */
 class Quiz extends Model
 {
     use HasFactory;

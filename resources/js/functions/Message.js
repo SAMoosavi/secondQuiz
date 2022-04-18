@@ -70,3 +70,9 @@ export function warningMessage(text) {
         rtl: false,
     });
 }
+
+export function showError(errors) {
+    for (const key in errors) {
+        errorMessage(errors[key]);
+    }
+}

@@ -1,7 +1,12 @@
 <template>
-    <Head title="زمان شروع آزمون"><title>زمان شروع آزمون</title></Head>
-    <div class="min-h-screen bg-gradient-to-br from-neutral to-neutral-focus flex items-center justify-center">
-        <div class="bg-base-200 border-transparent border-1 rounded w-full p-4 max-w-7xl">
+    <Head title="زمان شروع آزمون" />
+    <div
+        class="flex items-center justify-center min-h-screen bg-gradient-to-br from-neutral to-neutral-focus"
+    >
+        <div
+            class="flex items-center justify-center w-full p-4 border-transparent rounded bg-base-200 border-1 max-w-7xl"
+        >
+            <h1 class="mx-2">مدت زمان باقی مانده تا شروع آزمون:</h1>
             <countdown-timer
                 :now="now"
                 :start="start"
@@ -17,15 +22,15 @@
 import AppLayout from "@/Layouts/AppLayout.vue";
 import CountdownTimer from "@/component/CountdownTimer";
 
-import {successMessage} from "@/functions/Message";
+import { successMessage } from "@/functions/Message";
 
-import {Head, Link} from "@inertiajs/inertia-vue3";
-import {ref} from "@vue/reactivity";
+import { Head, Link } from "@inertiajs/inertia-vue3";
+import { ref } from "@vue/reactivity";
 
 const props = defineProps(["start", "now", "uuid", "time"]);
 let tagA = ref();
 
-function finish(){
+function finish() {
     console.log(tagA.value);
     tagA.value.click();
     successMessage("آزمون با شروع شد");

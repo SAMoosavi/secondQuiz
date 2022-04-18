@@ -16,10 +16,12 @@ class AnswerController extends Controller
             'answer' => 'required|array',
             'answer.*' => 'required|string',
         ]);
+        $questionId = null;
         foreach ($request->answer as $key => $answer) {
             $this->setAnswer($key, $answer, $request->userId);
+            $questionId = $key;
         }
-
+        StudentQuizController::setEndTime(Question::find($questionId)->Quiz);
         return Redirect::route('dashboard');
     }
 

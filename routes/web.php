@@ -24,8 +24,8 @@ Route::get('/create-quiz', function () {
 })->name('create.quiz');
 Route::post('/create-quiz', [QuizController::class, 'store'])->name('store.quiz');
 Route::get('/teacher/edit/{quiz:uuid}', function (\App\Models\Quiz $quiz) {
-    $quiz->start = ! !$quiz->start ? (new \Date\Date($quiz->start))->toJalali()->format('Y-m-d H:i:s') : null;
-    $quiz->end = ! !$quiz->end ? (new \Date\Date($quiz->end))->toJalali()->format('Y-m-d H:i:s') : null;
+    $quiz->start = !!$quiz->start ? (new \Date\Date($quiz->start))->toJalali()->format('Y-m-d H:i:s') : null;
+    $quiz->end = !!$quiz->end ? (new \Date\Date($quiz->end))->toJalali()->format('Y-m-d H:i:s') : null;
 
     return Inertia::render('Dashboard/Dashboard', [
         'showQuiz' => true,
@@ -47,7 +47,8 @@ Route::get('/teacher/information/{quiz:uuid}', function (\App\Models\Quiz $quiz)
     ]);
 })->name('teacher.information.quiz');
 Route::get('/student/{quiz:uuid}', [StudentQuizController::class, 'index'])->name('student.quiz');
-Route::post('/student/answered', [AnswerController::class, 'store'])->name('student.answered');
+Route::post('/student/answered/descriptive', [AnswerController::class, 'storeDescriptive'])->name('student.answered.descriptive');
+Route::post('/student/answered/test', [AnswerController::class, 'storeTest'])->name('student.answered.test');
 /***************************API**************************/
 Route::get('/teacher/quiz', function () {
     $quizzes = \App\Models\User::find(auth()->id())->TeacherQuizzes()->select(['name', 'uuid'])->latest()->get();

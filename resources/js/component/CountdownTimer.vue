@@ -1,5 +1,5 @@
 <template>
-    <span v-if="showtime.seconds != null" class="countdown">
+    <span class="countdown">
         <span :style="`--value:${showtime.seconds};`"></span>:
         <span :style="`--value:${showtime.minutes};`"></span>:
         <span :style="`--value:${showtime.hours};`"></span>
@@ -30,26 +30,37 @@ function toTwoNumber(num) {
 }
 
 let timeEnd = null;
-let timer = setInterval(() => {
-    let now = new Date().getTime() + dispute;
-    let lastTime = (now - start) / 1000;
+let now = new Date().getTime() + dispute;
+let lastTime = (now - start) / 1000;
+if (time - lastTime < 3) {
+    showtime.seconds = "00";
+    showtime.minutes = "00";
+    showtime.hours = "00";
+    emit("finish");
+} else {
+    let timer = setInterval(() => {
+        now = new Date().getTime() + dispute;
+        lastTime = (now - start) / 1000;
 
-    timeEnd = time - lastTime;
-    if (timeEnd > 0) {
-        showtime.seconds = toTwoNumber(Math.floor(timeEnd % 60));
-        timeEnd /= 60;
-        showtime.minutes = toTwoNumber(Math.floor(timeEnd % 60));
-        timeEnd /= 60;
-        showtime.hours = toTwoNumber(Math.floor(timeEnd % 60));
-    } else {
-        timeEnd.seconds = "00";
-        timeEnd.minutes = "00";
-        timeEnd.hours = "00";
-    }
-    if (time - lastTime < 2) {
-        clearInterval(timer);
-        showtime.seconds = "00";
-        emit("finish");
-    }
-}, 1000);
+        timeEnd = time - lastTime;
+        if (time - lastTime < 1) {
+            showtime.seconds = "00";
+            showtime.minutes = "00";
+            showtime.hours = "00";
+            emit("finish");
+            clearInterval(timer);
+        }
+        if (timeEnd > 0) {
+            showtime.seconds = toTwoNumber(Math.floor(timeEnd % 60));
+            timeEnd /= 60;
+            showtime.minutes = toTwoNumber(Math.floor(timeEnd % 60));
+            timeEnd /= 60;
+            showtime.hours = toTwoNumber(Math.floor(timeEnd % 60));
+        } else {
+            showtime.seconds = "00";
+            showtime.minutes = "00";
+            showtime.hours = "00";
+        }
+    }, 1000);
+}
 </script>

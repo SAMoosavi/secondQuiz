@@ -127,4 +127,11 @@ class StudentQuizController extends Controller
             'end' => date("Y-m-d H:i:s"),
         ]);
     }
+
+    static function setScore(Quiz $quiz, $score)
+    {
+        StudentQuiz::where('user_id', '=', auth()->id())->where('quiz_id', '=', $quiz->id)->first()->update([
+            'score' => $score,
+        ]);
+    }
 }

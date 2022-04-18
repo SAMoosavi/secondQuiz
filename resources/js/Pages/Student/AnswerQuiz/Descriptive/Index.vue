@@ -18,7 +18,7 @@
                                 :now="now"
                                 :start="start"
                                 :time="quiz.time"
-                                @finish="submit"
+                                @finish="finish"
                             />
                     </span>
                 </h3>
@@ -60,7 +60,7 @@
                             class="p-8 bg-primary/60 border border-primary-focus rounded-md"
                         >
                             <p class="mb-4 text-justify">
-                                آیا از ارسال جواب خود مطمعن هستید؟ <br /> {{
+                                آیا از ارسال جواب خود مطمعن هستید؟ <br/> {{
                                     counter - answered === 0
                                         ? "شما به تمامی سوالات پاسخ داده اید."
                                         : `شمااز ${counter} به ${answered} سوال پاسخ داده اید`
@@ -80,7 +80,7 @@
                                     type="button"
                                     @click="chengSend"
                                 >
-                                    کنسل
+                                    لغو
                                 </my-button>
                             </div>
                         </div>
@@ -103,7 +103,7 @@ import Test from "./Types/Test.vue";
 // Lodash function
 import {shuffle} from "lodash";
 // Message functions
-import {errorMessage, successMessage} from "@/functions/Message";
+import {showError, successMessage} from "@/functions/Message";
 // Inertia function
 import {useForm} from "@inertiajs/inertia-vue3";
 // Pinia
@@ -122,7 +122,10 @@ const components = {
     "test": Test,
 };
 // form
-const form = useForm({userId: props.quiz["user_id"], answer: null});
+const form = useForm({
+    userId: props.quiz["user_id"],
+    answer: null,
+});
 const send = ref(false);
 const loading = ref(false);
 
@@ -130,24 +133,26 @@ const answerQuiz = useAnswerQuiz();
 const {clear} = answerQuiz;
 const {answered, counter, answer} = storeToRefs(answerQuiz);
 
-function chengSend(){
+function chengSend() {
     setTimeout(() => send.value = !send.value, 100);
 }
 
-function submit(){
+function submit() {
     loading.value = true;
-    form.answer = answer.value;
-    form.post(route("student.answered"), {
+    form.transform((data) => ({
+        ...data,
+        answer: answer.value,
+    })).post(route("student.answered"), {
         onSuccess: () => {
             clear();
             successMessage("پاسخ با موفقیت ثبت شد");
         },
-        onError: errors => {
-            for (const error of errors){
-                errorMessage(error);
-            }
-        },
+        onError: errors => showError(errors),
     });
     setTimeout(() => loading.value = false, 400);
+}
+
+function finish() {
+    setTimeout(submit, 100);
 }
 </script>

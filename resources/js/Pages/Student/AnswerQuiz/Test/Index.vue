@@ -1,108 +1,42 @@
 <template>
-    <div class="min-h-screen bg-gradient-to-br from-neutral to-neutral-focus flex items-center justify-center">
-        <div class="bg-base-200 border-transparent border-1 rounded w-full p-4 max-w-7xl">
-            <div class="gap-2 grid md:grid-cols-3">
-                <h3 class="flex justify-between md:justify-start md:block">
-                    نام آزمون: <span>
-                            {{ quiz.name }}
-                    </span>
-                </h3>
-                <h3 class="md:text-left order-2 md:order-3 flex justify-between md:justify-start md:block">
-                    <span>
-                        نمره آزمون:
-                        <span class="mr-auto md:mr-0">
-                            {{ quiz.score }}
-                        </span>
-                    </span>
-                    <span class="hidden md:inline">/</span>
-                    <span>
-                        نمره منفی:
-                         <span class="mr-auto md:mr-0">
-                            {{ quiz.scoreN }}
-                        </span>
-                    </span>
-                </h3>
-                <h3 class="col-span-1 md:text-center order-3 md:order-2 md:block flex justify-between md:justify-start">
-                    مدت باقی مانده تا پایان آزمون: <span class="mr-auto md:mr-0">
-                            <countdown-timer
-                                :now="now"
-                                :start="start"
-                                :time="quiz.time"
-                                @finish="finish"
-                            />
-                    </span>
-                </h3>
+    <my-card :quiz="quiz" @finish="finish" :now="now" :start="start">
+        <form novalidate @submit.prevent="submit">
+            <div
+                v-for="(question, index) in thisQuestions"
+                :key="index"
+                class="flex flex-col w-full p-1 py-4 my-2"
+            >
+                <test :question="question"/>
             </div>
-            <form novalidate @submit.prevent="submit">
-                <div
-                    v-for="(question, index) in thisQuestions"
-                    :key="index"
-                    class="flex flex-col w-full p-1 py-4 my-2"
+            <div>
+                <my-button
+                    :disabled="form.processing"
+                    class="mr-4"
+                    type="button"
+                    @click="chengSend"
                 >
-                    <test :question="question"/>
-                </div>
-                <div>
-                    <my-button
-                        :disabled="form.processing"
-                        class="mr-4"
-                        type="button"
-                        @click="chengSend"
-                    >
-                        ارسال
-                    </my-button>
-                </div>
-                <transition
-                    enter-active-class="transition duration-200 ease-out"
-                    enter-from-class="transform opacity-0 scale-50"
-                    enter-to-class="transform scale-100 opacity-100"
-                    leave-active-class="transition duration-200 ease-in"
-                    leave-from-class="transform scale-100 opacity-100"
-                    leave-to-class="transform opacity-0 scale-50"
-                >
-                    <div
-                        v-if="send"
-                        class="absolute top-0 right-0 flex items-center justify-center w-screen h-screen px-8 py-4"
-                    >
-                        <div
-                            class="p-8 bg-primary/60 border border-primary-focus rounded-md"
-                        >
-                            <p class="mb-4 text-justify">
-                                آیا از ارسال جواب خود مطمعن هستید؟ <br/> {{
-                                    counter - answered === 0
-                                        ? "شما به تمامی سوالات پاسخ داده اید."
-                                        : `شمااز ${counter} به ${answered} سوال پاسخ داده اید`
-                                }}
-                            </p>
-                            <div class="flex justify-center items-center gap-4">
-                                <my-button
-                                    :disabled="form.processing"
-                                    :loading="loading"
-                                    class="btn-info"
-                                    @click="submit"
-                                >
-                                    ارسال
-                                </my-button>
-                                <my-button
-                                    class="btn-error"
-                                    type="button"
-                                    @click="chengSend"
-                                >
-                                    لغو
-                                </my-button>
-                            </div>
-                        </div>
-                    </div>
-                </transition>
-            </form>
-        </div>
-    </div>
+                    ارسال
+                </my-button>
+            </div>
+            <my-modal
+                :form="form"
+                :loading="loading"
+                :counter="counter"
+                :answered="answered"
+                :send="send"
+                @submit="submit"
+                @chengSend="chengSend"
+            />
+        </form>
+    </my-card>
 </template>
 
 <script setup>
 // Form component
 import MyButton from "@/component/Form/Button";
-// CountdownTimer component
-import CountdownTimer from "@/component/CountdownTimer";
+// AnswerQuiz component
+import MyCard from "@/component/Student/AnswerQuiz/Card";
+import MyModal from "@/component/Student/AnswerQuiz/Modal";
 // test Component
 import Test from "./Test.vue";
 // Lodash function

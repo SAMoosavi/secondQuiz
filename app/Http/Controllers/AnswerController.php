@@ -29,7 +29,7 @@ class AnswerController extends Controller
     {
         $request->validate([
             'userId' => 'required|numeric',
-            'answer' => 'required|array',
+            'answer' => 'nullable|array',
             'answer.*' => 'required|string',
         ]);
         $questionId = null;

@@ -26,7 +26,7 @@
 import MyTitle from "@/Pages/Dashboard/Menu/Answer/Title.vue";
 import Answer from "@/Pages/Dashboard/Menu/Answer/Answer.vue";
 // functions Anime
-import { open, close } from "@/functions/Anime";
+import { openH, closeH } from "@/functions/Anime";
 // vue functions
 import { reactive, ref } from "@vue/reactivity";
 // Props & Emits
@@ -39,10 +39,10 @@ function chengShowIndex(index) {
 }
 // functions of transition
 function onEnter(el, done) {
-    open(el, done);
+    openH(el, done);
 }
 function onLeave(el, done) {
-    close(el, done);
+    closeH(el, done);
 }
 // Test Value
 const answers = reactive([

@@ -20,4 +20,8 @@ class StudentQuiz extends Model
         'user_id',
         'quiz_id',
     ];
+    public function Student(): \Illuminate\Database\Eloquent\Relations\BelongsTo
+    {
+        return $this->belongsTo(User::class, 'user_id');
+    }
 }

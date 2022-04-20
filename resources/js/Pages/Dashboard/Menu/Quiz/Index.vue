@@ -35,7 +35,7 @@ import MyTitle from "@/Pages/Dashboard/Menu/Quiz/Title.vue";
 import Quiz from "@/Pages/Dashboard/Menu/Quiz/Quiz.vue";
 import CreatNewQuiz from "@/Pages/Dashboard/Menu/Quiz/CreatNewQuiz.vue";
 // functions Anime
-import {close, open} from "@/functions/Anime";
+import {closeH, openH} from "@/functions/Anime";
 // vue functions
 import {ref} from "@vue/reactivity";
 import {onMounted} from "vue";
@@ -52,11 +52,11 @@ function chengShowIndex(index) {
 
 // functions of transition
 function onEnter(el, done) {
-    open(el, done);
+    openH(el, done);
 }
 
 function onLeave(el, done) {
-    close(el, done);
+    closeH(el, done);
 }
 
 // quizzes Value

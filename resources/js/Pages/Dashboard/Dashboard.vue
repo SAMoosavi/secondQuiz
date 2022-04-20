@@ -1,7 +1,7 @@
 <template>
     <app-layout :title="props.title">
         <div
-            class="fixed inset-0 right-0 w-1/4 lg:w-1/5 overflow-y-auto bg-base-200 top-16 text-base-content"
+            class="fixed inset-0 right-0 w-1/4 lg:w-1/5 overflow-y-auto bg-base-200 top-16 text-base-content z-20"
         >
             <quiz-index
                 :show="showQuiz"
@@ -16,7 +16,7 @@
             />
         </div>
         <div
-            class="fixed inset-y-0 left-0 overflow-y-auto bg-base-100 top-16 w-3/4 lg:w-4/5 overflow-hidden"
+            class="fixed inset-y-0 left-0 overflow-y-auto bg-base-100 top-16 overflow-hidden w-3/4 lg:w-4/5"
         >
             <div class="sm:p-6 lg:p-8 pb-0">
                 <component
@@ -26,6 +26,7 @@
             </div>
         </div>
     </app-layout>
+    <div id="answer-quiz"></div>
 </template>
 
 <script setup>
@@ -64,7 +65,7 @@ const props = defineProps({
     },
 });
 // show Quiz Or Answer
-const showQuiz = ref(props.showQuiz);
+var showQuiz = ref(props.showQuiz);
 // components
 const components = {
     "create-quiz": CreateQuiz,

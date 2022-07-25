@@ -1,7 +1,7 @@
 <template>
     <app-layout :title="props.title">
         <div
-            class="fixed inset-0 right-0 w-1/4 lg:w-1/5 overflow-y-auto bg-base-200 top-16 text-base-content z-20"
+            class="fixed inset-0 right-0 z-20 w-1/4 overflow-y-auto lg:w-1/5 bg-base-200 top-16 text-base-content"
         >
             <quiz-index
                 :show="showQuiz"
@@ -16,9 +16,9 @@
             />
         </div>
         <div
-            class="fixed inset-y-0 left-0 overflow-y-auto bg-base-100 top-16 overflow-hidden w-3/4 lg:w-4/5"
+            class="fixed inset-y-0 left-0 w-3/4 overflow-hidden overflow-y-auto bg-base-100 top-16 lg:w-4/5"
         >
-            <div class="sm:p-6 lg:p-8 pb-0">
+            <div class="pb-0 sm:p-6 lg:p-8">
                 <component
                     :is="components[props.component]"
                     :myProps="props.myProps"
